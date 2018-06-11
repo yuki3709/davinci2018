@@ -6,11 +6,11 @@ var prop = {
 window.onload = function () {
   var go = document.getElementById('go');
   go.addEventListener('click',function(){
-    prop.command.push('{go:"10"}');
+    prop.command.push('{"go":"10"}');
   });
   var roll = document.getElementById('roll');
   roll.addEventListener('click',function(){
-    prop.command.push('{roll:"10"}');
+    prop.command.push('{"roll":"10"}');
   });
   var name = document.getElementById('message');
   var reset = document.getElementById('reset');
