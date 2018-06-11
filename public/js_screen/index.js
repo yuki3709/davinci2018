@@ -18,8 +18,6 @@ function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
-    //context.globalCompositeOperation = "lighter";
-    //document.write(order[ordernum]);
     if (order[ordernum] == 'roll') {
 
         if (circle[0].speedX == 0 && circle[0].speedY > 0) {
@@ -75,7 +73,6 @@ function draw() {
     context.fill();
 
     ordernum = (ordernum + 1) % order.length;
-    //document.write(ordernum);
 }
 
 
@@ -84,6 +81,7 @@ function init() {
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
         var data = JSON.parse(d); // 文字列→JSON
+        console.log(data);
         var e = document.createElement('p');
         e.innerText = data.text;
         message.appendChild(e);
