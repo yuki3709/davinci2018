@@ -71,7 +71,7 @@ function draw() {
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
         context.fill();
         context.fillStyle = 'black';
-        context.fillText(playername, circle.locX - 10, circle.locY - 10)
+        context.fillText(playername, circle.locX, circle.locY)
     });
     ordernum = (ordernum + 1) % order.length;
 }
