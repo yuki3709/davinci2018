@@ -9,6 +9,7 @@ var circle = [];
 var circle0 = [];
 var order = [];
 var pnum = 0;
+var playername;
 
 circle[0] = new Circles(3.0, 4.0, 200, 150);
 circle[1] = new Circles(-4.0, -3.0, 100, 50);
@@ -68,7 +69,7 @@ function draw() {
     context.fillStyle = '#3399FF';
     circle.forEach(function (circle) {
         context.arc(circle.locX, circle.locY, 4, 0, Math.PI * 2.0, true);
-        context.fillText(data.id, circle.locX, circle.locY)
+        context.fillText(playername, circle.locX, circle.locY)
     });
     context.fill();
     ordernum = (ordernum + 1) % order.length;
@@ -84,6 +85,7 @@ function init() {
         e.innerText = data.id;
         message.appendChild(e);
         order = data.command;
+        playername = data.id;
 
     });
     if (canvas.getContext) {
