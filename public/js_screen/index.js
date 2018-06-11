@@ -8,43 +8,42 @@ var ordernum = 0;
 var circle = [];
 var circle0 = [];
 var order = [];
-var playern = 0;
-order[playern] = [];
+var pnum = 0;
 
 circle[0] = new Circles(3.0, 4.0, 200, 150);
 circle[1] = new Circles(-4.0, -3.0, 100, 50);
 circle0[0] = new Circles(3.0, 4.0, 200, 150);
-circle0[1] = new Circles(-4.0, -3.0, 100, 50);
 
 
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
-    if (order[playern][ordernum].roll) {
-        if (circle[playern].speedX == 0 && circle[playern].speedY > 0) {
-            circle[playern].speedX = circle0[0].speedX;
+    if (order[ordernum].roll) {
+
+        if (circle[0].speedX == 0 && circle[0].speedY > 0) {
+            circle[0].speedX = circle0[0].speedX;
         }
-        else if (circle[playern].speedX > 0 && circle[playern].speedY > 0) {
-            circle[playern].speedY = 0;
+        else if (circle[0].speedX > 0 && circle[0].speedY > 0) {
+            circle[0].speedY = 0;
         }
-        else if (circle[playern].speedX > 0 && circle[playern].speedY == 0) {
-            circle[playern].speedY = circle0[0].speedY * -1;
+        else if (circle[0].speedX > 0 && circle[0].speedY == 0) {
+            circle[0].speedY = circle0[0].speedY * -1;
         }
-        else if (circle[playern].speedX > 0 && circle[playern].speedY < 0) {
-            circle[playern].speedX = 0;
+        else if (circle[0].speedX > 0 && circle[0].speedY < 0) {
+            circle[0].speedX = 0;
         }
-        else if (circle[playern].speedX == 0 && circle[playern].speedY < 0) {
-            circle[playern].speedX = circle0[0].speedX * -1;
+        else if (circle[0].speedX == 0 && circle[0].speedY < 0) {
+            circle[0].speedX = circle0[0].speedX * -1;
         }
-        else if (circle[playern].speedX < 0 && circle[playern].speedY < 0) {
-            circle[playern].speedY = 0;
+        else if (circle[0].speedX < 0 && circle[0].speedY < 0) {
+            circle[0].speedY = 0;
         }
-        else if (circle[playern].speedX < 0 && circle[playern].speedY == 0) {
-            circle[playern].speedY = circle0[0].speedY;
+        else if (circle[0].speedX < 0 && circle[0].speedY == 0) {
+            circle[0].speedY = circle0[0].speedY;
         }
-        else if (circle[playern].speedX < 0 && circle[playern].speedY > 0) {
-            circle[playern].speedX = 0;
+        else if (circle[0].speedX < 0 && circle[0].speedY > 0) {
+            circle[0].speedX = 0;
         }
     }
     //位置を更新
@@ -79,20 +78,18 @@ function init() {
     var canvas = document.getElementById('tutorial');
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
-        var data = [];
-        data[playern] = JSON.parse(JSON.parse(d).text); // 文字列→JSON
-        console.log(data[playern]);
+        var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
+        console.log(data);
         var e = document.createElement('p');
-        e.innerText = data[playern].id;
+        e.innerText = data.id;
         message.appendChild(e);
-        order[playern] = data[playern].command;
+        order = data.command;
 
     });
     if (canvas.getContext) {
         context = canvas.getContext('2d');
         setInterval(draw, 33);
     }
-    playern++;
 }
 
 window.onload = function () {
