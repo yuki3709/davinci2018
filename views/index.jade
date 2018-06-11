@@ -9,7 +9,8 @@ block content
         ul(id="messageList")
     script(type='text/javascript').
       window.onload = function () {
-        var message = document.getElementById('message');
+        var message = "aaa";
+//        var message = document.getElementById('message');
         var onKeyPress = function (e) {
           if (e.key !== 'Enter') return;
           if (e.shiftKey || e.ctrlKey || e.altKey) return;
