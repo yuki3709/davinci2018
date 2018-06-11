@@ -17,6 +17,12 @@ window.onload = function () {
   roll.addEventListener('click',function(){
     prop.command.push('{"roll":"10"}');
   });
+  var name = document.getElementById('message');
+  var onKeyPress = function(e){
+    if (e.key !== 'Enter') return;
+    if (e.shiftKey || e.ctrlKey || e.altKey) return;
+  }
+  prop.id = name.addEventListener('keypress',onKeyPress);
   var send = document.getElementById('send');
   send.addEventListener('click',function(d){
     socket.emit('message', JSON.stringify(prop));
