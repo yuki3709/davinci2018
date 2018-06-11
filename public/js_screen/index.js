@@ -20,7 +20,6 @@ function draw() {
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
     if (order[ordernum].roll) {
-
         if (circle[0].speedX == 0 && circle[0].speedY > 0) {
             circle[0].speedX = circle0[0].speedX;
         }
@@ -69,6 +68,7 @@ function draw() {
     context.fillStyle = '#3399FF';
     circle.forEach(function (circle) {
         context.arc(circle.locX, circle.locY, 4, 0, Math.PI * 2.0, true);
+        context.fillText(data.id, circle.locX, circle.locY)
     });
     context.fill();
     ordernum = (ordernum + 1) % order.length;
