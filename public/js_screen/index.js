@@ -74,7 +74,6 @@ function draw() {
         context.fillText(playername, circle.locX - 5, circle.locY - 5)
         context.fill();
     });
-    context.fill();
     ordernum = (ordernum + 1) % order.length;
 }
 
