@@ -70,8 +70,8 @@ function draw() {
         context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
         context.fill();
-        context.fillStyle = 'black';
-        context.fillText(playername, circle.locX, circle.locY)
+        context.fillStyle = 'white';
+        context.fillText(playername, circle.locX - 5, circle.locY)
     });
     ordernum = (ordernum + 1) % order.length;
 }
