@@ -1,66 +1,66 @@
-function Circles(speedX, speedY, locX, locY) {
-    this.speedX = speedX;
-    this.speedY = speedY;
-    this.locX = locX;
-    this.locY = locY;
+var defaultProps = {
+    speedX: 3.0,
+    speedY: 4.0,
+    locX: 200,
+    locY: 150
 }
-var ordernum = 0;
+function Circles(props) {
+    this.commandCount = 0;
+    this.command = props.command;
+    this.id = props.id;
+    this.speedX = defaultProps.speedX;
+    this.speedY = defaultProps.speedY;
+    this.locX = defaultProps.locX;
+    this.locY = defaultProps.locY;
+}
 var circle = [];
-var circle0 = [];
-var order = [];
-var pnum = 0;
-var playername;
-
-circle[0] = new Circles(3.0, 4.0, 200, 150);
-circle[1] = new Circles(-4.0, -3.0, 100, 50);
-circle0[0] = new Circles(3.0, 4.0, 200, 150);
-
 
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
-    if (order[ordernum].roll) {
-        if (circle[0].speedX == 0 && circle[0].speedY > 0) {
-            circle[0].speedX = circle0[0].speedX;
+    circle.forEach(function (circle) {
+        if (circle.command[commandCount].roll) {
+            if (circle.speedX == 0 && circle.speedY > 0) {
+                circle.speedX = defaultProps.speedX;
+            }
+            else if (circle.speedX > 0 && circle.speedY > 0) {
+                circle.speedY = 0;
+            }
+            else if (circle.speedX > 0 && circle.speedY == 0) {
+                circle.speedY = defaultProps.speedY * -1;
+            }
+            else if (circle.speedX > 0 && circle.speedY < 0) {
+                circle.speedX = 0;
+            }
+            else if (circle.speedX == 0 && circle.speedY < 0) {
+                circle.speedX = defaultProps.speedX * -1;
+            }
+            else if (circle.speedX < 0 && circle.speedY < 0) {
+                circle.speedY = 0;
+            }
+            else if (circle.speedX < 0 && circle.speedY == 0) {
+                circle.speedY = defaultProps.speedY;
+            }
+            else if (circle.speedX < 0 && circle.speedY > 0) {
+                circle.speedX = 0;
+            }
         }
-        else if (circle[0].speedX > 0 && circle[0].speedY > 0) {
-            circle[0].speedY = 0;
-        }
-        else if (circle[0].speedX > 0 && circle[0].speedY == 0) {
-            circle[0].speedY = circle0[0].speedY * -1;
-        }
-        else if (circle[0].speedX > 0 && circle[0].speedY < 0) {
-            circle[0].speedX = 0;
-        }
-        else if (circle[0].speedX == 0 && circle[0].speedY < 0) {
-            circle[0].speedX = circle0[0].speedX * -1;
-        }
-        else if (circle[0].speedX < 0 && circle[0].speedY < 0) {
-            circle[0].speedY = 0;
-        }
-        else if (circle[0].speedX < 0 && circle[0].speedY == 0) {
-            circle[0].speedY = circle0[0].speedY;
-        }
-        else if (circle[0].speedX < 0 && circle[0].speedY > 0) {
-            circle[0].speedX = 0;
-        }
-    }
-    //位置を更新
+        //位置を更新
 
-    for (i = 0; i < circle.length; i++) {
+        if (command[commandCount].go) {
+            circle.locX += circle.speedX;
+            circle.locY += circle.speedY;
 
-        circle[i].locX += circle[i].speedX;
-        circle[i].locY += circle[i].speedY;
+            if (circle.locX < 0 || circle.locX > 400) {
+                circle.speedX *= -1;
+            }
 
-        if (circle[i].locX < 0 || circle[i].locX > 400) {
-            circle[i].speedX *= -1;
+            if (circle.locY < 0 || circle.locY > 300) {
+                circle.speedY *= -1;
+            }
         }
-
-        if (circle[i].locY < 0 || circle[i].locY > 300) {
-            circle[i].speedY *= -1;
-        }
-    }
+    });
 
 
     //更新した座標で円を描く
@@ -71,7 +71,7 @@ function draw() {
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
         context.fill();
         context.fillStyle = 'white';
-        context.fillText(playername, circle.locX - 5, circle.locY)
+        context.fillText(circle.id, circle.locX - 5, circle.locY)
     });
     ordernum = (ordernum + 1) % order.length;
 }
@@ -81,13 +81,11 @@ function init() {
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
         var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
+        circle[circle.length] = new Circles(data);
         console.log(data);
         var e = document.createElement('p');
         e.innerText = data.id;
         message.appendChild(e);
-        order = data.command;
-        playername = data.id;
-
     });
     if (canvas.getContext) {
         context = canvas.getContext('2d');
