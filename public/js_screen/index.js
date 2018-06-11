@@ -1,4 +1,3 @@
-
 function Circle(speedX, speedY, locX, locY) {
     this.speedX = speedX;
     this.speedY = speedY;
@@ -80,9 +79,15 @@ function draw() {
 }
 
 
-
 function init() {
     var canvas = document.getElementById('tutorial');
+    var message = document.getElementById('message');
+    socket.on('receiveMessage', function (d) {
+        var data = JSON.parse(d); // 文字列→JSON
+        var e = document.createElement('p');
+        e.innerText = data.text;
+        message.appendChild(e);
+    });
     if (canvas.getContext) {
         context = canvas.getContext('2d');
         setInterval(draw, 33);
@@ -91,13 +96,5 @@ function init() {
 
 
 window.onload = function () {
-
-    var message = document.getElementById('message');
-    socket.on('receiveMessage', function (d) {
-        var data = JSON.parse(d); // 文字列→JSON
-        var e = document.createElement('p');
-        e.innerText = data.text;
-        message.appendChild(e);
-    });
-
+    init();
 };
