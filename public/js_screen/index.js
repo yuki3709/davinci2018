@@ -66,9 +66,9 @@ function draw() {
 
     context.beginPath();
     context.fillStyle = '#3399FF';
-    for (i = 0; i < circle.length; i++) {
-        context.arc(circle[i].locX, circle[i].locY, 4, 0, Math.PI * 2.0, true);
-    }
+    circle.forEach(function (circle) {
+        context.arc(circle.locX, circle.locY, 4, 0, Math.PI * 2.0, true);
+    });
 
     context.fill();
 
@@ -80,10 +80,10 @@ function init() {
     var canvas = document.getElementById('tutorial');
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
-        var data = JSON.parse(d); // 文字列→JSON
-        console.log(JSON.parse(data.text));
+        var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
+        console.log(data);
         var e = document.createElement('p');
-        e.innerText = data.text;
+        e.innerText = data.id;
         message.appendChild(e);
     });
     if (canvas.getContext) {
