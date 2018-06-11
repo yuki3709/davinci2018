@@ -19,7 +19,7 @@ function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
-    if (order[ordernum] == 'roll') {
+    if (order[ordernum].roll) {
 
         if (circle[0].speedX == 0 && circle[0].speedY > 0) {
             circle[0].speedX = circle0[0].speedX;
