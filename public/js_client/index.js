@@ -20,7 +20,7 @@ window.onload = function () {
   var name = document.getElementById('message');
   var reset = document.getElementById('reset');
   reset.addEventListener('click',function(){
-    document.textbox.value = '';
+    name.value = '';
     prop.id = "";
     prop.command = [];
   })
