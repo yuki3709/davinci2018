@@ -1,11 +1,6 @@
 var prop = {
-  "id":"nakamura",
-	"command":[
-			{"go":"10"},
-		  {"go":"10"},
-			{"roll":"10"},
-			{"go":"10"}
-		]
+  "id":"",
+	"command":[]
 };
 
 window.onload = function () {
