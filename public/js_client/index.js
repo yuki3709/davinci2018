@@ -8,11 +8,8 @@ var prop = {
 	"id":"中村"
 };
 window.onload = function () {
-  var message = document.getElementById('message');
-  var onKeyPress = function (e) {
-    if (e.key !== 'Enter') return;
-    if (e.shiftKey || e.ctrlKey || e.altKey) return;
+  var send = document.getElementById('send');
+  send.addEventListener('click',function (e) {
     socket.emit('message', JSON.stringify(prop));
-  };
-  message.addEventListener('keypress', onKeyPress);
+  });
 };
