@@ -13,6 +13,10 @@ window.onload = function () {
   go.addEventListener('click',function(){
     prop.command.push('{"go":"10"}');
   });
+  var roll =document.getElementById('roll');
+  roll.addEventListener('click',function(){
+    prop.command.push('{"roll":"10"}');
+  });
   var send = document.getElementById('send');
   send.addEventListener('click',function(d){
     socket.emit('message', JSON.stringify(prop));
