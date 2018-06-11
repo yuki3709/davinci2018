@@ -10,6 +10,6 @@ var prop = {
 window.onload = function () {
   var send = document.getElementById('send');
   send.addEventListener('click',function () {
-    socket.emit('message', JSON.stringify(prop));
+    socket.emit('send', JSON.stringify(prop));
   });
 };
