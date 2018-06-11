@@ -1,11 +1,11 @@
 var prop = {
+  "id":"中村",
 	"command":[
 			{"go":"10"},
 		  {"go":"10"},
 			{"roll":"10"},
 			{"go":"10"}
-		],
-	"id":"中村"
+		]
 };
 
 window.onload = function () {
