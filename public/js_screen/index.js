@@ -78,10 +78,11 @@ function init() {
     var canvas = document.getElementById('tutorial');
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
-        var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
-        console.log(data);
+        var data = [];
+        data[pnum] = JSON.parse(JSON.parse(d).text); // 文字列→JSON
+        console.log(data[pnum]);
         var e = document.createElement('p');
-        e.innerText = data.id;
+        e.innerText = data[pnum].id;
         message.appendChild(e);
         order[pnum] = data[pnum].command;
         pnum++;
