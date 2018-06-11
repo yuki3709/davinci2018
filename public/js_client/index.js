@@ -9,9 +9,7 @@ var prop = {
 };
 window.onload = function () {
   var send = document.getElementById('send');
-  send.addEventListener('click',function(){
+  send.addEventListener('click',function(d){
     socket.emit('message', JSON.stringify(prop));
-    document.getElementById('messageList').textContent = JSON.stringify(prop);
-		return false
   });
 };
