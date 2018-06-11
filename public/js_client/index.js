@@ -1,5 +1,5 @@
 var prop = {
-  "id":"中村",
+  "id":"nakamura",
 	"command":[
 			{"go":"10"},
 		  {"go":"10"},
@@ -22,7 +22,8 @@ window.onload = function () {
     if (e.key !== 'Enter') return;
     if (e.shiftKey || e.ctrlKey || e.altKey) return;
   }
-  prop.id = name.addEventListener('keypress',onKeyPress);
+  name.addEventListener('keypress',onKeyPress);
+  prop.id = name.value;
   var send = document.getElementById('send');
   send.addEventListener('click',function(d){
     socket.emit('message', JSON.stringify(prop));
