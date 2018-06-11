@@ -81,11 +81,8 @@ function init() {
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
         var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
-        circle[circle.length] = new Circles(data);
+        circle.push(new Circles(data));
         console.log(data);
-        var e = document.createElement('p');
-        e.innerText = data.id;
-        message.appendChild(e);
     });
     if (canvas.getContext) {
         context = canvas.getContext('2d');
