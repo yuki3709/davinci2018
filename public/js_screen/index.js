@@ -81,7 +81,7 @@ function init() {
     var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
         var data = JSON.parse(d); // 文字列→JSON
-        console.log(data);
+        console.log(JSON.parse(data.text));
         var e = document.createElement('p');
         e.innerText = data.text;
         message.appendChild(e);
