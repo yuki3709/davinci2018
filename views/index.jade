@@ -3,17 +3,12 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
-    div
+    form
         input(type="text" id="message")
+        input(type="submit" value="送信")
+        input(type="reset" value="リセット")
+        input(type="button" name="'go':'10'" value="go")
+        input(type="button" name="'roll':'10'" value="roll")
     div
         ul(id="messageList")
-    script(type='text/javascript').
-      window.onload = function () {
-        var message = document.getElementById('message');
-        var onKeyPress = function (e) {
-          if (e.key !== 'Enter') return;
-          if (e.shiftKey || e.ctrlKey || e.altKey) return;
-          socket.emit('message', JSON.stringify({text: "aaa"}));
-        };
-        message.addEventListener('keypress', onKeyPress);
-      };
+    script(type='text/javascript' src='../public/js_client/index.js')
