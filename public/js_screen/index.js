@@ -69,9 +69,10 @@ function draw() {
     circle.forEach(function (circle) {
         context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
+        context.fill();
         context.fillStyle = 'black';
-        context.fillText(playername, circle.locX, circle.locY)
-
+        context.fillText(playername, circle.locX - 5, circle.locY - 5)
+        context.fill();
     });
     context.fill();
     ordernum = (ordernum + 1) % order.length;
