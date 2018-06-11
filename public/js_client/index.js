@@ -18,6 +18,11 @@ window.onload = function () {
     prop.command.push('{"roll":"10"}');
   });
   var name = document.getElementById('message');
+  var reset = document.getElementById('reset');
+  reset.addEventListener('click',function(){
+    prop.id = "";
+    prop.command = [];
+  })
   var send = document.getElementById('send');
   send.addEventListener('click',function(d){
     prop.id = name.value;
