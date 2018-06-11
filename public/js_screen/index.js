@@ -20,7 +20,10 @@ function draw() {
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
     circle.forEach(function (circle) {
-        if (circle.command[commandCount].roll) {
+        var order = circle.command[circle.commandCount];
+        var { speedX, speedY } = circle;
+        console.log({ speedX: speedX, speedY: speedY });
+        if (order.roll) {
             if (circle.speedX == 0 && circle.speedY > 0) {
                 circle.speedX = defaultProps.speedX;
             }
@@ -48,7 +51,7 @@ function draw() {
         }
         //位置を更新
 
-        if (command[commandCount].go) {
+        if (order.go) {
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
 
@@ -78,7 +81,6 @@ function draw() {
 
 function init() {
     var canvas = document.getElementById('tutorial');
-    var message = document.getElementById('message');
     socket.on('receiveMessage', function (d) {
         var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
         circle.push(new Circles(data));
