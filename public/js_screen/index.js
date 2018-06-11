@@ -66,9 +66,10 @@ function draw() {
     //更新した座標で円を描く
 
     context.beginPath();
-    context.fillStyle = '#3399FF';
     circle.forEach(function (circle) {
+        context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
+        context.fillStyle = 'black';
         context.fillText(playername, circle.locX, circle.locY)
 
     });
