@@ -7,18 +7,19 @@ function Circle(speedX, speedY, locX, locY) {
 var ordernum = 0;
 var circle = [];
 var circle0 = [];
+var order = [];
+var pnum = 0;
+
 circle[0] = new Circle(3.0, 4.0, 200, 150);
 circle[1] = new Circle(-4.0, -3.0, 100, 50);
 circle0[0] = new Circle(3.0, 4.0, 200, 150);
-var order = ['go', 'go', 'roll', 'go'];
-
 
 
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 400, 300);
-    if (order[ordernum] == 'roll') {
+    if (order[ordernum] == roll) {
 
         if (circle[0].speedX == 0 && circle[0].speedY > 0) {
             circle[0].speedX = circle0[0].speedX;
@@ -69,12 +70,9 @@ function draw() {
     circle.forEach(function (circle) {
         context.arc(circle.locX, circle.locY, 4, 0, Math.PI * 2.0, true);
     });
-
     context.fill();
-
     ordernum = (ordernum + 1) % order.length;
 }
-
 
 function init() {
     var canvas = document.getElementById('tutorial');
@@ -85,13 +83,14 @@ function init() {
         var e = document.createElement('p');
         e.innerText = data.id;
         message.appendChild(e);
+        order = data.command;
+
     });
     if (canvas.getContext) {
         context = canvas.getContext('2d');
         setInterval(draw, 33);
     }
 }
-
 
 window.onload = function () {
     init();
