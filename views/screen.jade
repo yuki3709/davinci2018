@@ -4,8 +4,9 @@ block content
   h1= title
   p Welcome to #{title}
   div(id="message")
-  script(type='text/javascript').
+  script(type='text/javascript' src='/js_screen/index.js').
     window.onload = function () {
+
       var message = document.getElementById('message');
       socket.on('receiveMessage', function (d) {
         var data = JSON.parse(d); // 文字列→JSON
@@ -13,4 +14,5 @@ block content
         e.innerText = data.text;
         message.appendChild(e);
       });
+      
     };
