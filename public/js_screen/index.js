@@ -24,29 +24,19 @@ function draw() {
         var { speedX, speedY } = circle;
         console.log({ speedX: speedX, speedY: speedY });
         if (order.roll) {
-            if (circle.speedX == 0 && circle.speedY > 0) {
-                circle.speedX = defaultProps.speedX;
+            if (speedX == 0) {
+                if (speedY > 0) circle.speedX = defaultProps.speedX;
+                else if (speedY < 0) circle.speedX = defaultProps.speedX * -1;
             }
-            else if (circle.speedX > 0 && circle.speedY > 0) {
-                circle.speedY = 0;
+            else if (speedX > 0) {
+                if (speedY < 0) circle.speedX = 0;
+                else if (speedY == 0) circle.speedY = defaultProps.speedY * -1;
+                else circle.speedY = 0;
             }
-            else if (circle.speedX > 0 && circle.speedY == 0) {
-                circle.speedY = defaultProps.speedY * -1;
-            }
-            else if (circle.speedX > 0 && circle.speedY < 0) {
-                circle.speedX = 0;
-            }
-            else if (circle.speedX == 0 && circle.speedY < 0) {
-                circle.speedX = defaultProps.speedX * -1;
-            }
-            else if (circle.speedX < 0 && circle.speedY < 0) {
-                circle.speedY = 0;
-            }
-            else if (circle.speedX < 0 && circle.speedY == 0) {
-                circle.speedY = defaultProps.speedY;
-            }
-            else if (circle.speedX < 0 && circle.speedY > 0) {
-                circle.speedX = 0;
+            else if (speedX < 0) {
+                if (speedY > 0) circle.speedX = 0;
+                else if (speedY == 0) circle.speedY = defaultProps.speedY;
+                else circle.speedY = 0;
             }
         }
         //位置を更新
@@ -63,6 +53,7 @@ function draw() {
                 circle.speedY *= -1;
             }
         }
+        circle.commandCount = (circle.commandCount + 1) % circle.command.length;
     });
 
 
@@ -76,7 +67,7 @@ function draw() {
         context.fillStyle = 'white';
         context.fillText(circle.id, circle.locX - 5, circle.locY)
     });
-    ordernum = (ordernum + 1) % order.length;
+
 }
 
 function init() {
