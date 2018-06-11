@@ -21,7 +21,7 @@ window.onload = function () {
   var onKeyPress = function(e){
     if (e.key !== 'Enter') return;
     if (e.shiftKey || e.ctrlKey || e.altKey) return;
-    if (e.enterKey) {
+    if (e.key === 'Enter') {
       prop.id = name.value;
     }
   }
