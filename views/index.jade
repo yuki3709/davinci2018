@@ -5,10 +5,11 @@ block content
     p Welcome to #{title}
     form
         input(type="text" id="message")
-        input(type="button" value="送信" id="send")
-        input(type="reset" value="リセット" id="reset")
-        input(type="button" value="go" id="go")
-        input(type="button" value="roll" id="roll")
+    div
+        button(type="button" value="送信" id="send")
+        button(type="button" value="リセット" id="reset")
+        button(type="button" value="進む" id="go")
+        button(type="button" value="回転" id="roll")
     div
         ul(id="messageList")
     script(type='text/javascript' src='/js_client/index.js')

@@ -21,9 +21,11 @@ window.onload = function () {
   var onKeyPress = function(e){
     if (e.key !== 'Enter') return;
     if (e.shiftKey || e.ctrlKey || e.altKey) return;
+    if (e.enterKey) {
+      prop.id = name.value;
+    }
   }
   name.addEventListener('keypress',onKeyPress);
-  prop.id = name.value;
   var send = document.getElementById('send');
   send.addEventListener('click',function(d){
     socket.emit('message', JSON.stringify(prop));
