@@ -89,4 +89,15 @@ function init() {
     }
 }
 
-<canvas id="tutorial" width="400" height="300"></canvas>
+
+window.onload = function () {
+
+    var message = document.getElementById('message');
+    socket.on('receiveMessage', function (d) {
+        var data = JSON.parse(d); // 文字列→JSON
+        var e = document.createElement('p');
+        e.innerText = data.text;
+        message.appendChild(e);
+    });
+
+};
