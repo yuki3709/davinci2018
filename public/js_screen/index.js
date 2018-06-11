@@ -86,12 +86,13 @@ function init() {
         e.innerText = data[playern].id;
         message.appendChild(e);
         order[playern] = data[playern].command;
-        playern++;
+
     });
     if (canvas.getContext) {
         context = canvas.getContext('2d');
         setInterval(draw, 33);
     }
+    playern++;
 }
 
 window.onload = function () {
