@@ -22,7 +22,6 @@ function draw() {
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
         var { speedX, speedY } = circle;
-        console.log({ speedX: speedX, speedY: speedY });
         if (order.roll) {
             if (speedX == 0) {
                 if (speedY > 0) circle.speedX = defaultProps.speedX;
