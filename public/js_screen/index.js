@@ -18,24 +18,23 @@ var circle = [];
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
-    context.fillRect(0, 0, 400, 300);
+    context.fillRect(0, 0, 2000, 900);
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
         var { speedX, speedY } = circle;
-        console.log({ speedX: speedX, speedY: speedY });
         if (order.roll) {
             if (speedX == 0) {
-                if (speedY > 0) circle.speedX = defaultProps.speedX;
-                else if (speedY < 0) circle.speedX = defaultProps.speedX * -1;
+                if (speedY < 0) circle.speedX = defaultProps.speedX;
+                else if (speedY > 0) circle.speedX = defaultProps.speedX * -1;
             }
             else if (speedX > 0) {
-                if (speedY < 0) circle.speedX = 0;
-                else if (speedY == 0) circle.speedY = defaultProps.speedY * -1;
-                else circle.speedY = 0;
-            }
-            else if (speedX < 0) {
                 if (speedY > 0) circle.speedX = 0;
                 else if (speedY == 0) circle.speedY = defaultProps.speedY;
+                else circle.speedY = 0;
+            }
+            else {
+                if (speedY < 0) circle.speedX = 0;
+                else if (speedY == 0) circle.speedY = defaultProps.speedY * -1;
                 else circle.speedY = 0;
             }
         }
@@ -45,11 +44,11 @@ function draw() {
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
 
-            if (circle.locX < 0 || circle.locX > 400) {
+            if (circle.locX - 10 < 0 || circle.locX + 10 > 2000) {
                 circle.speedX *= -1;
             }
 
-            if (circle.locY < 0 || circle.locY > 300) {
+            if (circle.locY - 10 < 0 || circle.locY + 10 > 900) {
                 circle.speedY *= -1;
             }
         }
@@ -59,15 +58,15 @@ function draw() {
 
     //更新した座標で円を描く
 
-    context.beginPath();
+
     circle.forEach(function (circle) {
+        context.beginPath();
         context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
         context.fill();
         context.fillStyle = 'white';
         context.fillText(circle.id, circle.locX - 5, circle.locY)
     });
-
 }
 
 function init() {
