@@ -3,14 +3,6 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  div(id="message")
-  script(type='text/javascript').
-    window.onload = function () {
-      var message = document.getElementById('message');
-      socket.on('receiveMessage', function (d) {
-        var data = JSON.parse(d); // 文字列→JSON
-        var e = document.createElement('p');
-        e.innerText = data.text;
-        message.appendChild(e);
-      });
-    };
+  canvas(id="tutorial" width="400" height="300")
+  script(type='text/javascript' src='/js_screen/index.js')
+  
