@@ -33,7 +33,7 @@ function draw() {
                 else if (speedY == 0) circle.speedY = defaultProps.speedY * -1;
                 else circle.speedY = 0;
             }
-            else if (speedX < 0) {
+            else {
                 if (speedY > 0) circle.speedX = 0;
                 else if (speedY == 0) circle.speedY = defaultProps.speedY;
                 else circle.speedY = 0;
@@ -63,11 +63,11 @@ function draw() {
     circle.forEach(function (circle) {
         context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
-        context.fill();
-        context.fillStyle = 'white';
-        context.fillText(circle.id, circle.locX - 5, circle.locY)
+        // context.fill();
+        // context.fillStyle = 'white';
+        // context.fillText(circle.id, circle.locX - 5, circle.locY)
     });
-
+    context.fill();
 }
 
 function init() {
