@@ -4,11 +4,13 @@ block content
     h1= title
     p Welcome to #{title}
     form
-        input(type="text" id="message")
-        input(type="submit" value="送信" id="send")
-        input(type="reset" value="リセット" id="reset")
-        input(type="button" value="go" id="go")
-        input(type="button" value="roll" id="roll")
+        label ID:
+        input(type="text" name="textbox" id="message")
+    div
+        button(type="button" value="送信" id="send") 送信
+        button(type="button" value="リセット" id="reset") リセット
+        button(type="button" value="進む" id="go") 進む
+        button(type="button" value="回転" id="roll") 回転
     div
         ul(id="messageList")
     script(type='text/javascript' src='/js_client/index.js')
