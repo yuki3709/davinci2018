@@ -58,8 +58,9 @@ function draw() {
 
     //更新した座標で円を描く
 
-    context.beginPath();
+
     circle.forEach(function (circle) {
+        context.beginPath();
         context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
         var { locX, locY } = circle;
