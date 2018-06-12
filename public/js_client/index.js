@@ -7,7 +7,7 @@ window.onload = function () {
   var go = document.getElementById('go');
   go.addEventListener('click',function(){
     prop.command.push({go:10});
-    console.log(prop);
+    document.getElementById('messageList').textContent = prop;
   });
   var roll = document.getElementById('roll');
   roll.addEventListener('click',function(){
