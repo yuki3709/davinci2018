@@ -7,7 +7,7 @@ window.onload = function () {
   var go = document.getElementById('go');
   go.addEventListener('click',function(){
     prop.command.push({go:10});
-    document.getElementById('messageList').textContent = prop;
+    console.log(prop);
   });
   var roll = document.getElementById('roll');
   roll.addEventListener('click',function(){
@@ -28,5 +28,4 @@ window.onload = function () {
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
-  document.getElementById('messageList').textContent = prop;
 };
