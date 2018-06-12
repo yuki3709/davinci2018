@@ -29,5 +29,4 @@ window.onload = function () {
     socket.emit('message', JSON.stringify(prop));
   });
   document.getElementById('messageList').textContent = prop.toString();
-  return false;
 };
