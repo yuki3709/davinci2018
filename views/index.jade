@@ -3,17 +3,14 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
+    form
+        label ID:
+        input(type="text" name="textbox" id="message")
     div
-        input(type="text" id="message")
+        button(type="button" value="送信" id="send") 送信
+        button(type="button" value="リセット" id="reset") リセット
+        button(type="button" value="進む" id="go") 進む
+        button(type="button" value="回転" id="roll") 回転
     div
         ul(id="messageList")
-    script(type='text/javascript').
-      window.onload = function () {
-        var message = document.getElementById('message');
-        var onKeyPress = function (e) {
-          if (e.key !== 'Enter') return;
-          if (e.shiftKey || e.ctrlKey || e.altKey) return;
-          socket.emit('message', JSON.stringify({text: message.value}));
-        };
-        message.addEventListener('keypress', onKeyPress);
-      };
+    script(type='text/javascript' src='/js_client/index.js')
