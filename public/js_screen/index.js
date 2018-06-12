@@ -1,6 +1,6 @@
 var defaultProps = {
-    speedX: 5.0,
-    speedY: 5.0,
+    speedX: 3.0,
+    speedY: 4.0,
     locX: 200,
     locY: 150
 }
