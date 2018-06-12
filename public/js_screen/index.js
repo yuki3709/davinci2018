@@ -62,7 +62,8 @@ function draw() {
     circle.forEach(function (circle) {
         context.fillStyle = '#3399FF';
         context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
-        console.log(circle.loX);
+        var { locX, locY } = circle;
+        console.log({ locX: locX, locY: locY });
         context.fill();
         context.fillStyle = 'white';
         context.fillText(circle.id, circle.locX - 5, circle.locY)
