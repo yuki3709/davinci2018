@@ -1,7 +1,14 @@
 extends layout
 
 block content
-
-  canvas(id="tutorial" width="2000" height="900")
+  h1= title
+  p Welcome to #{title}
+  canvas(id="tutorial" width=windowW height=windowH)
   script(type='text/javascript' src='/js_screen/index.js')
-  
+  script.
+    var windowW, windowH = 0;
+    getwindowSize();
+    function getWindowSize() {
+        windowW = window.innerWidth;
+        windowH = window.innerHeight;
+    }

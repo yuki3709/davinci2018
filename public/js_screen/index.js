@@ -14,11 +14,15 @@ function Circles(props) {
     this.locY = defaultProps.locY;
 }
 var circle = [];
-
+var windowW, windowH = 0;
+function getWindowSize() {
+    windowW = window.innerWidth;
+    windowH = window.innerHeight;
+}
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
-    context.fillRect(0, 0, 2000, 900);
+    context.fillRect(0, 0, windowW, windowH);
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
         var { speedX, speedY } = circle;
@@ -44,11 +48,11 @@ function draw() {
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
 
-            if (circle.locX - 10 < 0 || circle.locX + 10 > 2000) {
+            if (circle.locX - 10 < 0 || circle.locX + 10 > windowW) {
                 circle.speedX *= -1;
             }
 
-            if (circle.locY - 10 < 0 || circle.locY + 10 > 900) {
+            if (circle.locY - 10 < 0 || circle.locY + 10 > windowH) {
                 circle.speedY *= -1;
             }
         }
@@ -85,3 +89,7 @@ function init() {
 window.onload = function () {
     init();
 };
+function getWindowSize() {
+    windowW = window.innerWidth;
+    windowH = window.innerHeight;
+}
