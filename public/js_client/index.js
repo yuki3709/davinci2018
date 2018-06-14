@@ -15,6 +15,11 @@ window.onload = function () {
     console.log(prop);
   });
   var name = document.getElementById('message');
+  var inputname = document.getElementById('inputname');
+  inputname.addEventListener('click',function(){
+    prop.id = name.value;   //nameを決定させる。
+    console.log(prop);
+  });
   var reset = document.getElementById('reset');
   reset.addEventListener('click',function(){
     name.value = '';
@@ -23,8 +28,7 @@ window.onload = function () {
     console.log(prop);
   })
   var send = document.getElementById('send');
-  send.addEventListener('click',function(d){
-    prop.id = name.value;
+  send.addEventListener('click',function(){
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
