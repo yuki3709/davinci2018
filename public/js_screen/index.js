@@ -1,6 +1,6 @@
 var defaultProps = {
-    speedX: 3.0,
-    speedY: 4.0,
+    speedX: 5.0,
+    speedY: 5.0,
     locX: 200,
     locY: 150
 }
@@ -14,10 +14,11 @@ function Circles(props) {
     this.locY = defaultProps.locY;
 }
 var circle = [];
+
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
-    context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    context.fillRect(0, 0, 2000, 900);
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
         var { speedX, speedY } = circle;
@@ -43,11 +44,11 @@ function draw() {
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
 
-            if (circle.locX - 10 < 0 || circle.locX + 10 > windowW) {
+            if (circle.locX - 10 < 0 || circle.locX + 10 > 2000) {
                 circle.speedX *= -1;
             }
 
-            if (circle.locY - 10 < 0 || circle.locY + 10 > windowH) {
+            if (circle.locY - 10 < 0 || circle.locY + 10 > 900) {
                 circle.speedY *= -1;
             }
         }
@@ -71,7 +72,7 @@ function draw() {
 function init() {
     var canvas = document.getElementById('tutorial');
     socket.on('receiveMessage', function (d) {
-        var data = JSON.parse(d); // 文字列→JSON
+        var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
         circle.push(new Circles(data));
         console.log(data);
     });
