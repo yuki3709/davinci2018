@@ -19,7 +19,6 @@ function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 2000, 900);
-
     discriminateCommand();
     circle.forEach(function (circle) {
         context.beginPath();
@@ -69,13 +68,17 @@ function discriminateCommand() {
         if (order.go) {
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
-
-            if (circle.locX - 10 < 0 || circle.locX + 10 > 2000) {
+            var area = 0;
+            if ((circle.locX - 10 < 0 || circle.locX + 10 > 2000) && area == 0) {
                 circle.speedX *= -1;
+                area++;
             }
-
-            if (circle.locY - 10 < 0 || circle.locY + 10 > 900) {
+            if ((circle.locY - 10 < 0 || circle.locY + 10 > 900) && area == 0) {
                 circle.speedY *= -1;
+                area++;
+            }
+            if (circle.locX - 10 > 0 && circle.locX + 10 < 2000 && circle.locY - 10 > 0 && circle.locY + 10 < 900) {
+                area = 0;
             }
         }
         circle.commandCount = (circle.commandCount + 1) % circle.command.length;
