@@ -1,6 +1,7 @@
-
 extends layout
 
 block content
-   canvas(id="tutorial" width="2000" height="900")
+  h1= title
+  p Welcome to #{title}
+  canvas(id="tutorial" width="2000" height="900")
   script(type='text/javascript' src='/js_screen/index.js')
