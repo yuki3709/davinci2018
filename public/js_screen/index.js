@@ -19,27 +19,53 @@ function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
     context.fillRect(0, 0, 2000, 900);
+
+    discriminateCommand();
+    circle.forEach(function (circle) {
+        context.beginPath();
+        context.fillStyle = '#3399FF';
+        context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
+        context.fill();
+        context.fillStyle = 'white';
+        context.fillText(circle.id, circle.locX - 5, circle.locY)
+    });
+}
+function discriminateCommand() {
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
         var { speedX, speedY } = circle;
         if (order.roll) {
             if (speedX == 0) {
-                if (speedY < 0) circle.speedX = defaultProps.speedX;
-                else if (speedY > 0) circle.speedX = defaultProps.speedX * -1;
+                if (speedY < 0) {
+                    circle.speedX = defaultProps.speedX;
+                }
+                else if (speedY > 0) {
+                    circle.speedX = defaultProps.speedX * -1;
+                }
             }
             else if (speedX > 0) {
-                if (speedY > 0) circle.speedX = 0;
-                else if (speedY == 0) circle.speedY = defaultProps.speedY;
-                else circle.speedY = 0;
+                if (speedY > 0) {
+                    circle.speedX = 0;
+                }
+                else if (speedY == 0) {
+                    circle.speedY = defaultProps.speedY;
+                }
+                else {
+                    circle.speedY = 0;
+                }
             }
             else {
-                if (speedY < 0) circle.speedX = 0;
-                else if (speedY == 0) circle.speedY = defaultProps.speedY * -1;
-                else circle.speedY = 0;
+                if (speedY < 0) {
+                    circle.speedX = 0;
+                }
+                else if (speedY == 0) {
+                    circle.speedY = defaultProps.speedY * -1;
+                }
+                else {
+                    circle.speedY = 0;
+                }
             }
         }
-        //位置を更新
-
         if (order.go) {
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
@@ -54,21 +80,7 @@ function draw() {
         }
         circle.commandCount = (circle.commandCount + 1) % circle.command.length;
     });
-
-
-    //更新した座標で円を描く
-
-
-    circle.forEach(function (circle) {
-        context.beginPath();
-        context.fillStyle = '#3399FF';
-        context.arc(circle.locX, circle.locY, 10, 0, Math.PI * 2.0, true);
-        context.fill();
-        context.fillStyle = 'white';
-        context.fillText(circle.id, circle.locX - 5, circle.locY)
-    });
 }
-
 function init() {
     var canvas = document.getElementById('tutorial');
     socket.on('receiveMessage', function (d) {
