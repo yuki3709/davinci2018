@@ -14,17 +14,10 @@ function Circles(props) {
     this.locY = defaultProps.locY;
 }
 var circle = [];
-var windowW, windowH = 0;
-console.log(windowH);
-function getWindowSize() {
-    windowW = window.innerWidth;
-    windowH = window.innerHeight;
-}
-getWindowSize();
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
-    context.fillRect(0, 0, windowW, windowH);
+    context.fillRect(0, 0, window.innerWidth, window.innerHeight);
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
         var { speedX, speedY } = circle;
