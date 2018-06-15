@@ -72,7 +72,7 @@ function draw() {
 function init() {
     var canvas = document.getElementById('tutorial');
     socket.on('receiveMessage', function (d) {
-        var data = JSON.parse(JSON.parse(d).text); // 文字列→JSON
+        var data = JSON.parse(d); // 文字列→JSON
         circle.push(new Circles(data));
         console.log(data);
     });
