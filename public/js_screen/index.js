@@ -70,10 +70,10 @@ function discriminateCommand() {
             var futurelocX = circle.locX + circle.speedX;
             var futurelocY = circle.locY + circle.speedY;
             if (futurelocX - 10 < 0 || futurelocX + 10 > 2000) {
-                return;
+                circle.speedX *= -1;
             }
             if (futurelocY - 10 < 0 || futurelocY + 10 > 900) {
-                return;
+                circle.speedY *= -1;
             }
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
