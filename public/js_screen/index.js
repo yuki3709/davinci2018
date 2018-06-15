@@ -15,6 +15,12 @@ function Circles(props) {
 }
 var circle = [];
 var windowW, windowH = 0;
+console.log(windowH);
+function getWindowSize() {
+    windowW = window.innerWidth;
+    windowH = window.innerHeight;
+}
+getWindowSize();
 function draw() {
     context.globalCompositeOperation = "source-over";
     context.fillStyle = "rgb(8,8,12)";
@@ -85,7 +91,3 @@ function init() {
 window.onload = function () {
     init();
 };
-function getWindowSize() {
-    windowW = window.innerWidth;
-    windowH = window.innerHeight;
-}
