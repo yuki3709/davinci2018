@@ -32,6 +32,7 @@ function draw() {
 function discriminateCommand() {
     circle.forEach(function (circle) {
         var order = circle.command[circle.commandCount];
+        circle.commandCount = (circle.commandCount + 1) % circle.command.length;
         var { speedX, speedY } = circle;
         if (order.roll) {
             if (speedX == 0) {
@@ -66,22 +67,18 @@ function discriminateCommand() {
             }
         }
         if (order.go) {
+            var futurelocX = circle.locX + circle.speedX;
+            var futurelocY = circle.locY + circle.speedY;
+            if (futurelocX - 10 < 0 || futurelocX + 10 > 2000) {
+                continue;
+            }
+            if (futurelocY - 10 < 0 || futurelocY + 10 > 900) {
+                continue;
+            }
             circle.locX += circle.speedX;
             circle.locY += circle.speedY;
-            var area = 0;
-            if ((circle.locX - 10 < 0 || circle.locX + 10 > 2000) && area == 0) {
-                circle.speedX *= -1;
-                area++;
-            }
-            if ((circle.locY - 10 < 0 || circle.locY + 10 > 900) && area == 0) {
-                circle.speedY *= -1;
-                area++;
-            }
-            if (circle.locX - 10 > 0 && circle.locX + 10 < 2000 && circle.locY - 10 > 0 && circle.locY + 10 < 900) {
-                area = 0;
-            }
         }
-        circle.commandCount = (circle.commandCount + 1) % circle.command.length;
+
     });
 }
 function init() {
