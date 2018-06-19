@@ -69,14 +69,17 @@ function draw() {
   context.globalCompositeOperation = "source-over";
   context.fillStyle = "rgb(8,8,12)";
   context.fillRect(0, 0, 2000, 900);
-  discriminateCommand();
-  circles.forEach(function (circle) {
-    circle.draw(context);
-  });
 }
 function discriminateCommand() {
   circles.forEach(function (circle) {
     circle.discriminateCommand();
+  });
+}
+function run() {
+  draw();
+  discriminateCommand();
+  circles.forEach(function (circle) {
+    circle.draw(context);
   });
 }
 window.onload = function () {
@@ -87,6 +90,6 @@ window.onload = function () {
   });
   if (canvas.getContext) {
     context = canvas.getContext('2d');
-    setInterval(draw, 33);
+    setInterval(run, 33);
   }
 };
