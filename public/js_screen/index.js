@@ -1,6 +1,7 @@
 const defaultProps = {
   locX: 200,
-  locY: 150
+  locY: 150,
+  direction: 45
 };
 let context;
 const Circle = function (props) {
@@ -9,6 +10,7 @@ const Circle = function (props) {
   this.id = props.id;
   this.locX = defaultProps.locX;
   this.locY = defaultProps.locY;
+  this.direction = defaultProps.direction;
 };
 Circle.prototype.draw = function (context) {
   context.beginPath();
