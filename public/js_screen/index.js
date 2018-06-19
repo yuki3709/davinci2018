@@ -33,21 +33,19 @@ Circle.prototype.discriminateCommand = function () {
       } else if (speedY > 0) {
         this.speedX = defaultProps.speedX * -1;
       }
-    } else if (speedX > 0) {
-      if (speedY > 0) {
-        this.speedX = 0;
-      } else if (speedY == 0) {
+    } if (speedY == 0) {
+      if (speedX > 0) {
         this.speedY = defaultProps.speedY;
-      } else {
+      } if (speedX < 0) {
+        this.speedY = defaultProps.speedY * -1;
+      }
+    } if (speedY > 0) {
+      if (speedX != 0) {
         this.speedY = 0;
       }
-    } else {
-      if (speedY < 0) {
+    } if (speedY < 0) {
+      if (speedX != 0) {
         this.speedX = 0;
-      } else if (speedY == 0) {
-        this.speedY = defaultProps.speedY * -1;
-      } else {
-        this.speedY = 0;
       }
     }
   }
