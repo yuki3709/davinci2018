@@ -1,6 +1,4 @@
-var defaultProps = {
-  speedX: 5.0,
-  speedY: 5.0,
+const defaultProps = {
   locX: 200,
   locY: 150
 };
@@ -9,8 +7,6 @@ const Circle = function (props) {
   this.commandCount = 0;
   this.command = props.command;
   this.id = props.id;
-  this.speedX = defaultProps.speedX;
-  this.speedY = defaultProps.speedY;
   this.locX = defaultProps.locX;
   this.locY = defaultProps.locY;
 };
@@ -22,44 +18,40 @@ Circle.prototype.draw = function (context) {
   context.fillStyle = 'white';
   context.fillText(this.id, this.locX - 5, this.locY)
 };
+Circle.prototype.roll = function (direction) {
+  this.direction = this.normalizeDirection(direction + this.direction);
+};
+Circle.prototype.go = function (distance) {
+  const radian = this.direction * Math.PI / 180;
+  let distanceX = distance * Math.cos(radian);
+  let distanceY = distance * Math.sin(radian);
+  var futureLocX = this.locX + distanceX;
+  var futureLocY = this.locY + distanceY;
+  let direction = this.direction;
+  if (futureLocX - 10 < 0 || futureLocX + 10 > 2000) {
+    distanceX *= -1;
+    direction = 180 - direction;
+  }
+  if (futureLocY - 10 < 0 || futureLocY + 10 > 900) {
+    distanceY *= -1;
+    direction *= -1;
+  }
+  this.direction = this.normalizeDirection(direction);
+  this.locX += distanceX;
+  this.locY += distanceY;
+};
+Circle.prototype.normalizeDirection = function (direction) {
+  return (direction + 360) % 360;
+};
 Circle.prototype.discriminateCommand = function () {
   var order = this.command[this.commandCount];
   this.commandCount = (this.commandCount + 1) % this.command.length;
   var { speedX, speedY } = this;
   if (order.roll) {
-    if (speedX == 0) {
-      if (speedY < 0) {
-        this.speedX = defaultProps.speedX;
-      } else if (speedY > 0) {
-        this.speedX = defaultProps.speedX * -1;
-      }
-    } else if (speedY == 0) {
-      if (speedX > 0) {
-        this.speedY = defaultProps.speedY;
-      } if (speedX < 0) {
-        this.speedY = defaultProps.speedY * -1;
-      }
-    } else if (speedY > 0) {
-      if (speedX != 0) {
-        this.speedY = 0;
-      }
-    } else if (speedY < 0) {
-      if (speedX != 0) {
-        this.speedX = 0;
-      }
-    }
+    this.roll(45);
   }
   if (order.go) {
-    var futureLocX = this.locX + this.speedX;
-    var futureLocY = this.locY + this.speedY;
-    if (futureLocX - 10 < 0 || futureLocX + 10 > 2000) {
-      this.speedX *= -1;
-    }
-    if (futureLocY - 10 < 0 || futureLocY + 10 > 900) {
-      this.speedY *= -1;
-    }
-    this.locX += this.speedX;
-    this.locY += this.speedY;
+    this.go(5);
   }
 };
 let circles = [];
