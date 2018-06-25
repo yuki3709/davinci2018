@@ -3,6 +3,10 @@ const defaultProps = {
   locY: 150,
   direction: 45
 };
+const Bound = {};
+Bound.Field = function (e) {
+  this.init(e);
+};
 let context;
 const Circle = function (props) {
   this.commandCount = 0;
@@ -12,6 +16,7 @@ const Circle = function (props) {
   this.locY = defaultProps.locY;
   this.direction = defaultProps.direction;
 };
+
 Circle.prototype.draw = function (context) {
   context.beginPath();
   context.fillStyle = '#3399FF';
@@ -56,6 +61,7 @@ Circle.prototype.discriminateCommand = function () {
     this.go(5);
   }
 };
+
 let circles = [];
 function draw() {
   context.globalCompositeOperation = "source-over";
