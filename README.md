@@ -4,4 +4,4 @@
 
 - Takeuchi Akihiro
 -
-- Sahara
+- Sahara Yui
