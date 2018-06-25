@@ -12,7 +12,6 @@ Bound.Field = e => {
   this.context.globalCompositeOperation = "source-over";
   setInterval(self.run, 33);
 };
-let context;
 const Circle = data => {
   const props = JSON.parse(data);
   this.commandCount = 0;
@@ -29,12 +28,11 @@ Bound.Field.prototype = {
     width: 0,
     height: 0
   },
-  components: [],
   constructor: Bound.Field,
   clear: () => {
-    let context = this.context;
+    const context = this.context;
     if (!context) return;
-    let size = this.size || {};
+    const size = this.size || {};
     context.fillStyle = "#000";
     context.fillRect(0, 0, size.width, size.height);
   },
@@ -42,13 +40,8 @@ Bound.Field.prototype = {
     this.size.width = this.canvas.width = parent.clientWidth;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
-  draw: () => {
-    context.globalCompositeOperation = "source-over";
-    context.fillStyle = "rgb(8,8,12)";
-    context.fillRect(0, 0, 2000, 900);
-  },
   run: () => {
-    this.draw();
+    this.clear();
     discriminateCommand();
     circles.forEach(circle => circle.draw(context));
   }
@@ -100,4 +93,5 @@ const discriminateCommand = () => circles.forEach(circle => circle.discriminateC
 window.onload = () => {
   var canvas = document.getElementById('tutorial');
   socket.on('receiveMessage', d => circles.push(new Circle(d)));
+  const field = new Bound.Field(canvas);
 };
