@@ -4,4 +4,4 @@
 
 - Takeuchi Akihiro
 - Ozaki Yuki
-- 
+- Sahara Yui
