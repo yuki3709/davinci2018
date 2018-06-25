@@ -94,4 +94,5 @@ window.onload = () => {
   var canvas = document.getElementById('tutorial');
   socket.on('receiveMessage', d => circles.push(new Circle(d)));
   const field = new Bound.Field(canvas);
+  field();
 };
