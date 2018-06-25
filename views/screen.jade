@@ -1,7 +1,13 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
-  canvas(id="tutorial" width="2000" height="900")
-  script(type='text/javascript' src='/js_screen/index.js')
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='screenStyle',href='/stylesheets/screen.css')
+        script(type="text/javascript" src="/socket.io/socket.io.js")
+        script.
+          var socket = io.connect();
+    body
+        canvas(id="tutorial" width="2000" height="900")
+        script(type='text/javascript' src='/js_screen/index.js')
