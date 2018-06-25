@@ -1,6 +1,7 @@
 var prop = {
   "id":"",
-	"command":[]
+	"command":[],
+  "hitEvent":[{roll:90}]
 };
 
 window.onload = function () {
@@ -12,7 +13,7 @@ window.onload = function () {
   });
   var roll = document.getElementById('roll');
   roll.addEventListener('click',function(){
-    prop.command.push({roll:10});
+    prop.command.push({roll:90});
     document.getElementById('messageList').textContent = JSON.stringify(prop);
     console.log(prop);
   });
