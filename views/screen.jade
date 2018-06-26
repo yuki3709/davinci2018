@@ -8,6 +8,6 @@ html
         script(type="text/javascript" src="/socket.io/socket.io.js")
         script.
           var socket = io.connect();
-    body
+    body(id="output-area")
         canvas(id="tutorial" width="2000" height="900")
         script(type='text/javascript' src='/js_screen/index.js')
