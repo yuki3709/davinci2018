@@ -103,5 +103,6 @@ window.onload = function () {
     circles.push(new Circle(data));
   });
   const field = new Bound.Field(canvas);
-  field.resize();
+  let outputArea = this.document.getElementById('output-area');
+  field.resize(outputArea);
 };
