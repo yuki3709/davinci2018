@@ -100,7 +100,7 @@ function discriminateCommand() {
 window.onload = function () {
   let canvas = document.getElementById('tutorial');
   socket.on('receiveMessage', function (d) {
-    circles.push(new Circle(data));
+    circles.push(new Circle(d));
   });
   const field = new Bound.Field(canvas);
   let outputArea = document.getElementById('output-area');
