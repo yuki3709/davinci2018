@@ -98,8 +98,10 @@ function discriminateCommand() {
     circle.discriminateCommand();
   });
 }
-window.onload = () => {
+window.onload = function () {
   let canvas = document.getElementById('tutorial');
-  socket.on('receiveMessage', d => circles.push(new Circle(d)));
-  const field = new Bound.Field(e);
+  socket.on('receiveMessage', function (d) {
+    circles.push(new Circle(data));
+  });
+  const field = new Bound.Field(canvas);
 };
