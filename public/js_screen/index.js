@@ -103,4 +103,5 @@ window.onload = function () {
     circles.push(new Circle(data));
   });
   const field = new Bound.Field(canvas);
+  field.resize();
 };
