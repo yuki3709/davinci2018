@@ -5,12 +5,11 @@ const defaultProps = {
 };
 const Bound = {};
 Bound.Field = function (e) {
-  const self = this;
   this.canvas = e;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
-  setInterval(self.run, 33);
+  setInterval(() => this.run(), 33);
 };
 const Circle = function (data) {
   const props = JSON.parse(data);
