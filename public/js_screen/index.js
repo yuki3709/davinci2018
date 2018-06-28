@@ -11,6 +11,15 @@ Bound.Field = function (e) {
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
 };
+const Circle = function (data) {
+  const props = JSON.parse(data);
+  this.commandCount = 0;
+  this.command = props.command;
+  this.id = props.id;
+  this.locX = defaultProps.locX;
+  this.locY = defaultProps.locY;
+  this.direction = defaultProps.direction;
+};
 Bound.Field.prototype = {
   canvas: null,
   context: null,
@@ -37,15 +46,6 @@ Bound.Field.prototype = {
   }
 };
 Circle.prototype = {
-  init: function (data) {
-    const props = JSON.parse(data);
-    this.commandCount = 0;
-    this.command = props.command;
-    this.id = props.id;
-    this.locX = defaultProps.locX;
-    this.locY = defaultProps.locY;
-    this.direction = defaultProps.direction;
-  },
   draw: function (context) {
     context.beginPath();
     context.fillStyle = '#3399FF';
