@@ -23,7 +23,7 @@ Bound.Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
-    discriminateCommand();
+    this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
   }
 };
