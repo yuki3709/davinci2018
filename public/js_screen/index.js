@@ -1,12 +1,11 @@
-const Bound = {};
-Bound.Field = function (e) {
+Field = function (e) {
   this.canvas = e;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
 };
-Bound.Field.prototype = {
+Field.prototype = {
   canvas: null,
   context: null,
   size: {
@@ -14,7 +13,7 @@ Bound.Field.prototype = {
     height: 0
   },
   circles: [],
-  constructor: Bound.Field,
+  constructor: Field,
   discriminateCommand: function () {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
@@ -27,17 +26,18 @@ Bound.Field.prototype = {
     this.circles.forEach(circle => circle.draw(this.context));
   }
 };
-const Circle = function (data) {
+const Circle = function (data, field) {
   const props = JSON.parse(data);
   this.color = "rgb(" + Array(3).fill(0).map(Math.random).map(x => x * 256).map(Math.floor).join(",") + ")";
   this.command = props.command;
   this.id = props.id;
-  this.width = Bound.Field.prototype.size.width;
-  this.height = Bound.Field.prototype.size.height;
+  this.width = field.size.width;
+  this.height = field.size.height;
+  this.locX = Math.floor(Math.random() * this.width);
+  this.locY = Math.floor(Math.random() * this.height);
 };
 Circle.prototype = {
-  locX: 200,
-  locY: 150,
+
   direction: 45,
   commandCount: 0,
   draw: function (context) {
@@ -84,10 +84,10 @@ Circle.prototype = {
 };
 window.onload = function () {
   let canvas = document.getElementById('tutorial');
+  const field = new Field(canvas);
   socket.on('receiveMessage', function (d) {
-    Bound.Field.prototype.circles.push(new Circle(d));
+    field.circles.push(new Circle(d, field));
   });
-  const field = new Bound.Field(canvas);
   let outputArea = document.getElementById('output-area');
   field.resize(outputArea);
 };
