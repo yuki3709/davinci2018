@@ -1,7 +1,8 @@
 var prop = {
   "id":"",
 	"command":[],
-  "hitEvent":[{roll:90}]
+  "hitEvent":[{roll:90}],
+  "color":""
 };
 
 window.onload = function () {
