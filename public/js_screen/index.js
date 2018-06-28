@@ -27,7 +27,6 @@ const Circle = function (data) {
   const props = JSON.parse(data);
   this.command = props.command;
   this.id = props.id;
-  this.direction = defaultProps.direction;
   this.width = Bound.Field.size.width;
   this.height = Bound.Field.size.height;
 };
