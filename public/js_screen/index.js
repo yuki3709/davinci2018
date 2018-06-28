@@ -76,13 +76,10 @@ Circle.prototype = {
     this.locX += distanceX;
     this.locY += distanceY;
   },
-  normalizeDirection: function (direction) {
-    (direction + 360) % 360
-  },
+  normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function () {
     var order = this.command[this.commandCount];
     this.commandCount = (this.commandCount + 1) % this.command.length;
-    var { speedX, speedY } = this;
     if (order.roll) {
       this.roll(45);
     }
