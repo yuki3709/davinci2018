@@ -13,19 +13,22 @@ Bound.Field.prototype = {
     width: 0,
     height: 0
   },
+  circles: [],
   constructor: Bound.Field,
+  discriminateCommand: function () {
+    this.circles.forEach(circle => circle.discriminateCommand());
+  },
   resize: function (parent) {
     this.size.width = this.canvas.width = parent.clientWidth;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
-    discriminateCommand();
-    circles.forEach(circle => circle.draw(this.context));
+    this.discriminateCommand();
+    this.circles.forEach(circle => circle.draw(this.context));
   }
 };
 const Circle = function (data) {
   const props = JSON.parse(data);
-  const arrayColor = ['red', 'blue', 'lime', 'yellow']
   this.color = "rgb(" + Array(3).fill(0).map(Math.random).map(x => x * 256).map(Math.floor).join(",") + ")";
   this.command = props.command;
   this.id = props.id;
@@ -71,24 +74,18 @@ Circle.prototype = {
   discriminateCommand: function () {
     var order = this.command[this.commandCount];
     this.commandCount = (this.commandCount + 1) % this.command.length;
-    if (order.roll) {
-      this.roll(45);
+    if (typeof order.roll !== "undefined") {
+      this.roll(order.roll);
     }
-    if (order.go) {
-      this.go(5);
+    if (typeof order.go !== "undefined") {
+      this.go(order.go);
     }
   }
 };
-let circles = [];
-function discriminateCommand() {
-  circles.forEach(function (circle) {
-    circle.discriminateCommand();
-  });
-}
 window.onload = function () {
   let canvas = document.getElementById('tutorial');
   socket.on('receiveMessage', function (d) {
-    circles.push(new Circle(d));
+    Bound.Field.prototype.circles.push(new Circle(d));
   });
   const field = new Bound.Field(canvas);
   let outputArea = document.getElementById('output-area');
