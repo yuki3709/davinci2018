@@ -25,6 +25,8 @@ Bound.Field.prototype = {
 };
 const Circle = function (data) {
   const props = JSON.parse(data);
+  const arrayColor = ['red', 'blue', 'lime', 'yellow']
+  this.color = "rgb(" + Array(3).fill(0).map(Math.random).map(x => x * 256).map(Math.floor).join(",") + ")";
   this.command = props.command;
   this.id = props.id;
   this.width = Bound.Field.prototype.size.width;
@@ -37,7 +39,7 @@ Circle.prototype = {
   commandCount: 0,
   draw: function (context) {
     context.beginPath();
-    context.fillStyle = '#3399FF';
+    context.fillStyle = this.color;
     context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
     context.fill();
     context.fillStyle = 'white';
