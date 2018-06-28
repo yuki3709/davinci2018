@@ -27,8 +27,8 @@ const Circle = function (data) {
   const props = JSON.parse(data);
   this.command = props.command;
   this.id = props.id;
-  this.width = Bound.Field.size.width;
-  this.height = Bound.Field.size.height;
+  this.width = Bound.Field.prototype.size.width;
+  this.height = Bound.Field.prototype.size.height;
 };
 Circle.prototype = {
   locX: 200,
