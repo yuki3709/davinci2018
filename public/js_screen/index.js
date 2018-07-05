@@ -22,6 +22,7 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
+    this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
   }
@@ -47,6 +48,12 @@ Circle.prototype = {
     context.fill();
     context.fillStyle = 'white';
     context.fillText(this.id, this.locX - 5, this.locY)
+  },
+  shadeDraw: function (context) {
+    context.beginPath();
+    context.fillStyle = this.color;
+    context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
+    context.fill();
   },
   roll: function (direction) {
     this.direction = this.normalizeDirection(direction + this.direction)
