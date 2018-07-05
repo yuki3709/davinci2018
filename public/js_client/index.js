@@ -5,28 +5,28 @@ var prop = {
   "color":""
 };
 
-window.onload = function () {
+window.onload = () => {
   var go = document.getElementById('go');
-  go.addEventListener('click',function(){
+  go.addEventListener('click',() => {
     prop.command.push({go:10});
     document.getElementById('messageList').textContent = JSON.stringify(prop);
     console.log(prop);
   });
   var roll = document.getElementById('roll');
-  roll.addEventListener('click',function(){
+  roll.addEventListener('click',() => {
     prop.command.push({roll:90});
     document.getElementById('messageList').textContent = JSON.stringify(prop);
     console.log(prop);
   });
   var name = document.getElementById('message');
   var inputname = document.getElementById('inputname');
-  inputname.addEventListener('click',function(){
+  inputname.addEventListener('click',() => {
     prop.id = name.value;   //nameを決定させる。
     document.getElementById('messageList').textContent = JSON.stringify(prop);
     console.log(prop);
   });
   var reset = document.getElementById('reset');
-  reset.addEventListener('click',function(){
+  reset.addEventListener('click',() => {
     name.value = '';
     prop.id = "";
     prop.command = [];
@@ -34,7 +34,7 @@ window.onload = function () {
     console.log(prop);
   })
   var send = document.getElementById('send');
-  send.addEventListener('click',function(){
+  send.addEventListener('click',() => {
     if(prop.command === 0) return fales;
     document.getElementById('messageList').textContent = JSON.stringify(prop);
     console.log(prop);
