@@ -1,43 +1,48 @@
-const Bound = {};
-Bound.Field = function (e) {
+Field = function (e) {
   this.canvas = e;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
 };
-Bound.Field.prototype = {
+Field.prototype = {
   canvas: null,
   context: null,
   size: {
     width: 0,
     height: 0
   },
-  constructor: Bound.Field,
+  circles: [],
+  constructor: Field,
+  discriminateCommand: function () {
+    this.circles.forEach(circle => circle.discriminateCommand());
+  },
   resize: function (parent) {
     this.size.width = this.canvas.width = parent.clientWidth;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
-    discriminateCommand();
-    circles.forEach(circle => circle.draw(this.context));
+    this.discriminateCommand();
+    this.circles.forEach(circle => circle.draw(this.context));
   }
 };
-const Circle = function (data) {
+const Circle = function (data, field) {
   const props = JSON.parse(data);
+  this.color = "rgb(" + Array(3).fill(0).map(Math.random).map(x => x * 256).map(Math.floor).join(",") + ")";
   this.command = props.command;
   this.id = props.id;
-  this.width = Bound.Field.prototype.size.width;
-  this.height = Bound.Field.prototype.size.height;
+  this.width = field.size.width;
+  this.height = field.size.height;
+  this.locX = Math.floor(Math.random() * this.width);
+  this.locY = Math.floor(Math.random() * this.height);
 };
 Circle.prototype = {
-  locX: 200,
-  locY: 150,
+
   direction: 45,
   commandCount: 0,
   draw: function (context) {
     context.beginPath();
-    context.fillStyle = '#3399FF';
+    context.fillStyle = this.color;
     context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
     context.fill();
     context.fillStyle = 'white';
@@ -69,26 +74,20 @@ Circle.prototype = {
   discriminateCommand: function () {
     var order = this.command[this.commandCount];
     this.commandCount = (this.commandCount + 1) % this.command.length;
-    if (order.roll) {
-      this.roll(45);
+    if (typeof order.roll !== "undefined") {
+      this.roll(order.roll);
     }
-    if (order.go) {
-      this.go(5);
+    if (typeof order.go !== "undefined") {
+      this.go(order.go);
     }
   }
 };
-let circles = [];
-function discriminateCommand() {
-  circles.forEach(function (circle) {
-    circle.discriminateCommand();
-  });
-}
 window.onload = function () {
   let canvas = document.getElementById('tutorial');
+  const field = new Field(canvas);
   socket.on('receiveMessage', function (d) {
-    circles.push(new Circle(d));
+    field.circles.push(new Circle(d, field));
   });
-  const field = new Bound.Field(canvas);
   let outputArea = document.getElementById('output-area');
   field.resize(outputArea);
 };
