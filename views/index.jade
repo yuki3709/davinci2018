@@ -5,11 +5,11 @@ block content
         label ID:
         input(type="text" name="textbox" id="message")
     div
-        button(type="button" value="決定" id="inputname") 決定
-        button(type="button" value="送信" id="send") 送信
-        button(type="button" value="リセット" id="reset") リセット
-        button(type="button" value="進む" id="go") 進む
-        button(type="button" value="回転" id="roll") 回転
+        button(type="button" id="inputname") 決定
+        button(type="button" id="send" style="position: absolute; left: 50%; top: 70%") 送信
+        button(type="button" id="reset" style="position: absolute; left: 50%; top: 65%") リセット
+        button(type="button" id="go" style="position: absolute; left: 30%; top: 30%") 進む
+        button(type="button" id="roll" style="position: absolute; left: 50%; top: 30%") 回転
     div
         ul(id="messageList")
     script(type='text/javascript' src='/js_client/index.js')
