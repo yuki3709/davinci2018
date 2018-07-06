@@ -56,6 +56,6 @@ window.onload = () => {
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
-  document.getElementById('messageList').textContent = prop.command;
-  document.getElementById('hitEventList').textContent = prop.hitEvent;
+  document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+  document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
 };
