@@ -12,6 +12,15 @@ Field.prototype = {
     width: 0,
     height: 0
   },
+  team: {
+    red: 0,
+    fuchsia: 0,
+    lime: 0,
+    aqua: 0,
+    black: 0,
+    other: 0
+  },
+  imageData: [],
   circles: [],
   constructor: Field,
   discriminateCommand: function () {
@@ -29,7 +38,8 @@ Field.prototype = {
 };
 const Circle = function (data, field) {
   const props = JSON.parse(data);
-  this.color = "rgb(" + Array(3).fill(0).map(Math.random).map(x => x * 256).map(Math.floor).join(",") + ")";
+  const arrayColor = ['red', 'fuchsia', 'lime', 'aqua']
+  this.color = arrayColor[Math.floor(Math.random() * 4)];
   this.command = props.command;
   this.id = props.id;
   this.width = field.size.width;
@@ -38,7 +48,6 @@ const Circle = function (data, field) {
   this.locY = Math.floor(Math.random() * this.height);
 };
 Circle.prototype = {
-
   direction: 45,
   commandCount: 0,
   draw: function (context) {
