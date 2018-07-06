@@ -38,7 +38,7 @@ window.onload = () => {
   });
   var hitEventRoll = document.getElementById('rollEvent');
   hitEventRoll.addEventListener('click',() => {
-    prop.hitEvent.push({roll:90});
+    prop.hitEvent.push({roll:45});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
@@ -53,7 +53,7 @@ window.onload = () => {
     name.value = '';
     prop.id = "";
     prop.command = [];
-    prop.hitEvent = [{roll:45}];
+    prop.hitEvent = [{roll:90}];
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
