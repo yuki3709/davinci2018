@@ -13,7 +13,7 @@ window.onload = () => {
   });
   var roll = document.getElementById('roll');
   roll.addEventListener('click',() => {
-    prop.command.push({roll:90});
+    prop.command.push({roll:45});
     console.log(prop);
   });
   var name = document.getElementById('message');
@@ -34,7 +34,7 @@ window.onload = () => {
   });
   var hitEventRoll = document.getElementById('rollEvent');
   go.addEventListener('click',() => {
-    prop.hitEvent.push({roll:90});
+    prop.hitEvent.push({roll:45});
     console.log(prop);
   });
   var hitEventOneReturn = document.getElementById('onereturnEvent');
@@ -47,7 +47,7 @@ window.onload = () => {
     name.value = '';
     prop.id = "";
     prop.command = [];
-    prop.hitEvent = [{roll:90}];
+    prop.hitEvent = [{roll:45}];
     console.log(prop);
   })
   var send = document.getElementById('send');
@@ -57,5 +57,5 @@ window.onload = () => {
     socket.emit('message', JSON.stringify(prop));
   });
   document.getElementById('messageList').textContent = prop.command.toString();
-  document.getElementById('hitEventList').textContent = prop.hitEventList.toString();
+  document.getElementById('hitEventList').textContent = prop.hitEvent.toString();
 };
