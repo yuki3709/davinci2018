@@ -28,17 +28,17 @@ window.onload = () => {
     console.log(prop);
   });
   var hitEventGo = document.getElementById('goEvent');
-  go.addEventListener('click',() => {
+  hitEventGo.addEventListener('click',() => {
     prop.hitEvent.push({go:10});
     console.log(prop);
   });
   var hitEventRoll = document.getElementById('rollEvent');
-  go.addEventListener('click',() => {
+  hitEventRoll.addEventListener('click',() => {
     prop.hitEvent.push({roll:45});
     console.log(prop);
   });
   var hitEventOneReturn = document.getElementById('onereturnEvent');
-  go.addEventListener('click',() => {
+  hitEventOneReturn.addEventListener('click',() => {
     prop.hitEvent.pop();
     console.log(prop);
   });
@@ -56,6 +56,6 @@ window.onload = () => {
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
-  document.getElementById('messageList').textContent = prop.command.toString();
-  document.getElementById('hitEventList').textContent = prop.hitEvent.toString();
+  document.getElementById('messageList').textContent = prop.command;
+  document.getElementById('hitEventList').textContent = prop.hitEvent;
 };
