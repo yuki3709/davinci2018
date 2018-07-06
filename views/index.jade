@@ -6,15 +6,15 @@ block content
         input(type="text" name="textbox" id="message")
     div
         button(type="button" id="inputname") 決定
-        button(type="button" id="send" style="position: absolute; left: 50%; top: 55%") 送信
+        button(type="button" id="send" style="position: absolute; left: 50%; top: 60%") 送信
         button(type="button" id="reset" style="position: absolute; left: 50%; top: 65%") リセット
         button(type="button" id="onereturn" style="position: absolute; left: 50%; top: 30%") １つ戻る
         button(type="button" id="go" style="position: absolute; left: 30%; top: 30%") 進む
         button(type="button" id="roll" style="position: absolute; left: 35%; top: 30%") 回転
-        ul(id="messageList")
+        ul(id="messageList" style="position: absolute; left: 10%; top: 30%")
     div
-        button(type="button" id="onereturnEvent" style="position: absolute; left: 50%; top: 70%") １つ戻る
-        button(type="button" id="goEvent" style="position: absolute; left: 30%; top: 70%") 進む
-        button(type="button" id="rollEvent" style="position: absolute; left: 35%; top: 70%") 回転
-        ul(id="hitEventList")
+        button(type="button" id="onereturnEvent" style="position: absolute; left: 50%; top: 50%") １つ戻る
+        button(type="button" id="goEvent" style="position: absolute; left: 30%; top: 50%") 進む
+        button(type="button" id="rollEvent" style="position: absolute; left: 35%; top: 50%") 回転
+        ul(id="hitEventList" style="position: absolute; left: 10%; top: 50%")
     script(type='text/javascript' src='/js_client/index.js')
