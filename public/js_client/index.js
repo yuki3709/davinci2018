@@ -38,7 +38,7 @@ window.onload = () => {
   });
   var hitEventRoll = document.getElementById('rollEvent');
   hitEventRoll.addEventListener('click',() => {
-    prop.hitEvent.push({roll:45});
+    prop.hitEvent.push({roll:90});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
