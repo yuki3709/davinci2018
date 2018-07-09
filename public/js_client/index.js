@@ -1,6 +1,6 @@
 var prop = {
   "id":"",
-	"command":[],
+  "command":[],
   "hitEvent":[{roll:90}],
   "color":""
 };
@@ -72,7 +72,7 @@ window.onload = () => {
   })
   var send = document.getElementById('send');
   send.addEventListener('click',() => {
-    if(prop.command === 0) return fales;
+    if(prop.command === 0 || prop.id === "") return fales;
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
