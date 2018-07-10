@@ -4,7 +4,7 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 10000);
+  setInterval(() => this.getColor(this.context), 100000);
 };
 Field.prototype = {
   canvas: null,
@@ -37,25 +37,35 @@ Field.prototype = {
     this.circles.forEach(circle => circle.draw(this.context));
   },
   getColor: function (context) {
-    for (i = 0; i < this.size.width + 1; i++) {
-      for (j = 0; j < this.size.width + 1; j++) {
-        this.imageData = context.getImageData(i, j, 1, 1);
-        if (JSON.stringify(this.imageData) == [255, 0, 0, 255]) {
-          this.team.red++;
-        } else if (JSON.stringify(this.imageData) == JSON.stringify([255, 0, 255, 255])) {
-          this.team.fuchsia++;
-        } else if (JSON.stringify(this.imageData) == JSON.stringify([0, 255, 0, 255])) {
-          this.team.lime++;
-        } else if (JSON.stringify(this.imageData) == JSON.stringify([0, 255, 255, 255])) {
-          this.team.aqua++;
-        } else if (JSON.stringify(this.imageData) == JSON.stringify([0, 0, 0, 0])) {
-          this.team.black++;
-        } else {
-          this.team.other++;
-        }
-      }
-    }
-    console.log(this.team);
+    this.imageData = context.getImageData(20, 20, 1, 1);
+    console.log(this.imageData);
+    // for (i = 0; i < this.size.width + 1; i++) {
+    //   for (j = 0; j < this.size.width + 1; j++) {
+
+    //     if (JSON.stringify(this.imageData)[0] == 255) {
+    //       if (JSON.stringify(this.imageData)[2] == 0){
+    //         this.team.red++;
+    //       } else if (JSON.stringify(this.imageData)[2] == 255){
+    //         this.team.fuchsia++;
+    //       }
+
+    //     }
+    //     if (JSON.stringify(this.imageData)[0] == [255, 0, 0, 255]) {
+    //       this.team.red++;
+    //     } else if (JSON.stringify(this.imageData) == [255, 0, 255, 255]) {
+    //       this.team.fuchsia++;
+    //     } else if (JSON.stringify(this.imageData) ==[0, 255, 0, 255]) {
+    //       this.team.lime++;
+    //     } else if (JSON.stringify(this.imageData) == [0, 255, 255, 255]) {
+    //       this.team.aqua++;
+    //     } else if (JSON.stringify(this.imageData) == [0, 0, 0, 0]) {
+    //       this.team.black++;
+    //     } else {
+    //       this.team.other++;
+    //     }
+    //   }
+    // }
+    // console.log(this.team);
   }
 };
 const Circle = function (data, field) {
