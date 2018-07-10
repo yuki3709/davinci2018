@@ -37,35 +37,36 @@ Field.prototype = {
     this.circles.forEach(circle => circle.draw(this.context));
   },
   getColor: function (context) {
-    this.imageData = context.getImageData(20, 20, 1, 1);
-    console.log(this.imageData);
-    // for (i = 0; i < this.size.width + 1; i++) {
-    //   for (j = 0; j < this.size.width + 1; j++) {
-
-    //     if (JSON.stringify(this.imageData)[0] == 255) {
-    //       if (JSON.stringify(this.imageData)[2] == 0){
-    //         this.team.red++;
-    //       } else if (JSON.stringify(this.imageData)[2] == 255){
-    //         this.team.fuchsia++;
-    //       }
-
-    //     }
-    //     if (JSON.stringify(this.imageData)[0] == [255, 0, 0, 255]) {
-    //       this.team.red++;
-    //     } else if (JSON.stringify(this.imageData) == [255, 0, 255, 255]) {
-    //       this.team.fuchsia++;
-    //     } else if (JSON.stringify(this.imageData) ==[0, 255, 0, 255]) {
-    //       this.team.lime++;
-    //     } else if (JSON.stringify(this.imageData) == [0, 255, 255, 255]) {
-    //       this.team.aqua++;
-    //     } else if (JSON.stringify(this.imageData) == [0, 0, 0, 0]) {
-    //       this.team.black++;
-    //     } else {
-    //       this.team.other++;
-    //     }
-    //   }
-    // }
-    // console.log(this.team);
+    this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
+    for (y = 0; y < this.size.height; y++) {
+      for (x = 0; x < this.size.width; x++) {
+        let index = (y * this.size.width + x) * 4;
+        let red = imageData.data[index]; // R
+        let green = imageData.data[index + 1]; // G
+        let blue = imageData.data[index + 2]; // B
+        if (red === 255 && green === 0 && blue === 0) {
+          this.team.red++;
+        }
+        if (red === 255 && green === 0 && blue === 255) {
+          this.team.fuchsia++;
+        }
+        if (red === 0 && green === 255 && blue === 0) {
+          this.team.lime++;
+        }
+        if (red === 0 && green === 255 && blue === 255) {
+          this.team.aqua++;
+        }
+        if (red === 0 && green === 0 && blue === 0) {
+          this.team.black++;
+        }
+      }
+    }
+    console.log(this.team);
+    this.team.red = 0;
+    this.team.fuchsia = 0;
+    this.team.lime = 0;
+    this.team.aqua = 0;
+    this.team.black = 0;
   }
 };
 const Circle = function (data, field) {
