@@ -10,11 +10,7 @@ window.onload = () => {
   console.log('https://davinch-sahara.herokuapp.com/?color=aqua');
   console.log('https://davinch-sahara.herokuapp.com/?color=fuchsia');
   console.log('https://davinch-sahara.herokuapp.com/?color=lime');
-  prop.color = () => {
-    // 最初の1文字 (?記号) を除いた文字列を取得する
-    var query = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
-    return query;
-  }
+  prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
   var go = document.getElementById('go');
   go.addEventListener('click',() => {
     prop.command.push({go:10});
