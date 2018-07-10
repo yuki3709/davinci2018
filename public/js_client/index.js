@@ -6,6 +6,31 @@ var prop = {
 };
 
 window.onload = () => {
+  console.log('https://davinch-sahara.herokuapp.com/?color=red');
+  console.log('https://davinch-sahara.herokuapp.com/?color=aqua');
+  console.log('https://davinch-sahara.herokuapp.com/?color=fuchsia');
+  console.log('https://davinch-sahara.herokuapp.com/?color=lime');
+  function GetQueryString()
+  {
+    var result = {};
+    if( 1 < window.location.search.length )
+    {
+        // 最初の1文字 (?記号) を除いた文字列を取得する
+        var query = window.location.search.substring( 1 ).sprit('&');
+        for( var i = 0; i < query.length; i++ )
+        {
+          // パラメータ名とパラメータ値に分割する
+          var element = query[ i ].split( '=' );
+
+          var paramName = decodeURIComponent( element[ 0 ] );
+          var paramValue = decodeURIComponent( element[ 1 ] );
+          // パラメータ名をキーとして連想配列に追加する
+          result[ paramName ] = paramValue;
+        }
+    }
+    return result;
+  };
+  prop.color = GetQueryString()
   var go = document.getElementById('go');
   go.addEventListener('click',() => {
     prop.command.push({go:10});
