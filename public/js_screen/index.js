@@ -4,7 +4,7 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 100000);
+  setInterval(() => this.getColor(this.context), 30000);
 };
 Field.prototype = {
   canvas: null,
@@ -41,9 +41,9 @@ Field.prototype = {
     for (y = 0; y < this.size.height; y++) {
       for (x = 0; x < this.size.width; x++) {
         let index = (y * this.size.width + x) * 4;
-        let red = imageData.data[index]; // R
-        let green = imageData.data[index + 1]; // G
-        let blue = imageData.data[index + 2]; // B
+        let red = this.imageData.data[index]; // R
+        let green = this.imageData.data[index + 1]; // G
+        let blue = this.imageData.data[index + 2]; // B
         if (red === 255 && green === 0 && blue === 0) {
           this.team.red++;
         }
