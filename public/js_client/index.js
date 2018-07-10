@@ -7,10 +7,10 @@ var prop = {
 
 window.onload = () => {
   var url = location.href;
-  console.log(url + '/?color=red');
-  console.log(url + '/?color=aqua');
-  console.log(url + '/?color=fuchsia');
-  console.log(url + '/?color=lime');
+  console.log(url + '?color=red');
+  console.log(url + '?color=aqua');
+  console.log(url + '?color=fuchsia');
+  console.log(url + '?color=lime');
   prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
   var go = document.getElementById('go');
   go.addEventListener('click',() => {
