@@ -6,10 +6,11 @@ var prop = {
 };
 
 window.onload = () => {
-  console.log('https://davinch-sahara.herokuapp.com/?color=red');
-  console.log('https://davinch-sahara.herokuapp.com/?color=aqua');
-  console.log('https://davinch-sahara.herokuapp.com/?color=fuchsia');
-  console.log('https://davinch-sahara.herokuapp.com/?color=lime');
+  var url = location.href;
+  console.log(url + '/?color=red');
+  console.log(url + '/?color=aqua');
+  console.log(url + '/?color=fuchsia');
+  console.log(url + '/?color=lime');
   prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
   var go = document.getElementById('go');
   go.addEventListener('click',() => {
