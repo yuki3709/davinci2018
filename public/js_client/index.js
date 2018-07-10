@@ -16,7 +16,7 @@ window.onload = () => {
     if( 1 < window.location.search.length )
     {
         // 最初の1文字 (?記号) を除いた文字列を取得する
-        var query = window.location.search.substring( 1 ).sprit('&');
+        var query = location.search.substring( 1 ).sprit('&');
         for( var i = 0; i < query.length; i++ )
         {
           // パラメータ名とパラメータ値に分割する
