@@ -78,7 +78,7 @@ window.onload = () => {
   })
   var send = document.getElementById('send');
   send.addEventListener('click',() => {
-    if(prop.command === 0 || prop.id === "") return fales;
+    if(prop.command === [] || prop.id === "" || prop.hitEvent === []) return fales;
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
