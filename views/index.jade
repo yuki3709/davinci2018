@@ -5,21 +5,31 @@ block content
         label ID:
         input(type="text" name="textbox" id="message")
     div
-        button(type="button" id="inputname" style="position: absolute; left: 30%; top: 20%") 決定
-        button(type="button" id="send" style="position: absolute; left: 50%; top: 65%") 送信
-        button(type="button" id="subsend" style="position: absolute; left: 50%; top: 60%") デモンストレーション
+        button(type="button" id="inputname" style="position: relative; left: 200px") 名前入力
+        button(type="button" id="send" style="position: absolute; left: 50%; top: 70%") 送信
+        button(type="button" id="subsend" style="position: absolute; left: 50%; top: 65%") デモンストレーション
         button(type="button" id="reset" style="position: absolute; left: 50%; top: 80%") リセット
-        button(type="button" id="onereturn" style="position: absolute; left: 50%; top: 30%") １つ戻る
-        button(type="button" id="go" style="position: absolute; left: 30%; top: 30%") 進む
-        button(type="button" id="left" style="position: absolute; left: 35%; top: 30%") 左回り
-        button(type="button" id="right" style="position: absolute; left: 40%; top: 30%") 右回り
+        button(type="button" id="onereturn" style="position: absolute; left: 50%; top: 36%") １つ戻る
+        button(type="button" id="go" style="position: absolute; left: 480px; top: 33%") Go
+        button(type="button" id="left45" style="position: absolute; left: 450px; top: 30%") ↖
+        button(type="button" id="left90" style="position: absolute; left: 450px; top: 33%") ←
+        button(type="button" id="left135" style="position: absolute; left: 450px; top: 36%") ↙
+        button(type="button" id="right45" style="position: absolute; left: 515px; top: 30%") ↗
+        button(type="button" id="right90" style="position: absolute; left: 515px; top: 33%") →
+        button(type="button" id="right135" style="position: absolute; left: 515px; top: 36%") ↘
+        button(type="button" id="back" style="position: absolute; left: 485px; top: 36%") ↓
     div
         ul(id="messageList" style="position: absolute; top: 10%")
     div
-        button(type="button" id="onereturnEvent" style="position: absolute; left: 50%; top: 50%") １つ戻る
-        button(type="button" id="goEvent" style="position: absolute; left: 30%; top: 50%") 進む
-        button(type="button" id="leftEvent" style="position: absolute; left: 35%; top: 50%") 左回り
-        button(type="button" id="rightEvent" style="position: absolute; left: 40%; top: 50%") 右回り
+        button(type="button" id="onereturnEvent" style="position: absolute; left: 50%; top: 56%") １つ戻る
+        button(type="button" id="goEvent" style="position: absolute; left: 480px; top: 53%") Go
+        button(type="button" id="left45Event" style="position: absolute; left: 450px; top: 50%") ↖
+        button(type="button" id="left90Event" style="position: absolute; left: 450px; top: 53%") ←
+        button(type="button" id="left135Event" style="position: absolute; left: 450px; top: 56%") ↙
+        button(type="button" id="right45Event" style="position: absolute; left: 515px; top: 50%") ↗
+        button(type="button" id="right90Event" style="position: absolute; left: 515px; top: 53%") →
+        button(type="button" id="right135Event" style="position: absolute; left: 515px; top: 56%") ↘
+        button(type="button" id="backEvent" style="position: absolute; left: 485px; top: 56%") ↓
     div
         ul(id="hitEventList" style="position: absolute; top: 40%")
     script(type='text/javascript' src='/js_client/index.js')

@@ -18,15 +18,45 @@ window.onload = () => {
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
   });
-  var left = document.getElementById('left');
-  left.addEventListener('click',() => {
+  var left45 = document.getElementById('left45');
+  left45.addEventListener('click',() => {
     prop.command.push({roll:-45});
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
   });
-  var right = document.getElementById('right');
-  right.addEventListener('click',() => {
+  var left90 = document.getElementById('left90');
+  left90.addEventListener('click',() => {
+    prop.command.push({roll:-90});
+    document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+    console.log(prop);
+  });
+  var left135 = document.getElementById('left135');
+  left135.addEventListener('click',() => {
+    prop.command.push({roll:-135});
+    document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+    console.log(prop);
+  });
+  var right45 = document.getElementById('right45');
+  right45.addEventListener('click',() => {
     prop.command.push({roll:45});
+    document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+    console.log(prop);
+  });
+  var right90 = document.getElementById('right90');
+  right90.addEventListener('click',() => {
+    prop.command.push({roll:90});
+    document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+    console.log(prop);
+  });
+  var right135 = document.getElementById('right135');
+  right135.addEventListener('click',() => {
+    prop.command.push({roll:135});
+    document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+    console.log(prop);
+  });
+  var back = document.getElementById('back');
+  back.addEventListener('click',() => {
+    prop.command.push({roll:180});
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
   });
@@ -48,15 +78,45 @@ window.onload = () => {
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
-  var hitEventLeft = document.getElementById('leftEvent');
-  hitEventLeft.addEventListener('click',() => {
+  var hitEventLeft45 = document.getElementById('left45Event');
+  hitEventLeft45.addEventListener('click',() => {
     prop.hitEvent.push({roll:-45});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
-  var hitEventRight = document.getElementById('rightEvent');
-  hitEventRight.addEventListener('click',() => {
+  var hitEventLeft90 = document.getElementById('left90Event');
+  hitEventLeft90.addEventListener('click',() => {
+    prop.hitEvent.push({roll:-90});
+    document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
+    console.log(prop);
+  });
+  var hitEventLeft135 = document.getElementById('left135Event');
+  hitEventLeft135.addEventListener('click',() => {
+    prop.hitEvent.push({roll:-135});
+    document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
+    console.log(prop);
+  });
+  var hitEventRight45 = document.getElementById('right45Event');
+  hitEventRight45.addEventListener('click',() => {
     prop.hitEvent.push({roll:45});
+    document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
+    console.log(prop);
+  });
+  var hitEventRight90 = document.getElementById('right90Event');
+  hitEventRight90.addEventListener('click',() => {
+    prop.hitEvent.push({roll:90});
+    document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
+    console.log(prop);
+  });
+  var hitEventRight135 = document.getElementById('right135Event');
+  hitEventRight135.addEventListener('click',() => {
+    prop.hitEvent.push({roll:135});
+    document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
+    console.log(prop);
+  });
+  var hitEventBack = document.getElementById('backEvent');
+  hitEventBack.addEventListener('click',() => {
+    prop.hitEvent.push({roll:180});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
