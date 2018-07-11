@@ -6,6 +6,12 @@ var prop = {
 };
 
 window.onload = () => {
+  var url = location.href;
+  console.log(url + '?color=red');
+  console.log(url + '?color=aqua');
+  console.log(url + '?color=fuchsia');
+  console.log(url + '?color=lime');
+  prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
   var go = document.getElementById('go');
   go.addEventListener('click',() => {
     prop.command.push({go:10});
@@ -72,7 +78,7 @@ window.onload = () => {
   })
   var send = document.getElementById('send');
   send.addEventListener('click',() => {
-    if(prop.command === 0 || prop.id === "") return fales;
+    if(prop.command === [] || prop.id === "" || prop.hitEvent === []) return fales;
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
