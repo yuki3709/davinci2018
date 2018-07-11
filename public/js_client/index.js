@@ -1,6 +1,6 @@
 var prop = {
   "id":"",
-	"command":[],
+  "command":[],
   "hitEvent":[{roll:90}],
   "color":""
 };
@@ -12,8 +12,14 @@ window.onload = () => {
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
   });
-  var roll = document.getElementById('roll');
-  roll.addEventListener('click',() => {
+  var left = document.getElementById('left');
+  left.addEventListener('click',() => {
+    prop.command.push({roll:-45});
+    document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+    console.log(prop);
+  });
+  var right = document.getElementById('right');
+  right.addEventListener('click',() => {
     prop.command.push({roll:45});
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
@@ -36,8 +42,14 @@ window.onload = () => {
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
-  var hitEventRoll = document.getElementById('rollEvent');
-  hitEventRoll.addEventListener('click',() => {
+  var hitEventLeft = document.getElementById('leftEvent');
+  hitEventLeft.addEventListener('click',() => {
+    prop.hitEvent.push({roll:-45});
+    document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
+    console.log(prop);
+  });
+  var hitEventRight = document.getElementById('rightEvent');
+  hitEventRight.addEventListener('click',() => {
     prop.hitEvent.push({roll:45});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
@@ -60,7 +72,7 @@ window.onload = () => {
   })
   var send = document.getElementById('send');
   send.addEventListener('click',() => {
-    if(prop.command === 0) return fales;
+    if(prop.command === 0 || prop.id === "") return fales;
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
