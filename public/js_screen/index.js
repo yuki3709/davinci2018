@@ -4,6 +4,7 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
+  setInterval(() => this.getColor(this.context), 30000);
 };
 Field.prototype = {
   canvas: null,
@@ -34,6 +35,38 @@ Field.prototype = {
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
+  },
+  getColor: function (context) {
+    this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
+    for (y = 0; y < this.size.height; y++) {
+      for (x = 0; x < this.size.width; x++) {
+        let index = (y * this.size.width + x) * 4;
+        let red = this.imageData.data[index]; // R
+        let green = this.imageData.data[index + 1]; // G
+        let blue = this.imageData.data[index + 2]; // B
+        if (red === 255 && green === 0 && blue === 0) {
+          this.team.red++;
+        }
+        if (red === 255 && green === 0 && blue === 255) {
+          this.team.fuchsia++;
+        }
+        if (red === 0 && green === 255 && blue === 0) {
+          this.team.lime++;
+        }
+        if (red === 0 && green === 255 && blue === 255) {
+          this.team.aqua++;
+        }
+        if (red === 0 && green === 0 && blue === 0) {
+          this.team.black++;
+        }
+      }
+    }
+    console.log(this.team);
+    this.team.red = 0;
+    this.team.fuchsia = 0;
+    this.team.lime = 0;
+    this.team.aqua = 0;
+    this.team.black = 0;
   }
 };
 const Circle = function (data, field) {
@@ -99,7 +132,7 @@ Circle.prototype = {
   }
 };
 window.onload = function () {
-  let canvas = document.getElementById('tutorial');
+  let canvas = document.getElementById('game');
   const field = new Field(canvas);
   socket.on('receiveMessage', function (d) {
     field.circles.push(new Circle(d, field));
