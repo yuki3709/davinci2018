@@ -46,6 +46,7 @@ Field.prototype = {
     this.circles.forEach(circle => circle.draw(this.context));
   },
   getColor: function (context) {
+    let sumScore;
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
     for (y = 0; y < this.size.height; y++) {
       for (x = 0; x < this.size.width; x++) {
@@ -55,15 +56,19 @@ Field.prototype = {
         let blue = this.imageData.data[index + 2]; // B
         if (red === 255 && green === 0 && blue === 0) {
           this.team.red++;
+          sumScore++;
         }
         if (red === 255 && green === 0 && blue === 255) {
           this.team.fuchsia++;
+          sumScore++;
         }
         if (red === 0 && green === 255 && blue === 0) {
           this.team.lime++;
+          sumScore++;
         }
         if (red === 0 && green === 255 && blue === 255) {
           this.team.aqua++;
+          sumScore++;
         }
         if (red === 0 && green === 0 && blue === 0) {
           this.team.black++;
@@ -72,12 +77,12 @@ Field.prototype = {
     }
   },
   displayRank: function () {
-    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
     this.score.red = Math.floor(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
     console.log(this.score);
+    sumScore = 0;
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
