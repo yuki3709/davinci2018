@@ -91,8 +91,7 @@ Field.prototype = {
 };
 const Circle = function (data, field) {
   const props = JSON.parse(data);
-  const arrayColor = ['red', 'fuchsia', 'lime', 'aqua']
-  this.color = arrayColor[Math.floor(Math.random() * 4)];
+  this.color = props.color;
   this.command = props.command;
   this.id = props.id;
   this.width = field.size.width;
