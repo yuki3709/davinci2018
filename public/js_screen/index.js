@@ -5,6 +5,7 @@ Field = function (e) {
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
   setInterval(() => this.getColor(this.context), 30000);
+  setInterval(() => this.displayRank(), 30000);
 };
 Field.prototype = {
   canvas: null,
@@ -69,6 +70,8 @@ Field.prototype = {
         }
       }
     }
+  },
+  displayRank: function () {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
     this.score.red = this.team.red / sumScore;
     this.score.fuchsia = this.team.fuchsia / sumScore;
