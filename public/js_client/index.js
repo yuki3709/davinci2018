@@ -18,13 +18,13 @@ window.onload = () => {
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
   });
-  var left = document.getElementById('left');
+  var left = document.getElementById('left45');
   left.addEventListener('click',() => {
     prop.command.push({roll:-45});
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
     console.log(prop);
   });
-  var right = document.getElementById('right');
+  var right = document.getElementById('right45');
   right.addEventListener('click',() => {
     prop.command.push({roll:45});
     document.getElementById('messageList').textContent = JSON.stringify(prop.command);
@@ -48,13 +48,13 @@ window.onload = () => {
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
-  var hitEventLeft = document.getElementById('leftEvent');
+  var hitEventLeft = document.getElementById('left45Event');
   hitEventLeft.addEventListener('click',() => {
     prop.hitEvent.push({roll:-45});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
     console.log(prop);
   });
-  var hitEventRight = document.getElementById('rightEvent');
+  var hitEventRight = document.getElementById('right45Event');
   hitEventRight.addEventListener('click',() => {
     prop.hitEvent.push({roll:45});
     document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
