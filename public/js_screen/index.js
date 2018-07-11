@@ -5,6 +5,7 @@ Field = function (e) {
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
   setInterval(() => this.getColor(this.context), 30000);
+  setInterval(() => this.displayRank(), 30000);
 };
 Field.prototype = {
   canvas: null,
@@ -21,6 +22,14 @@ Field.prototype = {
     black: 0,
     other: 0
   },
+  score: {
+    red: 0,
+    fuchsia: 0,
+    lime: 0,
+    aqua: 0,
+    black: 0,
+    other: 0
+  },
   imageData: [],
   circles: [],
   constructor: Field,
@@ -28,7 +37,7 @@ Field.prototype = {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
   resize: function (parent) {
-    this.size.width = this.canvas.width = parent.clientWidth;
+    this.size.width = this.canvas.width = parent.clientWidth * 0.7;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
@@ -61,7 +70,18 @@ Field.prototype = {
         }
       }
     }
-    console.log(this.team);
+  },
+  displayRank: function () {
+    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
+    this.score.red = Math.floor(this.team.red / sumScore * 100);
+    this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
+    this.score.lime = Math.floor(this.team.lime / sumScore * 100);
+    this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
+    console.log(this.score);
+    this.score.red = 0;
+    this.score.fuchsia = 0;
+    this.score.lime = 0;
+    this.score.aqua = 0;
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
@@ -71,8 +91,7 @@ Field.prototype = {
 };
 const Circle = function (data, field) {
   const props = JSON.parse(data);
-  const arrayColor = ['red', 'fuchsia', 'lime', 'aqua']
-  this.color = arrayColor[Math.floor(Math.random() * 4)];
+  this.color = props.color;
   this.command = props.command;
   this.id = props.id;
   this.width = field.size.width;
