@@ -21,6 +21,14 @@ Field.prototype = {
     black: 0,
     other: 0
   },
+  score: {
+    red: 0,
+    fuchsia: 0,
+    lime: 0,
+    aqua: 0,
+    black: 0,
+    other: 0
+  },
   imageData: [],
   circles: [],
   constructor: Field,
@@ -28,7 +36,7 @@ Field.prototype = {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
   resize: function (parent) {
-    this.size.width = this.canvas.width = parent.clientWidth;
+    this.size.width = this.canvas.width = parent.clientWidth * 0.7;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
@@ -61,7 +69,16 @@ Field.prototype = {
         }
       }
     }
-    console.log(this.team);
+    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
+    this.score.red = this.team.red / sumScore;
+    this.score.fuchsia = this.team.fuchsia / sumScore;
+    this.score.lime = this.team.lime / sumScore;
+    this.score.aqua = this.team.aqua / sumScore;
+    console.log(this.score);
+    this.score.red = 0;
+    this.score.fuchsia = 0;
+    this.score.lime = 0;
+    this.score.aqua = 0;
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
