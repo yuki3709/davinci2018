@@ -4,8 +4,8 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 20000);
-  setInterval(() => this.displayRank(this.context), 20000);
+  setInterval(() => this.getColor(this.context), 10000);
+  setInterval(() => this.displayRank(this.context), 10000);
 };
 Field.prototype = {
   canvas: null,
@@ -19,12 +19,14 @@ Field.prototype = {
     fuchsia: 0,
     lime: 0,
     aqua: 0,
+    black: 0
   },
   score: {
     red: 0,
     fuchsia: 0,
     lime: 0,
-    aqua: 0
+    aqua: 0,
+    black: 0
   },
   imageData: [],
   circles: [],
@@ -53,50 +55,52 @@ Field.prototype = {
         if (red === 255 && green === 0 && blue === 0) {
           this.team.red++;
         }
-        if (red === 255 && green === 0 && blue === 255) {
+        else if (red === 255 && green === 0 && blue === 255) {
           this.team.fuchsia++;
         }
-        if (red === 0 && green === 255 && blue === 0) {
+        else if (red === 0 && green === 255 && blue === 0) {
           this.team.lime++;
         }
-        if (red === 0 && green === 255 && blue === 255) {
+        else if (red === 0 && green === 255 && blue === 255) {
           this.team.aqua++;
         }
-        // if (red === 0 && green === 0 && blue === 0) {
-        //   this.team.black++;
-        // }
+        else if (red === 0 && green === 0 && blue === 0) {
+          this.team.black++;
+        }
       }
     }
   },
   displayRank: function (context) {
-    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
+    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
     this.score.red = Math.floor(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
+    this.score.black = Math.floor(this.team.black / sumScore * 100);
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua);
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
     this.score.aqua = 0;
+    this.score.black = 0;
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
     this.team.aqua = 0;
-    // this.team.black = 0;
+    this.team.black = 0;
   },
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, 10, red * 25, 150);
+    context.fillRect(this.size.width + 50, 10, red / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, 200, fuchsia * 25, 150);
+    context.fillRect(this.size.width + 50, 200, fuchsia / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, 350, lime * 25, 150);
+    context.fillRect(this.size.width + 50, 400, lime / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, 500, aqua * 25, 150);
+    context.fillRect(this.size.width + 50, 600, aqua / 100 * this.canvas.width * 0.3, 150);
   }
 };
 const Circle = function (data, field) {
@@ -108,6 +112,7 @@ const Circle = function (data, field) {
   this.height = field.size.height;
   this.locX = Math.floor(Math.random() * this.width);
   this.locY = Math.floor(Math.random() * this.height);
+  this.radius = 20;
 };
 Circle.prototype = {
   direction: 45,
@@ -115,15 +120,15 @@ Circle.prototype = {
   draw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
     context.fillStyle = 'white';
-    context.fillText(this.id, this.locX - 5, this.locY)
+    context.fillText(this.id, this.locX - this.radius, this.locY)
   },
   shadeDraw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
   },
   roll: function (direction) {
@@ -136,11 +141,11 @@ Circle.prototype = {
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
-    if (futureLocX - 10 < 0 || futureLocX + 10 > this.width) {
+    if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width) {
       distanceX *= -1;
       direction = 180 - direction;
     }
-    if (futureLocY - 10 < 0 || futureLocY + 10 > this.height) {
+    if (futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
       distanceY *= -1;
       direction *= -1;
     }
@@ -168,4 +173,6 @@ window.onload = function () {
   });
   let outputArea = document.getElementById('output-area');
   field.resize(outputArea);
+  field.context.fillStyle = "white";
+  field.context.fillRect(field.size.width, 0, field.canvas.width * 0.3, field.size.height);
 };
