@@ -92,7 +92,7 @@ Field.prototype = {
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
     context.fillStyle = "white";
-    context.fillRect(field.size.width, 0, field.canvas.width * 0.3, field.size.height);
+    context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
     context.fillRect(this.size.width + 50, 10, red / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "fuchsia";
