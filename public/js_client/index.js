@@ -61,11 +61,6 @@ window.onload = () => {
     console.log(prop);
   });
   var name = document.getElementById('message');
-  var inputname = document.getElementById('inputname');
-  inputname.addEventListener('click',() => {
-    prop.id = name.value;   //nameを決定させる。
-    console.log(prop);
-  });
   var onereturn = document.getElementById('onereturn');
   onereturn.addEventListener('click', () => {
     prop.command.pop();
@@ -138,6 +133,7 @@ window.onload = () => {
   })
   var send = document.getElementById('send');
   send.addEventListener('click',() => {
+    prop.id = name.value;
     if(prop.command.length === 0 || prop.id === "" || prop.hitEvent.length === 0) {
       alert('入力されていない部分があります');
       return false;
