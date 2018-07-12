@@ -112,6 +112,7 @@ const Circle = function (data, field) {
   this.height = field.size.height;
   this.locX = Math.floor(Math.random() * this.width);
   this.locY = Math.floor(Math.random() * this.height);
+  this.radius = 20;
 };
 Circle.prototype = {
   direction: 45,
@@ -119,15 +120,15 @@ Circle.prototype = {
   draw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, 15, 0, Math.PI * 2.0, true);
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
     context.fillStyle = 'white';
-    context.fillText(this.id, this.locX - 10, this.locY)
+    context.fillText(this.id, this.locX - this.radius, this.locY)
   },
   shadeDraw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
   },
   roll: function (direction) {
@@ -140,11 +141,11 @@ Circle.prototype = {
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
-    if (futureLocX - 10 < 0 || futureLocX + 10 > this.width) {
+    if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width) {
       distanceX *= -1;
       direction = 180 - direction;
     }
-    if (futureLocY - 10 < 0 || futureLocY + 10 > this.height) {
+    if (futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
       distanceY *= -1;
       direction *= -1;
     }
