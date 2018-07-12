@@ -4,8 +4,8 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 20000);
-  setInterval(() => this.displayRank(this.context), 20000);
+  setInterval(() => this.getColor(this.context), 1000);
+  setInterval(() => this.displayRank(this.context), 1000);
 };
 Field.prototype = {
   canvas: null,
@@ -19,12 +19,14 @@ Field.prototype = {
     fuchsia: 0,
     lime: 0,
     aqua: 0,
+    black: 0
   },
   score: {
     red: 0,
     fuchsia: 0,
     lime: 0,
-    aqua: 0
+    aqua: 0,
+    black: 0
   },
   imageData: [],
   circles: [],
@@ -62,14 +64,14 @@ Field.prototype = {
         if (red === 0 && green === 255 && blue === 255) {
           this.team.aqua++;
         }
-        // if (red === 0 && green === 0 && blue === 0) {
-        //   this.team.black++;
-        // }
+        if (red === 0 && green === 0 && blue === 0) {
+          this.team.black++;
+        }
       }
     }
   },
   displayRank: function (context) {
-    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
+    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black++;
     this.score.red = Math.floor(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
@@ -83,20 +85,20 @@ Field.prototype = {
     this.team.fuchsia = 0;
     this.team.lime = 0;
     this.team.aqua = 0;
-    // this.team.black = 0;
+    this.team.black = 0;
   },
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, 10, red * 25, 150);
+    context.fillRect(this.size.width + 50, 10, red * 10, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, 200, fuchsia * 25, 150);
+    context.fillRect(this.size.width + 50, 200, fuchsia * 10, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, 350, lime * 25, 150);
+    context.fillRect(this.size.width + 50, 400, lime * 10, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, 500, aqua * 25, 150);
+    context.fillRect(this.size.width + 50, 600, aqua * 10, 150);
   }
 };
 const Circle = function (data, field) {
