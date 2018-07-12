@@ -43,8 +43,8 @@ Field.prototype = {
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
-    let height = this.size.height / 5;
-    let width = this.size.width / 5;
+    let height = this.size.height / 10;
+    let width = this.size.width / 10;
     for (y = 0; y < this.size.height; y = y + height) {
       for (x = 0; x < this.size.width; x = x + width) {
         let index = (y * this.size.width + x) * 4;
