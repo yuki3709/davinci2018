@@ -4,8 +4,8 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 1000);
-  setInterval(() => this.displayRank(this.context), 1000);
+  setInterval(() => this.getColor(this.context), 10000);
+  setInterval(() => this.displayRank(this.context), 10000);
 };
 Field.prototype = {
   canvas: null,
@@ -89,8 +89,6 @@ Field.prototype = {
   },
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
-    context.fillStyle = "white";
-    context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
     context.fillRect(this.size.width + 50, 10, red * 10, 150);
     context.fillStyle = "fuchsia";
@@ -170,4 +168,6 @@ window.onload = function () {
   });
   let outputArea = document.getElementById('output-area');
   field.resize(outputArea);
+  field.context.fillStyle = "white";
+  field.context.fillRect(field.size.width, 0, field.canvas.width * 0.3, field.size.height);
 };
