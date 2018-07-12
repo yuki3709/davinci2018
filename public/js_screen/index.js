@@ -33,7 +33,8 @@ Field.prototype = {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
   resize: function (parent) {
-    this.size.width = this.canvas.width = parent.clientWidth * 0.7;
+    this.canvas.width = parent.clientWidth;
+    this.size.width = this.canvas.width * 0.7;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
