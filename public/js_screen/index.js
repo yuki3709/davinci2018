@@ -73,7 +73,26 @@ Field.prototype = {
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
-    console.log(this.score);
+    let context2 = document.getElementById("Chart").getContext('2d');
+    context.canvas.height = 280;
+    // ctx.canvas.width = 280;
+    var myChart = new Chart(context2, {
+      type: 'bar',
+      data: {
+        labels: ["red", "fuchsia", "lime", "aqua"],
+        datasets: [{
+          // label: 'apples',
+          data: [this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua],
+          backgroundColor: "rgba(153,255,51,1)"
+        }]
+      },
+      options: {
+        responsive: false
+        // barPercentage: 0.3,
+        // categoryPercentage: 0.3,
+        // barThickness: 10
+      }
+    });
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
