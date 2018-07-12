@@ -4,8 +4,8 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 30000);
-  setInterval(() => this.displayRank(), 30000);
+  setInterval(() => this.getColor(this.context), 20000);
+  setInterval(() => this.displayRank(this.context), 20000);
 };
 Field.prototype = {
   canvas: null,
@@ -19,16 +19,12 @@ Field.prototype = {
     fuchsia: 0,
     lime: 0,
     aqua: 0,
-    black: 0,
-    other: 0
   },
   score: {
     red: 0,
     fuchsia: 0,
     lime: 0,
-    aqua: 0,
-    black: 0,
-    other: 0
+    aqua: 0
   },
   imageData: [],
   circles: [],
@@ -37,18 +33,21 @@ Field.prototype = {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
   resize: function (parent) {
-    this.size.width = this.canvas.width = parent.clientWidth * 0.7;
+    this.canvas.width = parent.clientWidth;
+    this.size.width = this.canvas.width * 0.7;
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
+    this.context.fillStyle = "white";
+    this.context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
-    for (y = 0; y < this.size.height; y++) {
-      for (x = 0; x < this.size.width; x++) {
+    for (y = 0; y < this.size.height; y = y + 5) {
+      for (x = 0; x < this.size.width; x = x + 5) {
         let index = (y * this.size.width + x) * 4;
         let red = this.imageData.data[index]; // R
         let green = this.imageData.data[index + 1]; // G
@@ -65,19 +64,19 @@ Field.prototype = {
         if (red === 0 && green === 255 && blue === 255) {
           this.team.aqua++;
         }
-        if (red === 0 && green === 0 && blue === 0) {
-          this.team.black++;
-        }
+        // if (red === 0 && green === 0 && blue === 0) {
+        //   this.team.black++;
+        // }
       }
     }
   },
-  displayRank: function () {
+  displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
     this.score.red = Math.floor(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
-    console.log(this.score);
+    this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua);
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
@@ -86,7 +85,20 @@ Field.prototype = {
     this.team.fuchsia = 0;
     this.team.lime = 0;
     this.team.aqua = 0;
-    this.team.black = 0;
+    // this.team.black = 0;
+  },
+  drawChart: function (context, red, fuchsia, lime, aqua) {
+    context.beginPath();
+    context.fillStyle = "white";
+    context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
+    context.fillStyle = "red";
+    context.fillRect(this.size.width + 50, 10, red * 25, 150);
+    context.fillStyle = "fuchsia";
+    context.fillRect(this.size.width + 50, 200, fuchsia * 25, 150);
+    context.fillStyle = "lime";
+    context.fillRect(this.size.width + 50, 350, lime * 25, 150);
+    context.fillStyle = "aqua";
+    context.fillRect(this.size.width + 50, 500, aqua * 25, 150);
   }
 };
 const Circle = function (data, field) {
