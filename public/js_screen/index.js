@@ -38,8 +38,6 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
-    this.context.fillStyle = "white";
-    this.context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
