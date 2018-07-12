@@ -138,7 +138,10 @@ window.onload = () => {
   })
   var send = document.getElementById('send');
   send.addEventListener('click',() => {
-    if(prop.command === [] || prop.id === "" || prop.hitEvent === []) return fales;
+    if(prop.command.length === 0 || prop.id === "" || prop.hitEvent.length === 0) {
+      alert('入力されていない部分があります');
+      return false;
+    }
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
