@@ -72,15 +72,17 @@ Field.prototype = {
   },
   displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black++;
-    this.score.red = Math.floor(this.team.red / sumScore * 100);
+    this.score.red = Math.floor(this.team.red / sumScore);
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
+    this.score.black = Math.floor(this.team.black / sumScore * 100);
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua);
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
     this.score.aqua = 0;
+    this.score.black = 0;
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
@@ -90,13 +92,13 @@ Field.prototype = {
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, 10, red * 10, 150);
+    context.fillRect(this.size.width + 50, 10, red / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, 200, fuchsia * 10, 150);
+    context.fillRect(this.size.width + 50, 200, fuchsia / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, 400, lime * 10, 150);
+    context.fillRect(this.size.width + 50, 400, lime / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, 600, aqua * 10, 150);
+    context.fillRect(this.size.width + 50, 600, aqua / 100 * this.canvas.width * 0.3, 150);
   }
 };
 const Circle = function (data, field) {
@@ -115,10 +117,10 @@ Circle.prototype = {
   draw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, 10, 0, Math.PI * 2.0, true);
+    context.arc(this.locX, this.locY, 15, 0, Math.PI * 2.0, true);
     context.fill();
     context.fillStyle = 'white';
-    context.fillText(this.id, this.locX - 5, this.locY)
+    context.fillText(this.id, this.locX - 10, this.locY)
   },
   shadeDraw: function (context) {
     context.beginPath();
