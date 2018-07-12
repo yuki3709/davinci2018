@@ -72,7 +72,7 @@ Field.prototype = {
   },
   displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black++;
-    this.score.red = Math.floor(this.team.red / sumScore);
+    this.score.red = Math.floor(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
