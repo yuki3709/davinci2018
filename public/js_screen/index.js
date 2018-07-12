@@ -68,17 +68,17 @@ Field.prototype = {
     }
   },
   displayRank: function () {
-    // let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
-    // this.score.red = Math.floor(this.team.red / sumScore * 100);
-    // this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
-    // this.score.lime = Math.floor(this.team.lime / sumScore * 100);
-    // this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
-    // console.log(this.score);
+    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua;
+    this.score.red = Math.floor(this.team.red / sumScore * 100);
+    this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
+    this.score.lime = Math.floor(this.team.lime / sumScore * 100);
+    this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
+    console.log(this.score);
     console.log(this.team);
-    // this.score.red = 0;
-    // this.score.fuchsia = 0;
-    // this.score.lime = 0;
-    // this.score.aqua = 0;
+    this.score.red = 0;
+    this.score.fuchsia = 0;
+    this.score.lime = 0;
+    this.score.aqua = 0;
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
