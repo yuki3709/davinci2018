@@ -55,16 +55,16 @@ Field.prototype = {
         if (red === 255 && green === 0 && blue === 0) {
           this.team.red++;
         }
-        if (red === 255 && green === 0 && blue === 255) {
+        else if (red === 255 && green === 0 && blue === 255) {
           this.team.fuchsia++;
         }
-        if (red === 0 && green === 255 && blue === 0) {
+        else if (red === 0 && green === 255 && blue === 0) {
           this.team.lime++;
         }
-        if (red === 0 && green === 255 && blue === 255) {
+        else if (red === 0 && green === 255 && blue === 255) {
           this.team.aqua++;
         }
-        if (red === 0 && green === 0 && blue === 0) {
+        else if (red === 0 && green === 0 && blue === 0) {
           this.team.black++;
         }
       }
