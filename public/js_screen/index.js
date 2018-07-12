@@ -19,16 +19,12 @@ Field.prototype = {
     fuchsia: 0,
     lime: 0,
     aqua: 0,
-    black: 0,
-    other: 0
   },
   score: {
     red: 0,
     fuchsia: 0,
     lime: 0,
-    aqua: 0,
-    black: 0,
-    other: 0
+    aqua: 0
   },
   imageData: [],
   circles: [],
@@ -65,9 +61,9 @@ Field.prototype = {
         if (red === 0 && green === 255 && blue === 255) {
           this.team.aqua++;
         }
-        if (red === 0 && green === 0 && blue === 0) {
-          this.team.black++;
-        }
+        // if (red === 0 && green === 0 && blue === 0) {
+        //   this.team.black++;
+        // }
       }
     }
   },
@@ -79,15 +75,15 @@ Field.prototype = {
     // this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
     // console.log(this.score);
     console.log(this.team);
-    this.score.red = 0;
-    this.score.fuchsia = 0;
-    this.score.lime = 0;
-    this.score.aqua = 0;
+    // this.score.red = 0;
+    // this.score.fuchsia = 0;
+    // this.score.lime = 0;
+    // this.score.aqua = 0;
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
     this.team.aqua = 0;
-    this.team.black = 0;
+    // this.team.black = 0;
   }
 };
 const Circle = function (data, field) {
