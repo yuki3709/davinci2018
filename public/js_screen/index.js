@@ -38,6 +38,8 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
+    this.context.fillStyle = "white";
+    this.context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
@@ -90,13 +92,13 @@ Field.prototype = {
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, 10, red, 150);
+    context.fillRect(this.size.width + 50, 10, red * 5, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, 200, fuchsia, 150);
+    context.fillRect(this.size.width + 50, 200, fuchsia * 5, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, 350, lime, 150);
+    context.fillRect(this.size.width + 50, 350, lime * 5, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, 500, aqua, 150);
+    context.fillRect(this.size.width + 50, 500, aqua * 5, 150);
   }
 };
 const Circle = function (data, field) {
