@@ -92,13 +92,13 @@ Field.prototype = {
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, 10, red * 5, 150);
+    context.fillRect(this.size.width + 50, 10, red * 25, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, 200, fuchsia * 5, 150);
+    context.fillRect(this.size.width + 50, 200, fuchsia * 25, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, 350, lime * 5, 150);
+    context.fillRect(this.size.width + 50, 350, lime * 25, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, 500, aqua * 5, 150);
+    context.fillRect(this.size.width + 50, 500, aqua * 25, 150);
   }
 };
 const Circle = function (data, field) {
