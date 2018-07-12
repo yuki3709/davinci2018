@@ -4,8 +4,8 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 30000);
-  setInterval(() => this.displayRank(), 30000);
+  setInterval(() => this.getColor(this.context), 20000);
+  setInterval(() => this.displayRank(), 20000);
 };
 Field.prototype = {
   canvas: null,
@@ -43,8 +43,8 @@ Field.prototype = {
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
-    for (y = 0; y < this.size.height; y = y + 10) {
-      for (x = 0; x < this.size.width; x = x + 10) {
+    for (y = 0; y < this.size.height; y = y + 5) {
+      for (x = 0; x < this.size.width; x = x + 5) {
         let index = (y * this.size.width + x) * 4;
         let red = this.imageData.data[index]; // R
         let green = this.imageData.data[index + 1]; // G
@@ -74,7 +74,6 @@ Field.prototype = {
     this.score.lime = Math.floor(this.team.lime / sumScore * 100);
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
     console.log(this.score);
-    console.log(this.team);
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
