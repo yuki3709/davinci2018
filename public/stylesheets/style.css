@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+button.send {
+  background-color: blue;
+  color: #fff;
+}
+button.subsend {
+  background-color: green;
+  color: #fff;
+}
+button.reset {
+  background-color: red;
+  color: #fff;
+}
+button.button1 {
+  background-color: white;
+  color: #fff;
+}
+button.button2 {
+  background-color: gray;
+  color: #fff;
+}
