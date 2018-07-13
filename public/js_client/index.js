@@ -7,6 +7,7 @@ var prop = {
 
 window.onload = () => {
   var url = location.href;
+  console.log(url + 'screen');
   console.log(url + '?color=red');
   console.log(url + '?color=aqua');
   console.log(url + '?color=fuchsia');
