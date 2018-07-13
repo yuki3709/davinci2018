@@ -112,9 +112,9 @@ const Circle = function (data, field) {
   this.height = field.size.height;
   this.random = Math.floor(Math.random() * 2);
   this.positionX = [40, this.width - 40];
+  this.locX = this.positionX[this.random];
   this.random = Math.floor(Math.random() * 2);
   this.positionY = [40, this.height - 40];
-  this.locX = this.positionX[this.random];
   this.locY = this.positionY[this.random];
   this.radius = 20;
 };
