@@ -78,6 +78,7 @@ Field.prototype = {
     this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
     this.score.black = Math.floor(this.team.black / sumScore * 100);
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua);
+    this.resetScreen(context, this.score.black);
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
@@ -88,6 +89,7 @@ Field.prototype = {
     this.team.lime = 0;
     this.team.aqua = 0;
     this.team.black = 0;
+
   },
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
@@ -101,6 +103,14 @@ Field.prototype = {
     context.fillRect(this.size.width + 50, 400, lime / 100 * this.canvas.width * 0.3, 150);
     context.fillStyle = "aqua";
     context.fillRect(this.size.width + 50, 600, aqua / 100 * this.canvas.width * 0.3, 150);
+  },
+  resetScreen: function (context, black) {
+    if (black < 20) {
+      context.fillStyle = "white";
+      context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      context.fillStyle = "black";
+      context.fillRect(0, 0, this.size.width, this.canvas.height);
+    }
   }
 };
 const Circle = function (data, field) {
