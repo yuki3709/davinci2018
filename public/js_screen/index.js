@@ -52,19 +52,19 @@ Field.prototype = {
         let red = this.imageData.data[index]; // R
         let green = this.imageData.data[index + 1]; // G
         let blue = this.imageData.data[index + 2]; // B
-        if (red === 255 && green === 0 && blue === 0) {
+        if (red == 255 && green == 0 && blue == 0) {
           this.team.red++;
         }
-        else if (red === 255 && green === 0 && blue === 255) {
+        else if (red == 255 && green == 0 && blue == 255) {
           this.team.fuchsia++;
         }
-        else if (red === 0 && green === 255 && blue === 0) {
+        else if (red == 0 && green == 255 && blue == 0) {
           this.team.lime++;
         }
-        else if (red === 0 && green === 255 && blue === 255) {
+        else if (red == 0 && green == 255 && blue == 255) {
           this.team.aqua++;
         }
-        else if (red === 0 && green === 0 && blue === 0) {
+        else if (red == 0 && green == 0 && blue == 0) {
           this.team.black++;
         }
       }
