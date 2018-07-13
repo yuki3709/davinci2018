@@ -110,8 +110,12 @@ const Circle = function (data, field) {
   this.id = props.id;
   this.width = field.size.width;
   this.height = field.size.height;
-  this.locX = Math.floor(Math.random() * this.width);
-  this.locY = Math.floor(Math.random() * this.height);
+  this.random = Math.floor(Math.random() * 2);
+  this.positionX = [40, this.width - 40];
+  this.random = Math.floor(Math.random() * 2);
+  this.positionY = [40, this.height - 40];
+  this.locX = this.positionX[this.random];
+  this.locY = this.positionY[this.random];
   this.radius = 20;
 };
 Circle.prototype = {
