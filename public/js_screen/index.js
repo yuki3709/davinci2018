@@ -108,6 +108,8 @@ Field.prototype = {
     if (black < 20) {
       context.fillStyle = "white";
       context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      context.fillStyle = "black";
+      context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
   }
 };
