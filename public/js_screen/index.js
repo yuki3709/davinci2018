@@ -118,9 +118,9 @@ const Circle = function (data, field) {
   this.command = (function* () {
     while (true) for (const i in props.command) yield props.command[i];
   })();
-  this.hitEvent = (function* () {
+  this.hitEvent = function* () {
     for (const i in props.hitEvent) yield props.hitEvent[i];
-  })();
+  };
   this.id = props.id;
   this.width = field.size.width;
   this.height = field.size.height;
@@ -161,7 +161,7 @@ Circle.prototype = {
     let direction = this.direction;
     if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width ||
       futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
-      this.hitCommand = this.hitEvent;
+      this.hitCommand = this.hitEvent();
     } else {
       this.direction = this.normalizeDirection(direction);
       this.locX += distanceX;
