@@ -177,6 +177,9 @@ Circle.prototype = {
     } else {
       order = this.command.next().value;
     }
+    if (typeof order === "undefined") {
+      order = this.command.next().value;
+    }
     if (typeof order.roll !== "undefined") {
       this.roll(order.roll);
     }
