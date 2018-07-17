@@ -72,11 +72,6 @@ Field.prototype = {
   },
   displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
-    this.team.red = 0;
-    this.team.fuchsia = 0;
-    this.team.lime = 0;
-    this.team.aqua = 0;
-    this.team.black = 0;
     this.score.red = Math.ceil(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.ceil(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.ceil(this.team.lime / sumScore * 100);
@@ -84,6 +79,11 @@ Field.prototype = {
     this.score.black = Math.ceil(this.team.black / sumScore * 100);
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua);
     this.resetScreen(context, this.score.black);
+    this.team.red = 0;
+    this.team.fuchsia = 0;
+    this.team.lime = 0;
+    this.team.aqua = 0;
+    this.team.black = 0;
     this.score.red = 0;
     this.score.fuchsia = 0;
     this.score.lime = 0;
