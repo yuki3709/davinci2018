@@ -177,10 +177,10 @@ Circle.prototype = {
     } else {
       order = this.command.next().value;
     }
-    if (typeof order.roll !== undefined) {
+    if (typeof order.roll !== "undefined") {
       this.roll(order.roll);
     }
-    if (typeof order.go !== undefined) {
+    if (typeof order.go !== "undefined") {
       this.go(order.go);
     }
   }
