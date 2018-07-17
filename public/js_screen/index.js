@@ -31,7 +31,7 @@ Field.prototype = {
   imageData: [],
   circles: [],
   constructor: Field,
-  discriminateCommand: function () {
+  discriminateCommand: function* () {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
   resize: function (parent) {
@@ -116,7 +116,12 @@ Field.prototype = {
 const Circle = function (data, field) {
   const props = JSON.parse(data);
   this.color = props.color;
-  this.command = props.command;
+  this.command = (function* () {
+    while (true) for (const i in props.command) yield props.command[i];
+  })();
+  this.hitEvent = function* () {
+    for (const i in props.hitEvent) yield props.hitEvent[i];
+  }();
   this.id = props.id;
   this.width = field.size.width;
   this.height = field.size.height;
@@ -130,7 +135,7 @@ const Circle = function (data, field) {
 };
 Circle.prototype = {
   direction: 45,
-  commandCount: 0,
+  hitCommand: undefined,
   draw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
@@ -156,12 +161,10 @@ Circle.prototype = {
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width) {
-      distanceX *= -1;
-      direction = 180 - direction;
+      this.hitCommand = hitEvent();
     }
     if (futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
-      distanceY *= -1;
-      direction *= -1;
+      this.hitCommand = hitEvent();
     }
     this.direction = this.normalizeDirection(direction);
     this.locX += distanceX;
@@ -169,8 +172,7 @@ Circle.prototype = {
   },
   normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function () {
-    var order = this.command[this.commandCount];
-    this.commandCount = (this.commandCount + 1) % this.command.length;
+    var order = this.hitCommand.next().value || this.command.next().value;
     if (typeof order.roll !== "undefined") {
       this.roll(order.roll);
     }
