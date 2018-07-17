@@ -171,12 +171,7 @@ Circle.prototype = {
   },
   normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function () {
-    let order;
-    if (this.hitCommand !== "undefined") {
-      order = this.hitCommand.next().value;
-    } else {
-      order = this.command.next().value;
-    }
+    var order = (this.hitCommand !== "undefined" || this.hitCommand.next().value) || this.command.next().value;
     if (typeof order.roll !== "undefined") {
       this.roll(order.roll);
     }
