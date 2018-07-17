@@ -171,11 +171,16 @@ Circle.prototype = {
   },
   normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function () {
-    var order = (this.hitCommand !== "undefined" || this.hitCommand.next().value) || this.command.next().value;
-    if (typeof order.roll !== "undefined") {
+    let order;
+    if (this.hitCommand !== undefined) {
+      order = this.hitCommand.next().value;
+    } else {
+      order = this.command.next().value;
+    }
+    if (typeof order.roll !== undefined) {
       this.roll(order.roll);
     }
-    if (typeof order.go !== "undefined") {
+    if (typeof order.go !== undefined) {
       this.go(order.go);
     }
   }
