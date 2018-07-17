@@ -3,7 +3,8 @@ html
     head
         meta(charset='utf-8')
         title= title
-        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous")
+        link(rel='stylesheet' href='/stylesheets/style.css')
         script(type="text/javascript" src="/socket.io/socket.io.js")
         script.
           var socket = io.connect();
@@ -14,28 +15,29 @@ html
         div
             ul(id="messageList")
         div
-            button(class="send" type="button" id="send" style="position: absolute; left: 600px; top: 70%") 送信
-            button(class="subsend" type="button" id="subsend" style="position: absolute; left: 600px; top: 65%") デモンストレーション
+            button(class="send" type="button" id="send" style="position: absolute; left: 600px; top: 75%")  送信
+            button(class="subsend" type="button" id="subsend" style="position: absolute; left: 600px; top: 70%") デモンストレーション
             button(class="reset" type="button" id="reset" style="position: absolute; left: 600px; top: 80%") リセット
-            button(class="reset" type="button" id="onereturn" style="position: absolute; left: 600px; top: 36%") １つ戻る
-            button(class="button2" type="button" id="go" style="position: absolute; left: 480px; top: 33%") Go
-            button(class="button1" type="button" id="left45" style="position: absolute; left: 450px; top: 30%") ↖
-            button(class="button1" type="button" id="left90" style="position: absolute; left: 450px; top: 33%") ←
-            button(class="button1" type="button" id="left135" style="position: absolute; left: 450px; top: 36%") ↙
-            button(class="button1" type="button" id="right45" style="position: absolute; left: 515px; top: 30%") ↗
-            button(class="button1" type="button" id="right90" style="position: absolute; left: 515px; top: 33%") →
-            button(class="button1" type="button" id="right135" style="position: absolute; left: 515px; top: 36%") ↘
-            button(class="button1" type="button" id="back" style="position: absolute; left: 485px; top: 36%") ↓
+            button(class="reset" type="button" id="onereturn" style="position: absolute; left: 600px; top: 40%") １つ戻る
+            button(class="button2" type="button" id="go" style="position: absolute; left: 480px; top: 35%") Go
+            button(class="button1" type="button" id="left45" style="position: absolute; left: 430px; top: 30%") ↖
+            button(class="button4" type="button" id="left90" style="position: absolute; left: 430px; top: 35%") ←
+            button(class="button1" type="button" id="left135" style="position: absolute; left: 430px; top: 40%") ↙
+            button(class="button1" type="button" id="right45" style="position: absolute; left: 530px; top: 30%") ↗
+            button(class="button4" type="button" id="right90" style="position: absolute; left: 530px; top: 35%") →
+            button(class="button1" type="button" id="right135" style="position: absolute; left: 530px; top: 40%") ↘
+            button(class="button3" type="button" id="back" style="position: absolute; left: 480px; top: 40%") ↓
         div
-            button(class="reset" type="button" id="onereturnEvent" style="position: absolute; left: 600px; top: 56%") １つ戻る
-            button(class="button2" type="button" id="goEvent" style="position: absolute; left: 480px; top: 53%") Go
-            button(class="button1" type="button" id="left45Event" style="position: absolute; left: 450px; top: 50%") ↖
-            button(class="button1" type="button" id="left90Event" style="position: absolute; left: 450px; top: 53%") ←
-            button(class="button1" type="button" id="left135Event" style="position: absolute; left: 450px; top: 56%") ↙
-            button(class="button1" type="button" id="right45Event" style="position: absolute; left: 515px; top: 50%") ↗
-            button(class="button1" type="button" id="right90Event" style="position: absolute; left: 515px; top: 53%") →
-            button(class="button1" type="button" id="right135Event" style="position: absolute; left: 515px; top: 56%") ↘
-            button(class="button1" type="button" id="backEvent" style="position: absolute; left: 485px; top: 56%") ↓
+            button(class="reset" type="button" id="onereturnEvent" style="position: absolute; left: 600px; top: 60%") １つ戻る
+            button(class="button2" type="button" id="goEvent" style="position: absolute; left: 480px; top: 55%") Go
+            button(class="button1" type="button" id="left45Event" style="position: absolute; left: 430px; top: 50%") ↖
+            button(class="button4" type="button" id="left90Event" style="position: absolute; left: 430px; top: 55%") ←
+            button(class="button1" type="button" id="left135Event" style="position: absolute; left: 430px; top: 60%") ↙
+            button(class="button1" type="button" id="right45Event" style="position: absolute; left: 530px; top: 50%") ↗
+            button(class="button4" type="button" id="right90Event" style="position: absolute; left: 530px; top: 55%") →
+            button(class="button1" type="button" id="right135Event" style="position: absolute; left: 530px; top: 60%") ↘
+            button(class="button3" type="button" id="backEvent" style="position: absolute; left: 480px; top: 60%") ↓
         div
             ul(id="hitEventList" style="position: absolute; top: 40%")
+        div(class="block")
         script(type='text/javascript' src='/js_client/index.js')
