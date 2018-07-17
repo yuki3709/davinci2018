@@ -31,7 +31,7 @@ Field.prototype = {
   imageData: [],
   circles: [],
   constructor: Field,
-  discriminateCommand: function* () {
+  discriminateCommand: function () {
     this.circles.forEach(circle => circle.discriminateCommand());
   },
   resize: function (parent) {
