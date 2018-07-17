@@ -159,15 +159,14 @@ Circle.prototype = {
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
-    if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width) {
+    if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width ||
+      futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
       this.hitCommand = this.hitEvent;
+    } else {
+      this.direction = this.normalizeDirection(direction);
+      this.locX += distanceX;
+      this.locY += distanceY;
     }
-    if (futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
-      this.hitCommand = this.hitEvent;
-    }
-    this.direction = this.normalizeDirection(direction);
-    this.locX += distanceX;
-    this.locY += distanceY;
   },
   normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function () {
