@@ -72,11 +72,11 @@ Field.prototype = {
   },
   displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
-    this.score.red = Math.floor(this.team.red / sumScore * 100);
-    this.score.fuchsia = Math.floor(this.team.fuchsia / sumScore * 100);
-    this.score.lime = Math.floor(this.team.lime / sumScore * 100);
-    this.score.aqua = Math.floor(this.team.aqua / sumScore * 100);
-    this.score.black = Math.floor(this.team.black / sumScore * 100);
+    this.score.red = Math.ceil(this.team.red / sumScore * 100);
+    this.score.fuchsia = Math.ceil(this.team.fuchsia / sumScore * 100);
+    this.score.lime = Math.ceil(this.team.lime / sumScore * 100);
+    this.score.aqua = Math.ceil(this.team.aqua / sumScore * 100);
+    this.score.black = Math.ceil(this.team.black / sumScore * 100);
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua);
     this.resetScreen(context, this.score.black);
     this.score.red = 0;
@@ -89,20 +89,19 @@ Field.prototype = {
     this.team.lime = 0;
     this.team.aqua = 0;
     this.team.black = 0;
-
   },
   drawChart: function (context, red, fuchsia, lime, aqua) {
     context.beginPath();
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, 10, red / 100 * this.canvas.width * 0.3, 150);
+    context.fillRect(this.size.width + 50, 10, red * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, 200, fuchsia / 100 * this.canvas.width * 0.3, 150);
+    context.fillRect(this.size.width + 50, 200, fuchsia * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, 400, lime / 100 * this.canvas.width * 0.3, 150);
+    context.fillRect(this.size.width + 50, 400, lime * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, 600, aqua / 100 * this.canvas.width * 0.3, 150);
+    context.fillRect(this.size.width + 50, 600, aqua * this.canvas.width * 0.3 / 100, 150);
   },
   resetScreen: function (context, black) {
     if (black < 20) {
@@ -151,7 +150,7 @@ Circle.prototype = {
     context.fill();
   },
   roll: function (direction) {
-    this.direction = this.normalizeDirection(direction + this.direction)
+    this.direction = this.normalizeDirection(direction + this.direction);
   },
   go: function (distance) {
     const radian = this.direction * Math.PI / 180;
@@ -161,10 +160,10 @@ Circle.prototype = {
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width) {
-      this.hitCommand = hitEvent();
+      this.hitCommand = this.hitEvent();
     }
     if (futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
-      this.hitCommand = hitEvent();
+      this.hitCommand = this.hitEvent();
     }
     this.direction = this.normalizeDirection(direction);
     this.locX += distanceX;
@@ -172,7 +171,7 @@ Circle.prototype = {
   },
   normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function () {
-    var order = this.hitCommand.next().value || this.command.next().value;
+    var order = (this.hitEvent !== "undefined" || this.hitCommand.next().value) || this.command.next().value;
     if (typeof order.roll !== "undefined") {
       this.roll(order.roll);
     }
