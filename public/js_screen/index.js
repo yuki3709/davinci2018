@@ -163,7 +163,7 @@ Circle.prototype = {
       this.hitCommand = this.hitEvent;
     }
     if (futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
-      this.hitCommand = this.hitEvent();
+      this.hitCommand = this.hitEvent;
     }
     this.direction = this.normalizeDirection(direction);
     this.locX += distanceX;
