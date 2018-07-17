@@ -6,3 +6,79 @@ body {
 a {
   color: #00B7FF;
 }
+button{
+  cursor: pointer;
+}
+button.send {
+  background-color: blue;
+  color: #fff;
+  padding: 7px 61px;
+  border-style: none;
+}
+button.send:hover {
+  background-color: DodgerBlue;
+  color: #f0f0f0;
+  border-style: none;
+}
+button.subsend {
+  background-color: green;
+  color: #fff;
+  padding: 7px 8px;
+  border-style: none;
+}
+button.subsend:hover {
+  background-color: MediumSeaGreen;
+  color: #f0f0f0;
+  border-style: none;
+}
+button.reset {
+  background-color: red;
+  color: #fff;
+  padding: 7px 48px;
+  border-style: none;
+}
+button.reset:hover {
+  background-color: OrangeRed;
+  color: #f0f0f0;
+  border-style: none;
+}
+button.button1 {
+  background-color: gray;
+  color: #000;
+  padding: 7px 14px;
+  border-style: none;
+}
+button.button1:hover {
+  background-color: DarkGray;
+  color: #000;
+}
+button.button2 {
+  background-color: Silver;
+  color: #000;
+  padding: 10px 11px;
+  border-style: none;
+}
+button.button2:hover {
+  background-color: Gainsboro;
+  color: #000;
+}
+button.button3 {
+  background-color: gray;
+  color: #000;
+  padding: 10px 16px;
+  border-style: none;
+}
+button.button3:hover {
+  background-color: DarkGray;
+  color: #000;
+}
+button.button4 {
+  background-color: gray;
+  color: #000;
+  padding: 10px 14px;
+  border-style: none;
+}
+button.button4:hover {
+  background-color: DarkGray;
+  color: #000;
+}
