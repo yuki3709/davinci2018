@@ -94,11 +94,12 @@ Field.prototype = {
     context.beginPath();
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
+    context.fillStyle = "black";
     context.fillText(red, this.size.width + 10, 75);
-    context.fillText(fuchsia, this.size.width + 10, 225);
-    context.fillText(lime, this.size.width + 10, 395);
-    context.fillText(aqua, this.size.width + 10, 545);
-    context.fillText(black, this.size.width + 10, 695);
+    context.fillText(fuchsia, this.size.width + 10, 275);
+    context.fillText(lime, this.size.width + 10, 475);
+    context.fillText(aqua, this.size.width + 10, 675);
+    context.fillText(black, this.size.width + 10, 875);
     context.fillStyle = "red";
     context.fillRect(this.size.width + 50, 10, red * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "fuchsia";
