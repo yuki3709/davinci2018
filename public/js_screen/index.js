@@ -154,9 +154,9 @@ Circle.prototype = {
     context.fill();
     context.fillStyle = 'black';
     context.font = "14px 'ＭＳ ゴシック'";
-    context.fillText(this.id, this.locX - this.radius, this.locY);
-    context.fillStyle = 'white';
     context.fillText(this.id, this.locX - this.radius + 1, this.locY + 1);
+    context.fillStyle = 'white';
+    context.fillText(this.id, this.locX - this.radius + 2, this.locY + 2);
   },
   shadeDraw: function (context) {
     context.beginPath();
