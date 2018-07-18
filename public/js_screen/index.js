@@ -76,7 +76,8 @@ Field.prototype = {
     this.score.fuchsia = Math.ceil(this.team.fuchsia / sumScore * 100);
     this.score.lime = Math.ceil(this.team.lime / sumScore * 100);
     this.score.aqua = Math.ceil(this.team.aqua / sumScore * 100);
-    this.score.black = Math.ceil(this.team.black / sumScore * 100);
+    let total = this.score.red + this.score.fuchsia + this.score.lime + this.score.aqua;
+    this.score.black = 100 - tota;
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua, this.score.black);
     this.resetScreen(context, this.score.black);
     this.team.red = 0;
