@@ -152,8 +152,11 @@ Circle.prototype = {
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
-    context.fillStyle = 'white';
+    context.fillStyle = 'black';
+    context.font = "14px 'ＭＳ ゴシック'";
     context.fillText(this.id, this.locX - this.radius, this.locY);
+    context.fillStyle = 'white';
+    context.fillText(this.id, this.locX - this.radius + 1, this.locY + 1);
   },
   shadeDraw: function (context) {
     context.beginPath();
