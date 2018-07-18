@@ -145,7 +145,7 @@ const Circle = function (data, field) {
   this.radius = 20;
 };
 Circle.prototype = {
-  direction: 45,
+  direction: Math.floor(Math.random() * 360),
   hitCommand: undefined,
   draw: function (context) {
     context.beginPath();
