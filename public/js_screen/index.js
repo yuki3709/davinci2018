@@ -4,8 +4,7 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 10000);
-  setInterval(() => this.displayRank(this.context), 10000);
+  setInterval(() => this.getColor(this.context), 5000);
 };
 Field.prototype = {
   canvas: null,
@@ -36,7 +35,7 @@ Field.prototype = {
   },
   resize: function (parent) {
     this.canvas.width = parent.clientWidth;
-    this.size.width = this.canvas.width * 0.7;
+    this.size.width = Math.floor(this.canvas.width * 0.7);
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
@@ -69,6 +68,7 @@ Field.prototype = {
         }
       }
     }
+    this.displayRank(this.context)
   },
   displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
@@ -93,7 +93,7 @@ Field.prototype = {
   drawChart: function (context, red, fuchsia, lime, aqua, black) {
     context.beginPath();
     context.fillStyle = "white";
-    context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
+    context.fillRect(this.size.width, 0, this.canvas.width - this.size.width, this.size.height);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
     context.fillText(red, this.size.width + 5, this.size.height / 100 + 75);
@@ -111,9 +111,6 @@ Field.prototype = {
     context.fillRect(this.size.width + 50, this.size.height / 1.7, aqua * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "black";
     context.fillRect(this.size.width + 50, this.size.height / 1.27, black * this.canvas.width * 0.3 / 100, 150);
-
-
-
   },
   resetScreen: function (context, black) {
     if (black < 20) {
@@ -144,6 +141,7 @@ const Circle = function (data, field) {
   this.locY = this.positionY[this.random];
   this.radius = 20;
   this.direction = Math.floor(Math.random() * 360);
+  this.num = field.circles.length;
 };
 Circle.prototype = {
   hitCommand: undefined,
@@ -198,7 +196,7 @@ Circle.prototype = {
       this.roll(order.roll);
     }
     if (typeof order.go !== "undefined") {
-      this.go(order.go);
+      this.go(order.go, );
     }
   }
 };
