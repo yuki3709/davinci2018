@@ -96,11 +96,11 @@ Field.prototype = {
     context.fillRect(this.size.width, 0, this.canvas.width * 0.3, this.size.height);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
-    context.fillText(red, this.size.width + 10, this.size.height / 100 + 75);
-    context.fillText(fuchsia, this.size.width + 10, this.size.height / 5 + 75);
-    context.fillText(lime, this.size.width + 10, this.size.height / 2.5 + 75);
-    context.fillText(aqua, this.size.width + 10, this.size.height / 1.7 + 75);
-    context.fillText(black, this.size.width + 10, +this.size.height / 1.27 + 75);
+    context.fillText(red, this.size.width + 5, this.size.height / 100 + 75);
+    context.fillText(fuchsia, this.size.width + 5, this.size.height / 5 + 75);
+    context.fillText(lime, this.size.width + 5, this.size.height / 2.5 + 75);
+    context.fillText(aqua, this.size.width + 5, this.size.height / 1.7 + 75);
+    context.fillText(black, this.size.width + 5, +this.size.height / 1.27 + 75);
     context.fillStyle = "red";
     context.fillRect(this.size.width + 50, this.size.height / 100, red * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "fuchsia";
