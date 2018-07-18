@@ -196,7 +196,7 @@ Circle.prototype = {
       this.roll(order.roll);
     }
     if (typeof order.go !== "undefined") {
-      this.go(order.go, );
+      this.go(order.go);
     }
   }
 };
