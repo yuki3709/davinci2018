@@ -31,7 +31,7 @@ Field.prototype = {
   circles: [],
   constructor: Field,
   discriminateCommand: function () {
-    this.circles.forEach(circle => circle.discriminateCommand());
+    this.circles.forEach(circle => circle.discriminateCommand(this.circles));
   },
   resize: function (parent) {
     this.canvas.width = parent.clientWidth;
@@ -173,7 +173,7 @@ Circle.prototype = {
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
-    this.check(circles);
+    this.check(circles, futureLocX, futureLocY);
     if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width ||
       futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
       this.hitCommand = this.hitEvent();
@@ -201,18 +201,18 @@ Circle.prototype = {
       this.go(order.go, circles);
     }
   },
-  check: function (circles) {
+  check: function (circles, futureLocX, futureLocY) {
     for (i = 0; i < this.num; i++) {
       if ((circles[i].radius + this.radius) ** 2
-        > (circles[i].locX - this.locX) ** 2
-        + (circles[i].locY - this.locY) ** 2) {
+        > (circles[i].locX - futureLocX) ** 2
+        + (circles[i].locY - futureLocY) ** 2) {
         this.hitCommand = this.hitEvent();
       }
     }
     for (i = this.num + 1; i < circles.length; i++) {
       if ((circles[i].radius + this.radius) ** 2
-        > (circles[i].locX - this.locX) ** 2
-        + (circles[i].locY - this.locY) ** 2) {
+        > (circles[i].locX - futureLocX) ** 2
+        + (circles[i].locY - futureLocY) ** 2) {
         this.hitCommand = this.hitEvent();
       }
     }
