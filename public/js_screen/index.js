@@ -143,9 +143,9 @@ const Circle = function (data, field) {
   this.positionY = [40, this.height - 40];
   this.locY = this.positionY[this.random];
   this.radius = 20;
+  this.direction = Math.floor(Math.random() * 360);
 };
 Circle.prototype = {
-  direction: Math.floor(Math.random() * 360),
   hitCommand: undefined,
   draw: function (context) {
     context.beginPath();
