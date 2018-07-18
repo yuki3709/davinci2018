@@ -4,7 +4,7 @@ Field = function (e) {
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 5000);
+  setInterval(() => this.getColor(this.context), 1000);
 };
 Field.prototype = {
   canvas: null,
