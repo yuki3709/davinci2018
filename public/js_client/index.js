@@ -4,13 +4,58 @@ var prop = {
   "hitEvent":[{roll:90}],
   "color":""
 };
-function addCommand(){
-  document.getElementById('messageList').textContent = JSON.stringify(prop.command);
+function getButton(discriminate){
+  if("go" in discriminate){
+    return "前進";
+  }
+  if("roll" in discriminate){
+    return (deg => {
+      switch (deg) {
+        case -10:
+          return "少し左を向く (左へ10°回転)";
+        case -90:
+          return "左を向く (左へ90°回転)";
+        case -135:
+          return "大きく左を向く (左へ135°回転)"
+        case 10:
+          return "少し右を向く (右へ10°回転)";
+        case 90:
+          return "右を向く (右へ90°回転)";
+        case 135:
+          return "大きく右を向く (右へ135°回転)";
+        case 180:
+          return "後退 (180°回転)";
+      }
+    })(discriminate.roll);
+  }
+}
+function addElement(){
   console.log(prop);
+  // block.innerHTML = "";
+}
+function addCommand(){
+  addElement();
+  var commandList = document.getElementById('messageList');
+  commandList.innerHTML = "";
+  for(var i =0; i<prop.command.length; i++){
+    var command = document.createElement("div");
+    command.className = "block1";
+    command.style.marginBottom = "20px";
+    command.innerHTML = getButton(prop.command[i]);
+    commandList.appendChild(command);
+  }
 }
 function addEvent(){
-  document.getElementById('hitEventList').textContent = JSON.stringify(prop.hitEvent);
-  console.log(prop);
+  addElement();
+  var hitEventList = document.getElementById('hitEventList');
+  hitEventList.innerHTML = "";
+  for(var i =0; i<prop.hitEvent.length; i++){
+    var hitEvent = document.createElement("div");
+    hitEvent.className = "block2";
+    hitEvent.style.marginBottom = "20px";
+    hitEvent.innerHTML = getButton(prop.hitEvent[i]);
+    hitEventList.appendChild(hitEvent);
+  }
 }
 window.onload = () => {
   var url = location.href;
@@ -25,9 +70,9 @@ window.onload = () => {
     prop.command.push({go:10});
     addCommand();
   });
-  var left45 = document.getElementById('left45');
-  left45.addEventListener('click',() => {
-    prop.command.push({roll:-45});
+  var left10 = document.getElementById('left10');
+  left10.addEventListener('click',() => {
+    prop.command.push({roll:-10});
     addCommand();
   });
   var left90 = document.getElementById('left90');
@@ -40,9 +85,9 @@ window.onload = () => {
     prop.command.push({roll:-135});
     addCommand();
   });
-  var right45 = document.getElementById('right45');
-  right45.addEventListener('click',() => {
-    prop.command.push({roll:45});
+  var right10 = document.getElementById('right10');
+  right10.addEventListener('click',() => {
+    prop.command.push({roll:10});
     addCommand();
   });
   var right90 = document.getElementById('right90');
@@ -71,9 +116,9 @@ window.onload = () => {
     prop.hitEvent.push({go:10});
     addEvent();
   });
-  var hitEventLeft45 = document.getElementById('left45Event');
-  hitEventLeft45.addEventListener('click',() => {
-    prop.hitEvent.push({roll:-45});
+  var hitEventLeft10 = document.getElementById('left10Event');
+  hitEventLeft10.addEventListener('click',() => {
+    prop.hitEvent.push({roll:-10});
     addEvent();
   });
   var hitEventLeft90 = document.getElementById('left90Event');
@@ -86,9 +131,9 @@ window.onload = () => {
     prop.hitEvent.push({roll:-135});
     addEvent();
   });
-  var hitEventRight45 = document.getElementById('right45Event');
-  hitEventRight45.addEventListener('click',() => {
-    prop.hitEvent.push({roll:45});
+  var hitEventRight10 = document.getElementById('right10Event');
+  hitEventRight10.addEventListener('click',() => {
+    prop.hitEvent.push({roll:10});
     addEvent();
   });
   var hitEventRight90 = document.getElementById('right90Event');
