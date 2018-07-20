@@ -156,10 +156,8 @@ Circle.prototype = {
         }
       }
       if (!safe) {
-        this.random = Math.floor(Math.random() * 2);
-        this.locX = this.positionX[this.random];
-        this.random = Math.floor(Math.random() * 2);
-        this.locY = this.positionY[this.random];
+        this.locX = Math.floor(Math.random() * (this.width - 40));
+        this.locY = Math.floor(Math.random() * (this.height - 40));
       }
     }
   },
