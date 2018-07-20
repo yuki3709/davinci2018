@@ -148,6 +148,10 @@ Circle.prototype = {
   hitCommand: undefined,
   draw: function (context) {
     context.beginPath();
+    context.lineWidth = 3;
+    context.strokeStyle = 'white';
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
+    context.stroke();
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
@@ -155,14 +159,17 @@ Circle.prototype = {
     context.font = "14px 'ＭＳ ゴシック'";
     context.fillText(this.id, this.locX - this.radius + 1, this.locY + 1);
     context.fillStyle = 'white';
-    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fillText(this.id, this.locX - this.radius + 2, this.locY + 2);
+
   },
   shadeDraw: function (context) {
     context.beginPath();
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
+    context.strokeStyle = this.color;
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
+    context.stroke();
   },
   roll: function (direction) {
     this.direction = this.normalizeDirection(direction + this.direction);
