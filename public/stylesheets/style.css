@@ -82,3 +82,55 @@ button.button4:hover {
   background-color: DarkGray;
   color: #000;
 }
+/* block{
+  position: relative;
+  padding: 0.35em 0.7em 0.2em;
+  background: #668ad8;
+  color: #FFF;
+  text-decoration: none;
+}
+block::before{
+  content: '';
+  position: absolute;
+  z-index: -2;
+  height: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  top: 100%;
+    top: calc(100% - 2px);
+  left: 0;
+  background: -webkit-linear-gradient(top left, #668ad8 4px, transparent 0%) 0 4px, -webkit-linear-gradient(top left, #668ad8 4px, #fff 0%) 0 4px;
+  background: -o-linear-gradient(top left, #668ad8 4px, transparent 0%) 0 4px, -o-linear-gradient(top left, #668ad8 4px, #fff 0%) 0 4px;
+  background: linear-gradient(to bottom right, #668ad8 4px, transparent 0%) 0 4px, linear-gradient(to bottom right, #668ad8 4px, #fff 0%) 0 4px;
+  background-color: #668ad8;
+  background-position: left bottom;
+  background-repeat: repeat-x;
+  background-size: 10px 10px;
+  transition: .2s;
+}
+block:hover::before{
+  background-size: 13px 10px;
+} */
+.block1{
+  position: relative;
+  padding: 0.35em 0.7em;
+  text-decoration: none;
+  color: #00BCD4;
+  background: #ECECEC;
+  transition: .4s;
+  text-align: center;
+}
+.block1{
+  background-size: 13px 10px;
+}
+.block2{
+  position: relative;
+  padding: 0.35em 0.7em;
+  background: #668ad8;
+  color: #FFF;
+  text-align: center;
+  text-decoration: none;
+}
+.block2:hover{
+  background-size: 13px 10px;
+}
