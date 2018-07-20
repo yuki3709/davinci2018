@@ -155,6 +155,7 @@ Circle.prototype = {
     context.font = "14px 'ＭＳ ゴシック'";
     context.fillText(this.id, this.locX - this.radius + 1, this.locY + 1);
     context.fillStyle = 'white';
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fillText(this.id, this.locX - this.radius + 2, this.locY + 2);
   },
   shadeDraw: function (context) {
