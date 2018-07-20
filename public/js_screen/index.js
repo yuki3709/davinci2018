@@ -134,19 +134,35 @@ const Circle = function (data, field) {
   this.id = props.id;
   this.width = field.size.width;
   this.height = field.size.height;
-  this.random = Math.floor(Math.random() * 2);
-  this.positionX = [40, this.width - 40];
-  this.locX = this.positionX[this.random];
-  this.random = Math.floor(Math.random() * 2);
-  this.positionY = [40, this.height - 40];
-  this.locY = this.positionY[this.random];
+  this.locX = Math.floor(Math.random() * (this.width - 40));
+  this.locY = Math.floor(Math.random() * (this.height - 40));
   this.radius = 20;
   this.direction = Math.floor(Math.random() * 360);
   this.num = field.circles.length;
   this.flag = 0;
+  this.checkCircle(field.circles);
 };
 Circle.prototype = {
   hitCommand: undefined,
+  checkCircle: function (circles) {
+    let safe = false;
+    while (!safe) {
+      safe = true;
+      for (i = 0; i < this.num; i++) {
+        if ((circles[i].radius + this.radius) ** 2
+          > (circles[i].locX - this.locX) ** 2
+          + (circles[i].locY - this.locY) ** 2) {
+          safe = false;
+        }
+      }
+      if (!safe) {
+        this.random = Math.floor(Math.random() * 2);
+        this.locX = this.positionX[this.random];
+        this.random = Math.floor(Math.random() * 2);
+        this.locY = this.positionY[this.random];
+      }
+    }
+  },
   draw: function (context) {
     context.beginPath();
     context.lineWidth = 2;
