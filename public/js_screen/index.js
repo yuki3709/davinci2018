@@ -143,11 +143,17 @@ const Circle = function (data, field) {
   this.radius = 20;
   this.direction = Math.floor(Math.random() * 360);
   this.num = field.circles.length;
+  this.flag = 0;
 };
 Circle.prototype = {
   hitCommand: undefined,
   draw: function (context) {
     context.beginPath();
+    context.lineWidth = 2;
+    context.strokeStyle = 'white';
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
+    context.stroke();
+    context.lineWidth = 1;
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
@@ -156,9 +162,15 @@ Circle.prototype = {
     context.fillText(this.id, this.locX - this.radius + 1, this.locY + 1);
     context.fillStyle = 'white';
     context.fillText(this.id, this.locX - this.radius + 2, this.locY + 2);
+
   },
   shadeDraw: function (context) {
     context.beginPath();
+    context.lineWidth = 2;
+    context.strokeStyle = this.color;
+    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
+    context.stroke();
+    context.lineWidth = 1;
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
@@ -174,14 +186,17 @@ Circle.prototype = {
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     this.check(circles, futureLocX, futureLocY);
-    if (futureLocX - this.radius < 0 || futureLocX + this.radius > this.width ||
-      futureLocY - this.radius < 0 || futureLocY + this.radius > this.height) {
+    if (futureLocX - this.radius <= 0 || futureLocX + this.radius >= this.width - 3 ||
+      futureLocY - this.radius <= 0 || futureLocY + this.radius >= this.height - 3) {
       this.hitCommand = this.hitEvent();
     } else {
-      this.direction = this.normalizeDirection(direction);
-      this.locX += distanceX;
-      this.locY += distanceY;
+      if (this.flag === 0) {
+        this.direction = this.normalizeDirection(direction);
+        this.locX += distanceX;
+        this.locY += distanceY;
+      }
     }
+    this.flag = 0;
   },
   normalizeDirection: direction => (direction + 360) % 360,
   discriminateCommand: function (circles) {
@@ -204,16 +219,18 @@ Circle.prototype = {
   check: function (circles, futureLocX, futureLocY) {
     for (i = 0; i < this.num; i++) {
       if ((circles[i].radius + this.radius) ** 2
-        > (circles[i].locX - futureLocX) ** 2
+        >= (circles[i].locX - futureLocX) ** 2
         + (circles[i].locY - futureLocY) ** 2) {
         this.hitCommand = this.hitEvent();
+        this.flag++;
       }
     }
     for (i = this.num + 1; i < circles.length; i++) {
       if ((circles[i].radius + this.radius) ** 2
-        > (circles[i].locX - futureLocX) ** 2
+        >= (circles[i].locX - futureLocX) ** 2
         + (circles[i].locY - futureLocY) ** 2) {
         this.hitCommand = this.hitEvent();
+        this.flag++;
       }
     }
   }
