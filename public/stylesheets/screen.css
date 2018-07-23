@@ -12,12 +12,6 @@ body{
 
 #output-area{
     flex: 1 1 70%; }
-#div{
-    position: absolute;
-    top:50px;
-    left:0;
-    width: 100%;
-}
     
 #input-area{
     flex: 1 1 30%;
