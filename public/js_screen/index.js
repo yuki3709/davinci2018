@@ -2,13 +2,15 @@ Field = function (e) {
   this.canvas = e;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
+  this.text = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 1000);
+  setInterval(() => this.getColor(this.context, this.text), 1000);
 };
 Field.prototype = {
   canvas: null,
   context: null,
+  text: null,
   size: {
     width: 0,
     height: 0
@@ -43,7 +45,7 @@ Field.prototype = {
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
   },
-  getColor: function (context) {
+  getColor: function (context, text) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
     for (y = 0; y < this.size.height; y = y + 5) {
       for (x = 0; x < this.size.width; x = x + 5) {
@@ -68,9 +70,9 @@ Field.prototype = {
         }
       }
     }
-    this.displayRank(this.context)
+    this.displayRank(context, text)
   },
-  displayRank: function (context) {
+  displayRank: function (context, text) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
     this.score.red = Math.ceil(this.team.red / sumScore * 100);
     this.score.fuchsia = Math.ceil(this.team.fuchsia / sumScore * 100);
@@ -79,7 +81,7 @@ Field.prototype = {
     let total = this.score.red + this.score.fuchsia + this.score.lime + this.score.aqua;
     this.score.black = 100 - total;
     this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua, this.score.black);
-    this.resetScreen(context, this.score.black);
+    this.resetScreen(context, text, this.score.black);
     this.team.red = 0;
     this.team.fuchsia = 0;
     this.team.lime = 0;
@@ -113,9 +115,10 @@ Field.prototype = {
     context.fillStyle = "black";
     context.fillRect(this.size.width + 50, this.size.height / 1.27, black * this.canvas.width * 0.3 / 100, 150);
   },
-  resetScreen: function (context, black) {
+  resetScreen: function (context, text, black) {
+    let div = document.getElementById('div');
     if (black < 30) {
-      document.write("リセットまで", black - 20);
+      text.fillText("もうすぐリセット");
     }
     if (black < 20) {
       context.fillStyle = "white";
