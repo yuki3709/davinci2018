@@ -134,6 +134,7 @@ const Circle = function (data, field) {
   this.hitEvent = function* () {
     for (const i in props.hitEvent) yield props.hitEvent[i];
   };
+  this.command.go = 10;
   this.id = props.id;
   this.width = field.size.width;
   this.height = field.size.height;
@@ -253,6 +254,8 @@ Circle.prototype = {
   }
 };
 window.onload = function () {
+  let url = location.href;
+  console.log(url - "screen");
   let canvas = document.getElementById('game');
   const field = new Field(canvas);
   socket.on('receiveMessage', function (d) {
