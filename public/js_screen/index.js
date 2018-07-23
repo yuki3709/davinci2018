@@ -114,6 +114,9 @@ Field.prototype = {
     context.fillRect(this.size.width + 50, this.size.height / 1.27, black * this.canvas.width * 0.3 / 100, 150);
   },
   resetScreen: function (context, black) {
+    if (black < 30) {
+      document.write("リセットまで", black - 20);
+    }
     if (black < 20) {
       context.fillStyle = "white";
       context.fillRect(0, 0, this.canvas.width, this.canvas.height);
