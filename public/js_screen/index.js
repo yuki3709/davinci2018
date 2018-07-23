@@ -134,8 +134,8 @@ const Circle = function (data, field) {
   this.id = props.id;
   this.width = field.size.width;
   this.height = field.size.height;
-  this.locX = Math.floor(Math.random() * (this.width - 50) + 50);
-  this.locY = Math.floor(Math.random() * (this.height - 50) + 50);
+  this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
+  this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
   this.radius = 20;
   this.direction = Math.floor(Math.random() * 360);
   this.num = field.circles.length;
@@ -156,8 +156,8 @@ Circle.prototype = {
         }
       }
       if (!safe) {
-        this.locX = Math.floor(Math.random() * (this.width - 50) + 50);
-        this.locY = Math.floor(Math.random() * (this.height - 50) + 50);
+        this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
+        this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
       }
     }
   },
