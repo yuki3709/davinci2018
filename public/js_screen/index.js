@@ -255,7 +255,8 @@ Circle.prototype = {
 };
 window.onload = function () {
   let url = location.href;
-  console.log(url - "screen");
+  let index = url.replace(/screen/g, "");
+  console.log(index);
   let canvas = document.getElementById('game');
   const field = new Field(canvas);
   socket.on('receiveMessage', function (d) {
