@@ -68,7 +68,7 @@ Field.prototype = {
         }
       }
     }
-    this.displayRank(this.context)
+    this.displayRank(context)
   },
   displayRank: function (context) {
     let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
@@ -101,7 +101,10 @@ Field.prototype = {
     context.fillText(fuchsia, this.size.width + 5, this.size.height / 5 + 75);
     context.fillText(lime, this.size.width + 5, this.size.height / 2.5 + 75);
     context.fillText(aqua, this.size.width + 5, this.size.height / 1.7 + 75);
-    context.fillText(black, this.size.width + 5, +this.size.height / 1.27 + 75);
+    context.fillText("リ　　　あ", this.size.width + 55, this.size.height / 1.27 + 150 * 1 / 4);
+    context.fillText("セ　　　と", this.size.width + 55, this.size.height / 1.27 + 150 * 2 / 4);
+    context.fillText("ッ　　　少", this.size.width + 55, this.size.height / 1.27 + 150 * 3 / 4);
+    context.fillText("ト　　　し", this.size.width + 55, this.size.height / 1.27 + 150 * 4 / 4);
     context.fillStyle = "red";
     context.fillRect(this.size.width + 50, this.size.height / 100, red * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "fuchsia";
@@ -111,10 +114,10 @@ Field.prototype = {
     context.fillStyle = "aqua";
     context.fillRect(this.size.width + 50, this.size.height / 1.7, aqua * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "black";
-    context.fillRect(this.size.width + 50, this.size.height / 1.27, black * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 50, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.3 / 100, 150);
   },
   resetScreen: function (context, black) {
-    if (black < 20) {
+    if (black <= 20) {
       context.fillStyle = "white";
       context.fillRect(0, 0, this.canvas.width, this.canvas.height);
       context.fillStyle = "black";
