@@ -105,7 +105,8 @@ window.onload = () => {
     prop.command.push({roll:180});
     addCommand();
   });
-  var name = document.getElementById('message');
+  // var name = document.getElementById('message');
+  var name = document.getElementById('userID');
   var onereturn = document.getElementById('onereturn');
   onereturn.addEventListener('click', () => {
     prop.command.pop();

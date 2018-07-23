@@ -9,11 +9,18 @@ html
         script.
           var socket = io.connect();
     body
-        form
-            label ID:
-            input(type="text" name="textbox" id="message")
-        div(id="messageList" style="position: absolute; top: 10%") 通常命令
-        div(id="hitEventList" style="position: absolute; left: 300px; top: 10%") ぶつかったとき
+        // form
+        //     label ID:
+        //     input(type="text" name="textbox" id="message")
+        form(class="cp_ipselect cp_sl01" style="position: absolute; top 1px")
+          select(id="userID")
+            option(value="" hidden) 選択してくだい
+            option(value="^^") ^^
+            option(value="><") ><
+            option(value="aa") aa
+            option(value="^p^") ^p^
+        div(id="messageList" style="position: absolute; top: 15%") 通常命令
+        div(id="hitEventList" style="position: absolute; left: 300px; top: 15%") ぶつかったとき
         div
             button(class="send" type="button" id="send" style="position: absolute; left: 800px; top: 75%")  送信
             button(class="subsend" type="button" id="subsend" style="position: absolute; left: 800px; top: 70%") デモンストレーション
