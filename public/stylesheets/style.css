@@ -12,7 +12,8 @@ button{
 button.send {
   background-color: blue;
   color: #fff;
-  padding: 7px 61px;
+  width: 200px;
+  height:  35px;
   border-style: none;
 }
 button.send:hover {
@@ -23,7 +24,8 @@ button.send:hover {
 button.subsend {
   background-color: green;
   color: #fff;
-  padding: 7px 8px;
+  width: 200px;
+  height:  35px;
   border-style: none;
 }
 button.subsend:hover {
@@ -34,7 +36,8 @@ button.subsend:hover {
 button.reset {
   background-color: red;
   color: #fff;
-  padding: 7px 48px;
+  width: 200px;
+  height:  35px;
   border-style: none;
 }
 button.reset:hover {
@@ -148,4 +151,9 @@ pointer-events: none;
 .cp_ipselect.cp_sl01 select {
 padding: 8px 38px 8px 8px;
 color: #666666;
+}
+.scroll{
+  height: 70%;
+  width: 235px;
+  overflow-y: scroll;
 }
