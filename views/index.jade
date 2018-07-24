@@ -9,9 +9,6 @@ html
         script.
           var socket = io.connect();
     body
-        // form
-        //     label ID:
-        //     input(type="text" name="textbox" id="message")
         form(class="cp_ipselect cp_sl01" style="position: absolute; top 1px")
           select(id="userID")
             option(value="" hidden) せんたくしてください
@@ -19,29 +16,29 @@ html
             option(value="><") ><
             option(value="aa") aa
             option(value="^p^") ^p^
-        div(class="scroll" id="messageList" style="position: absolute; top: 15%") めいれい
-        div(class="scroll" id="hitEventList" style="position: absolute; left: 310px; top: 15%") ぶつかったとき
+        div(class="scroll" id="messageList" style="position: absolute; top: 35%") めいれい
+        div(class="scroll" id="hitEventList" style="position: absolute; left: 310px; top: 35%") ぶつかったとき
         div
-            button(class="send" type="button" id="send" style="position: absolute; left: 800px; top: 75%")  アップロード
-            button(class="subsend" type="button" id="subsend" style="position: absolute; left: 800px; top: 70%") おためし
-            button(class="reset" type="button" id="reset" style="position: absolute; left: 800px; top: 80%") リセット
-            button(class="reset" type="button" id="onereturn" style="position: absolute; left: 800px; top: 40%") ひとつけす
-            button(class="button2" type="button" id="go" style="position: absolute; left: 680px; top: 35%") Go
-            button(class="button1" type="button" id="left15" style="position: absolute; left: 630px; top: 30%") ↖
-            button(class="button1" type="button" id="left90" style="position: absolute; left: 630px; top: 35%") ←
-            button(class="button1" type="button" id="left135" style="position: absolute; left: 630px; top: 40%") ↙
-            button(class="button1" type="button" id="right15" style="position: absolute; left: 730px; top: 30%") ↗
-            button(class="button1" type="button" id="right90" style="position: absolute; left: 730px; top: 35%") →
-            button(class="button1" type="button" id="right135" style="position: absolute; left: 730px; top: 40%") ↘
-            button(class="button1" type="button" id="back" style="position: absolute; left: 680px; top: 40%") ↓
+            button(class="send" type="button" id="send" style="position: absolute; left: 600px; top: 75%")  アップロード
+            button(class="subsend" type="button" id="subsend" style="position: absolute; left: 600px; top: 70%") おためし
+            button(class="reset" type="button" id="reset" style="position: absolute; left: 600px; top: 80%") リセット
+            button(class="reset" type="button" id="onereturn" style="position: absolute; left: 60px; top: 30%") ひとつけす
+            button(class="button2" type="button" id="go" style="position: absolute; left: 150px; top: 20%") Go
+            button(class="button1" type="button" id="left15" style="position: absolute; left: 100px; top: 15%") ↖
+            button(class="button1" type="button" id="left90" style="position: absolute; left: 100px; top: 20%") ←
+            button(class="button1" type="button" id="left135" style="position: absolute; left: 100px; top: 25%") ↙
+            button(class="button1" type="button" id="right15" style="position: absolute; left: 200px; top: 15%") ↗
+            button(class="button1" type="button" id="right90" style="position: absolute; left: 200px; top: 20%") →
+            button(class="button1" type="button" id="right135" style="position: absolute; left: 200px; top: 25%") ↘
+            button(class="button1" type="button" id="back" style="position: absolute; left: 150px; top: 25%") ↓
         div
-            button(class="reset" type="button" id="onereturnEvent" style="position: absolute; left: 800px; top: 60%") ひとつけす
-            button(class="button2" type="button" id="goEvent" style="position: absolute; left: 680px; top: 55%") Go
-            button(class="button1" type="button" id="left15Event" style="position: absolute; left: 630px; top: 50%") ↖
-            button(class="button1" type="button" id="left90Event" style="position: absolute; left: 630px; top: 55%") ←
-            button(class="button1" type="button" id="left135Event" style="position: absolute; left: 630px; top: 60%") ↙
-            button(class="button1" type="button" id="right15Event" style="position: absolute; left: 730px; top: 50%") ↗
-            button(class="button1" type="button" id="right90Event" style="position: absolute; left: 730px; top: 55%") →
-            button(class="button1" type="button" id="right135Event" style="position: absolute; left: 730px; top: 60%") ↘
-            button(class="button1" type="button" id="backEvent" style="position: absolute; left: 680px; top: 60%") ↓
+            button(class="reset" type="button" id="onereturnEvent" style="position: absolute; left: 330px; top: 30%") ひとつけす
+            button(class="button2" type="button" id="goEvent" style="position: absolute; left: 400px; top: 20%") Go
+            button(class="button1" type="button" id="left15Event" style="position: absolute; left: 350px; top: 15%") ↖
+            button(class="button1" type="button" id="left90Event" style="position: absolute; left: 350px; top: 20%") ←
+            button(class="button1" type="button" id="left135Event" style="position: absolute; left: 350px; top: 25%") ↙
+            button(class="button1" type="button" id="right15Event" style="position: absolute; left: 450px; top: 15%") ↗
+            button(class="button1" type="button" id="right90Event" style="position: absolute; left: 450px; top: 20%") →
+            button(class="button1" type="button" id="right135Event" style="position: absolute; left: 450px; top: 25%") ↘
+            button(class="button1" type="button" id="backEvent" style="position: absolute; left: 400px; top: 25%") ↓
         script(type='text/javascript' src='/js_client/index.js')
