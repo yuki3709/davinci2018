@@ -58,28 +58,28 @@ Field.prototype = {
     for (i = 0; i < this.circles.length; i++) {
       if (this.num.red > 4) {
         if (this.circles[i].color === "red") {
-          circle.shadeDraw(this.circles[i]);
+          circle => circle.shadeDraw(this.circles[i]);
           this.circles.splice(i, 1);
           break;
         }
       }
       if (this.num.fuchsia > 4) {
         if (this.circles[i].color === "fuchsia") {
-          circle.shadeDraw(this.circles[i]);
+          circle => circle.shadeDraw(this.circles[i]);
           this.circles.splice(i, 1);
           break;
         }
       }
       if (this.num.lime > 4) {
         if (this.circles[i].color === "lime") {
-          circle.shadeDraw(this.circles[i]);
+          circle => circle.shadeDraw(this.circles[i]);
           this.circles.splice(i, 1);
           break;
         }
       }
       if (this.num.aqua > 4) {
         if (this.circles[i].color === "aqua") {
-          circle.shadeDraw(this.circles[i]);
+          circle => circle.shadeDraw(this.circles[i]);
           this.circles.splice(i, 1);
           break;
         }
