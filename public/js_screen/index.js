@@ -27,9 +27,61 @@ Field.prototype = {
     aqua: 0,
     black: 0
   },
+  num: {
+    red: 0,
+    fuchsia: 0,
+    lime: 0,
+    aqua: 0
+  },
   imageData: [],
   circles: [],
   constructor: Field,
+  checkNumber: function () {
+    this.num.red = 0;
+    this.num.fuchsia = 0;
+    this.num.lime = 0;
+    this.num.aqua = 0;
+    for (i = 0; i < this.circles.length; i++) {
+      if (this.circles[i].color === "red") {
+        this.num.red++;
+      }
+      else if (this.circles[i].color === "fuchsia") {
+        this.num.fuchsia++;
+      }
+      else if (this.circles[i].color === "lime") {
+        this.num.lime++;
+      }
+      else if (this.circles[i].color === "aqua") {
+        this.num.aqua++;
+      }
+    }
+    for (i = 0; i < this.circles.length; i++) {
+      if (this.num.red > 4) {
+        if (this.circles[i].color === "red") {
+          this.circles.splice(i, 1);
+          break;
+        }
+      }
+      if (this.num.fuchsia > 4) {
+        if (this.circles[i].color === "fuchsia") {
+          this.circles.splice(i, 1);
+          break;
+        }
+      }
+      if (this.num.lime > 4) {
+        if (this.circles[i].color === "lime") {
+          this.circles.splice(i, 1);
+          break;
+        }
+      }
+      if (this.num.aqua > 4) {
+        if (this.circles[i].color === "aqua") {
+          this.circles.splice(i, 1);
+          break;
+        }
+      }
+    }
+  },
   discriminateCommand: function () {
     this.circles.forEach(circle => circle.discriminateCommand(this.circles));
   },
@@ -39,6 +91,7 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
+    this.checkNumber();
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
@@ -125,7 +178,7 @@ Field.prototype = {
     }
   }
 };
-const Circle = function (data, field) {
+const Circle = function (data, field, n) {
   const props = JSON.parse(data);
   this.color = props.color;
   this.command = (function* () {
@@ -142,7 +195,7 @@ const Circle = function (data, field) {
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
   this.radius = 20;
   this.direction = Math.floor(Math.random() * 360);
-  this.num = field.circles.length;
+  this.num = n;
   this.flag = 0;
   this.checkCircle(field.circles);
 };
@@ -152,11 +205,13 @@ Circle.prototype = {
     let safe = false;
     while (!safe) {
       safe = true;
-      for (i = 0; i < this.num; i++) {
-        if ((circles[i].radius + this.radius) ** 2
-          > (circles[i].locX - this.locX) ** 2
-          + (circles[i].locY - this.locY) ** 2) {
-          safe = false;
+      for (i = 0; i < circles.length; i++) {
+        if (circles[i].num !== this.num) {
+          if ((circles[i].radius + this.radius) ** 2
+            > (circles[i].locX - this.locX) ** 2
+            + (circles[i].locY - this.locY) ** 2) {
+            safe = false;
+          }
         }
       }
       if (!safe) {
@@ -235,32 +290,28 @@ Circle.prototype = {
     }
   },
   check: function (circles, futureLocX, futureLocY) {
-    for (i = 0; i < this.num; i++) {
-      if ((circles[i].radius + this.radius) ** 2
-        >= (circles[i].locX - futureLocX) ** 2
-        + (circles[i].locY - futureLocY) ** 2) {
-        this.hitCommand = this.hitEvent();
-        this.flag++;
-      }
-    }
-    for (i = this.num + 1; i < circles.length; i++) {
-      if ((circles[i].radius + this.radius) ** 2
-        >= (circles[i].locX - futureLocX) ** 2
-        + (circles[i].locY - futureLocY) ** 2) {
-        this.hitCommand = this.hitEvent();
-        this.flag++;
+    for (i = 0; i < circles.length; i++) {
+      if (circles[i].num !== this.num) {
+        if ((circles[i].radius + this.radius) ** 2
+          >= (circles[i].locX - futureLocX) ** 2
+          + (circles[i].locY - futureLocY) ** 2) {
+          this.hitCommand = this.hitEvent();
+          this.flag++;
+        }
       }
     }
   }
 };
 window.onload = function () {
+  let n = 0;
   let url = location.href;
   let index = url.replace(/screen/g, "");
   console.log(index);
   let canvas = document.getElementById('game');
   const field = new Field(canvas);
   socket.on('receiveMessage', function (d) {
-    field.circles.push(new Circle(d, field));
+    field.circles.push(new Circle(d, field, n));
+    n++;
   });
   let outputArea = document.getElementById('output-area');
   field.resize(outputArea);
