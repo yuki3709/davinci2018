@@ -161,7 +161,7 @@ padding: 8px 38px 8px 8px;
 color: #666666;
 }
 .scroll{
-  height: 60%;
+  height: 50%;
   width: 235px;
   overflow-y: scroll;
 }
