@@ -8,6 +8,9 @@ a {
 }
 button{
   cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 button.send {
   background-color: blue;
@@ -15,8 +18,13 @@ button.send {
   width: 200px;
   height:  35px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#8080f0 0%, #0000ff 100%);
+  background-image: linear-gradient(#8080f0 0%, #0000ff 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #33339b;
 }
 button.send:hover {
+  opacity: 0.8;
   background-color: DodgerBlue;
   color: #f0f0f0;
   border-style: none;
@@ -27,9 +35,13 @@ button.subsend {
   width: 200px;
   height:  35px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#558000 0%, #55f055 100%);
+  background-image: linear-gradient(#558000 0%, #55f055 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #5e8f70;
 }
 button.subsend:hover {
-  background-color: MediumSeaGreen;
+  opacity: 0.7;
   color: #f0f0f0;
   border-style: none;
 }
@@ -39,50 +51,46 @@ button.reset {
   width: 200px;
   height:  35px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#ff0000 0%, #ff8080 100%);
+  background-image: linear-gradient(#ff0000 0%, #ff8080 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #ffa07a;
 }
 button.reset:hover {
-  background-color: OrangeRed;
+  opacity: 0.7;
   color: #f0f0f0;
   border-style: none;
 }
 button.button1 {
   background-color: gray;
   color: #000;
-  padding: 7px 14px;
+  width: 45px;
+  height:  40px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#a0a0a0 0%, #606060 100%);
+  background-image: linear-gradient(#a0a0a0 0%, #606060 100%);
+  border-bottom: solid 3px #505050;
 }
 button.button1:hover {
+  opacity: 0.7;
   background-color: DarkGray;
   color: #000;
+  border-bottom: none;
 }
 button.button2 {
   background-color: Silver;
   color: #000;
-  padding: 10px 11px;
+  width: 45px;
+  height:  40px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#f0f0f0 0%, #a0a0a0 100%);
+  background-image: linear-gradient(#f0f0f0 0%, #a0a0a0 100%);
+  border-bottom: solid 3px #808080;
 }
 button.button2:hover {
+  opacity: 0.7;
+  border-bottom: none;
   background-color: Gainsboro;
-  color: #000;
-}
-button.button3 {
-  background-color: gray;
-  color: #000;
-  padding: 10px 16px;
-  border-style: none;
-}
-button.button3:hover {
-  background-color: DarkGray;
-  color: #000;
-}
-button.button4 {
-  background-color: gray;
-  color: #000;
-  padding: 10px 14px;
-  border-style: none;
-}
-button.button4:hover {
-  background-color: DarkGray;
   color: #000;
 }
 .block1{
@@ -153,7 +161,7 @@ padding: 8px 38px 8px 8px;
 color: #666666;
 }
 .scroll{
-  height: 70%;
+  height: 50%;
   width: 235px;
   overflow-y: scroll;
 }
