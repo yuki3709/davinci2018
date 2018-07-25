@@ -193,11 +193,20 @@ const Circle = function (data, field, n) {
   };
   this.command.go = 10;
   this.id = props.id;
+  if (this.id === "'ω'") {
+    this.radius = 50;
+  }
+  else if (this.id === "><") {
+    this.radius = 30;
+  }
+  else if (this.id === "˘ω˘") {
+    this.radius = 20;
+  }
   this.width = field.size.width;
   this.height = field.size.height;
   this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
-  this.radius = 20;
+  this.speed = 300 / this.radius;
   this.direction = Math.floor(Math.random() * 360);
   this.num = n;
   this.flag = 0;
@@ -206,19 +215,10 @@ const Circle = function (data, field, n) {
 Circle.prototype = {
   hitCommand: undefined,
   checkCircle: function (circles) {
-    let safe = false;
-    while (!safe) {
-      safe = true;
-      for (i = 0; i < circles.length; i++) {
-        if (circles[i].num !== this.num) {
-          if ((circles[i].radius + this.radius) ** 2
-            > (circles[i].locX - this.locX) ** 2
-            + (circles[i].locY - this.locY) ** 2) {
-            safe = false;
-          }
-        }
-      }
-      if (!safe) {
+    let out = true;
+    while (out) {
+      out = circles.some(circle => (circle.num !== this.num) && ((circle.radius + this.radius) ** 2 > (circle.locX - this.locX) ** 2 + (circle.locY - this.locY) ** 2));
+      if (out) {
         this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
         this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
       }
@@ -234,13 +234,14 @@ Circle.prototype = {
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
-    let textLocX = this.radius / 2 * Math.cos(this.direction * Math.PI / 180);
-    let textLocY = this.radius / 2 * Math.sin(this.direction * Math.PI / 180);
+    let textLocX = this.locX + this.radius / 2 * Math.cos(this.direction * Math.PI / 180);
+    let textLocY = this.locY + this.radius / 2 * Math.sin(this.direction * Math.PI / 180);
     context.fillStyle = 'black';
     context.font = "14px 'ＭＳ ゴシック'";
-    context.fillText(this.id, this.locX + textLocX - 5, this.locY + textLocY + 10);
+    //     console.log(this.direction);
+    context.fillText(this.id, textLocX - 5 - this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 2 - this.radius * Math.sin(this.direction * Math.PI / 180));
     context.fillStyle = 'white';
-    context.fillText(this.id, this.locX + textLocX - 4, this.locY + textLocY + 11);
+    context.fillText(this.id, textLocX - 6 - this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 3 - this.radius * Math.sin(this.direction * Math.PI / 180));
   },
   shadeDraw: function (context) {
     context.beginPath();
@@ -291,7 +292,7 @@ Circle.prototype = {
       this.roll(order.roll);
     }
     if (typeof order.go !== "undefined") {
-      this.go(order.go, circles);
+      this.go(this.speed, circles);
     }
   },
   check: function (circles, futureLocX, futureLocY) {
