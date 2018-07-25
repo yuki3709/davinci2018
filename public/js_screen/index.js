@@ -234,14 +234,13 @@ Circle.prototype = {
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
-    let textLocX = this.locX + this.radius / 2 * Math.cos(this.direction * Math.PI / 180);
-    let textLocY = this.locY + this.radius / 2 * Math.sin(this.direction * Math.PI / 180);
+    let textLocX = this.locX - this.radius * 3 / 5 * Math.cos(this.direction * Math.PI / 180);
+    let textLocY = this.locY - this.radius * 3 / 5 * Math.sin(this.direction * Math.PI / 180);
     context.fillStyle = 'black';
     context.font = "14px 'ＭＳ ゴシック'";
-    //     console.log(this.direction);
-    context.fillText(this.id, textLocX - 5 - this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 2 - this.radius * Math.sin(this.direction * Math.PI / 180));
+    context.fillText(this.id, textLocX - 12 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
     context.fillStyle = 'white';
-    context.fillText(this.id, textLocX - 6 - this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 3 - this.radius * Math.sin(this.direction * Math.PI / 180));
+    context.fillText(this.id, textLocX - 13 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 8 + this.radius * Math.sin(this.direction * Math.PI / 180));
   },
   shadeDraw: function (context) {
     context.beginPath();
