@@ -234,12 +234,13 @@ Circle.prototype = {
     context.fillStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.fill();
+    let textLocX = this.radius / 2 * Math.cos(this.direction * Math.PI / 180);
+    let textLocY = this.radius / 2 * Math.sin(this.direction * Math.PI / 180);
     context.fillStyle = 'black';
     context.font = "14px 'ＭＳ ゴシック'";
-    context.fillText(this.id, this.locX - this.radius + 1, this.locY + 1);
+    context.fillText(this.id, this.locX + textLocX - 5, this.locY + textLocY + 10);
     context.fillStyle = 'white';
-    context.fillText(this.id, this.locX - this.radius + 2, this.locY + 2);
-
+    context.fillText(this.id, this.locX - textLocX - 4, this.locY + textLocY + 11);
   },
   shadeDraw: function (context) {
     context.beginPath();
