@@ -36,7 +36,7 @@ Field.prototype = {
   imageData: [],
   circles: [],
   constructor: Field,
-  checkNumber: function () {
+  checkNumber: function (circle) {
     this.num.red = 0;
     this.num.fuchsia = 0;
     this.num.lime = 0;
@@ -58,24 +58,28 @@ Field.prototype = {
     for (i = 0; i < this.circles.length; i++) {
       if (this.num.red > 4) {
         if (this.circles[i].color === "red") {
+          this.circles[i].shadeDraw(this.context);
           this.circles.splice(i, 1);
           break;
         }
       }
       if (this.num.fuchsia > 4) {
         if (this.circles[i].color === "fuchsia") {
+          this.circles[i].shadeDraw(this.context);
           this.circles.splice(i, 1);
           break;
         }
       }
       if (this.num.lime > 4) {
         if (this.circles[i].color === "lime") {
+          this.circles[i].shadeDraw(this.context);
           this.circles.splice(i, 1);
           break;
         }
       }
       if (this.num.aqua > 4) {
         if (this.circles[i].color === "aqua") {
+          this.circles[i].shadeDraw(this.context);
           this.circles.splice(i, 1);
           break;
         }
@@ -239,7 +243,7 @@ Circle.prototype = {
   },
   shadeDraw: function (context) {
     context.beginPath();
-    context.lineWidth = 2;
+    context.lineWidth = 3;
     context.strokeStyle = this.color;
     context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
     context.stroke();
