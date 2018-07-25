@@ -240,7 +240,7 @@ Circle.prototype = {
     context.font = "14px 'ＭＳ ゴシック'";
     context.fillText(this.id, this.locX + textLocX - 5, this.locY + textLocY + 10);
     context.fillStyle = 'white';
-    context.fillText(this.id, this.locX - textLocX - 4, this.locY + textLocY + 11);
+    context.fillText(this.id, this.locX + textLocX - 4, this.locY + textLocY + 11);
   },
   shadeDraw: function (context) {
     context.beginPath();
