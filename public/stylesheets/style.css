@@ -8,6 +8,9 @@ a {
 }
 button{
   cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 button.send {
   background-color: blue;
@@ -15,8 +18,13 @@ button.send {
   width: 200px;
   height:  35px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#8080f0 0%, #0000ff 100%);
+  background-image: linear-gradient(#8080f0 0%, #0000ff 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #33339b;
 }
 button.send:hover {
+  opacity: 0.8;
   background-color: DodgerBlue;
   color: #f0f0f0;
   border-style: none;
@@ -33,7 +41,7 @@ button.subsend {
   border-bottom: solid 3px #5e8f70;
 }
 button.subsend:hover {
-  opacity: 0.8;
+  opacity: 0.7;
   color: #f0f0f0;
   border-style: none;
 }
@@ -43,9 +51,13 @@ button.reset {
   width: 200px;
   height:  35px;
   border-style: none;
+  background-image: -webkit-linear-gradient(#ff0000 0%, #ff8080 100%);
+  background-image: linear-gradient(#ff0000 0%, #ff8080 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #ffa07a;
 }
 button.reset:hover {
-  background-color: OrangeRed;
+  opacity: 0.7;
   color: #f0f0f0;
   border-style: none;
 }
@@ -55,9 +67,10 @@ button.button1 {
   width: 45px;
   height:  40px;
   border-style: none;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  background-image: -webkit-linear-gradient(#808080 0%, #606060 100%);
+  background-image: linear-gradient(#808080 0%, #606060 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #ffa07a;
 }
 button.button1:hover {
   background-color: DarkGray;
@@ -69,9 +82,6 @@ button.button2 {
   width: 45px;
   height:  40px;
   border-style: none;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 button.button2:hover {
   background-color: Gainsboro;
