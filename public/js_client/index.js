@@ -43,7 +43,7 @@ function addCommand(){
     command.style.marginBottom = "20px";
     command.innerHTML = getButton(prop.command[i]);
     commandList.appendChild(command);
-    commandList.scrollTop = commandList.scrollHight;
+    commandList.scrollTop = commandList.scrollHeight;
   }
 }
 function addEvent(){
@@ -56,6 +56,7 @@ function addEvent(){
     hitEvent.style.marginBottom = "20px";
     hitEvent.innerHTML = getButton(prop.hitEvent[i]);
     hitEventList.appendChild(hitEvent);
+    hitEventList.scrollTop = hitEventList.scrollHeight;
   }
 }
 window.onload = () => {
