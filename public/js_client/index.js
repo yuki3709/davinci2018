@@ -29,9 +29,6 @@ function getButton(discriminate){
       }
     })(discriminate.roll);
   }
-  // if("for" in discriminate){
-  //   setInterval(getButton(discriminate.for),30);
-  // }
 }
 function addElement(){
   console.log(prop);
@@ -46,6 +43,7 @@ function addCommand(){
     command.style.marginBottom = "20px";
     command.innerHTML = getButton(prop.command[i]);
     commandList.appendChild(command);
+    commandList.scrollTop = commandList.scrollHeight;
   }
 }
 function addEvent(){
@@ -58,6 +56,7 @@ function addEvent(){
     hitEvent.style.marginBottom = "20px";
     hitEvent.innerHTML = getButton(prop.hitEvent[i]);
     hitEventList.appendChild(hitEvent);
+    hitEventList.scrollTop = hitEventList.scrollHeight;
   }
 }
 window.onload = () => {
@@ -121,12 +120,4 @@ window.onload = () => {
     console.log(prop);
     socket.emit('message', JSON.stringify(prop));
   });
-  // setEvent('begin',() => {
-  //   tmpCommand = [];
-  //   prop.command.push({for:tmpCommand});
-  //   console.log(prop.command);
-  // });
-  // document.getElementById('end').addEventListener('click',() => {
-  //   tmpCommand = prop.command;
-  // });
 };
