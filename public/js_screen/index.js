@@ -196,7 +196,7 @@ const Circle = function (data, field, n) {
   let radius = 10;
   this.radius = (radius => {
     switch (this.id) {
-      case "'ω'":
+      case "・ω・":
         return 50;
       case "˘ω˘":
         return 30;
@@ -241,7 +241,7 @@ Circle.prototype = {
     let textLocX = this.locX - this.radius * 3 / 5 * Math.cos(this.direction * Math.PI / 180);
     let textLocY = this.locY - this.radius * 3 / 5 * Math.sin(this.direction * Math.PI / 180);
     context.fillStyle = 'black';
-    context.font = "14px Arial bold";
+    context.font = "bold 16px Arial";
     context.fillText(this.id, textLocX - 12 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
     context.fillStyle = 'white';
     context.fillText(this.id, textLocX - 13 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 8 + this.radius * Math.sin(this.direction * Math.PI / 180));
