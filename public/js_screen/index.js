@@ -99,6 +99,7 @@ Field.prototype = {
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
+    this.circles.forEach(circle => circle.effect(this.context));
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
@@ -214,6 +215,7 @@ const Circle = function (data, field, n) {
   this.direction = Math.floor(Math.random() * 360);
   this.num = n;
   this.flag = 0;
+  this.effectFlag = 0;
   this.checkCircle(field.circles);
 };
 Circle.prototype = {
@@ -306,9 +308,18 @@ Circle.prototype = {
           + (circles[i].locY - futureLocY) ** 2) {
           this.hitCommand = this.hitEvent();
           this.flag++;
+          this.effectFlag++;
         }
       }
     }
+  },
+  effect: function (context) {
+    if (this.effectFlag !== 0) {
+      context.fillStyle = 'white';
+      context.font = "bold 18px Arial";
+      context.fillText("いてっ！", this.locX, this.locY);
+    }
+    this.effectFlag = 0;
   }
 };
 window.onload = function () {
