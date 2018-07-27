@@ -156,24 +156,24 @@ Field.prototype = {
     context.fillRect(this.size.width, 0, this.canvas.width - this.size.width, this.size.height);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
-    context.fillText(red, this.size.width + 5, this.size.height / 100 + 75);
-    context.fillText(fuchsia, this.size.width + 5, this.size.height / 5 + 75);
-    context.fillText(lime, this.size.width + 5, this.size.height / 2.5 + 75);
-    context.fillText(aqua, this.size.width + 5, this.size.height / 1.7 + 75);
-    context.fillText("リ　　　あ", this.size.width + 55, this.size.height / 1.27 + 150 * 1 / 4);
-    context.fillText("セ　　　と", this.size.width + 55, this.size.height / 1.27 + 150 * 2 / 4);
-    context.fillText("ッ　　　少", this.size.width + 55, this.size.height / 1.27 + 150 * 3 / 4);
-    context.fillText("ト　　　し", this.size.width + 55, this.size.height / 1.27 + 150 * 4 / 4);
+    context.fillText(red, this.size.width + 55, this.size.height / 100 + 75);
+    context.fillText(fuchsia, this.size.width + 55, this.size.height / 5 + 75);
+    context.fillText(lime, this.size.width + 55, this.size.height / 2.5 + 75);
+    context.fillText(aqua, this.size.width + 55, this.size.height / 1.7 + 75);
+    context.fillText("リ　　　あ", this.size.width + 105, this.size.height / 1.27 + 150 * 1 / 4);
+    context.fillText("セ　　　と", this.size.width + 105, this.size.height / 1.27 + 150 * 2 / 4);
+    context.fillText("ッ　　　少", this.size.width + 105, this.size.height / 1.27 + 150 * 3 / 4);
+    context.fillText("ト　　　し", this.size.width + 105, this.size.height / 1.27 + 150 * 4 / 4);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, this.size.height / 100, red * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 100, this.size.height / 100, red * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, this.size.height / 5, fuchsia * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 100, this.size.height / 5, fuchsia * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, this.size.height / 2.5, lime * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 100, this.size.height / 2.5, lime * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, this.size.height / 1.7, aqua * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 100, this.size.height / 1.7, aqua * this.canvas.width * 0.3 / 100, 150);
     context.fillStyle = "black";
-    context.fillRect(this.size.width + 50, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 100, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.3 / 100, 150);
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
@@ -185,7 +185,7 @@ Field.prototype = {
   },
   fillWhite: function (context) {
     context.fillStyle = "white";
-    context.fillRect(this.size.width - 80, 0, 80, this.canvas.height);
+    context.fillRect(this.size.width, 0, 50, this.canvas.height);
   }
 };
 const Circle = function (data, field, n) {
@@ -282,10 +282,10 @@ Circle.prototype = {
       this.locX %= this.width;
       this.locY %= this.height;
       if (this.locX < 0) {
-        this.locX = this.width + this.locX
+        this.locX = this.width + this.locX;
       }
       if (this.locY < 0) {
-        this.locY = this.height + this.locY
+        this.locY = this.height + this.locY;
       }
     }
     this.flag = 0;
