@@ -95,6 +95,7 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
+    this.fillWhite(this.context);
     this.checkNumber();
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
@@ -181,6 +182,10 @@ Field.prototype = {
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
+  },
+  fillWhite: function (context) {
+    context.fillStyle = "white";
+    context.fillRect(this.size.width - 50, 0, this.size.width, this.canvas.height);
   }
 };
 const Circle = function (data, field, n) {
@@ -264,25 +269,35 @@ Circle.prototype = {
   },
   go: function (distance, circles) {
     const radian = this.direction * Math.PI / 180;
+    let flagX = 0;
+    let flagY = 0;
     let distanceX = distance * Math.cos(radian);
     let distanceY = distance * Math.sin(radian);
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     this.check(circles, futureLocX, futureLocY);
-    if (futureLocX - this.radius <= 0 || futureLocX + this.radius >= this.width - 3 ||
-      futureLocY - this.radius <= 0 || futureLocY + this.radius >= this.height - 3) {
-      if (futureLocX - this.radius <= 0) {
-        this.locX = this.width - this.radius - 1;
+    if (futureLocX <= 0 || futureLocX >= this.width - 50 ||
+      futureLocY <= 0 || futureLocY >= this.height) {
+      if (futureLocX <= 0 && flagX === 0) {
+        console.log(flagX);
+        this.locX = this.width - 50;
+        flagX++;
       }
-      if (futureLocX + this.radius >= this.width - 3) {
-        this.locX = this.radius + 1;
+      if (futureLocX >= this.width - 50 && flagX === 0) {
+        console.log(flagX);
+        this.locX = 0;
+        flagX++;
       }
-      if (futureLocY - this.radius <= 0) {
-        this.locY = this.height - this.radius - 1;
+      if (futureLocY <= 0 && flagY === 0) {
+        console.log(flagY);
+        this.locY = this.height;
+        flagY++;
       }
-      if (futureLocY + this.radius >= this.height - 3) {
-        this.locY = this.radius + 1
+      if (futureLocY >= this.height && flagY === 0) {
+        console.log(flagY);
+        this.locY = 0;
+        flagY++;
       }
     } else {
       if (this.flag === 0) {
