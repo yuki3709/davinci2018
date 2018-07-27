@@ -185,7 +185,7 @@ Field.prototype = {
   },
   fillWhite: function (context) {
     context.fillStyle = "white";
-    context.fillRect(this.size.width - 50, 0, 50, this.canvas.height);
+    context.fillRect(this.size.width - 80, 0, 80, this.canvas.height);
   }
 };
 const Circle = function (data, field, n) {
