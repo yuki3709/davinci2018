@@ -279,12 +279,12 @@ Circle.prototype = {
       this.direction = this.normalizeDirection(direction);
       this.locX += distanceX;
       this.locY += distanceY;
-      this.locX %= (this.width - this.radius);
-      this.locY %= (this.height - this.radius);
-      if (this.loX < 0) {
+      this.locX %= this.width;
+      this.locY %= this.height;
+      if (this.locX < 0) {
         this.locX = this.width + this.locX
       }
-      if (this.loY < 0) {
+      if (this.locY < 0) {
         this.locY = this.height + this.locY
       }
     }
