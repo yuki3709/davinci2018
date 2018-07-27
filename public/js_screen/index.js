@@ -277,26 +277,22 @@ Circle.prototype = {
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     this.check(circles, futureLocX, futureLocY);
-    if (futureLocX <= 0 || futureLocX >= this.width - this.radius - 3 ||
-      futureLocY <= 0 || futureLocY >= this.height) {
-      if (futureLocX <= 0 && flagX === 0) {
-        console.log(flagX);
+    if (futureLocX <= -  this.radius || futureLocX >= this.width - this.radius - 3 ||
+      futureLocY <= -  this.radius || futureLocY >= this.height + this.radius) {
+      if (futureLocX <= -  this.radius && flagX === 0) {
         this.locX = this.width - this.radius - 3;
         flagX++;
       }
       if (futureLocX >= this.width - this.radius - 3 && flagX === 0) {
-        console.log(flagX);
-        this.locX = 0;
+        this.locX = -  this.radius;
         flagX++;
       }
-      if (futureLocY <= 0 && flagY === 0) {
-        console.log(flagY);
-        this.locY = this.height;
+      if (futureLocY <= -  this.radius && flagY === 0) {
+        this.locY = this.height + this.radius;
         flagY++;
       }
-      if (futureLocY >= this.height && flagY === 0) {
-        console.log(flagY);
-        this.locY = 0;
+      if (futureLocY >= this.height + this.radius && flagY === 0) {
+        this.locY = -  this.radius;
         flagY++;
       }
     } else {
