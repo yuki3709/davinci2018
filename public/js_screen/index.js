@@ -3,7 +3,6 @@ Field = function (e) {
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
-  setInterval(() => this.fillWhite(this.context), 10);
   setInterval(() => this.run(), 33);
   setInterval(() => this.getColor(this.context), 1000);
 };
@@ -96,12 +95,12 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
-    this.fillWhite(this.context);
     this.checkNumber();
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
     this.circles.forEach(circle => circle.effect(this.context));
+    this.fillWhite(this.context);
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
@@ -278,14 +277,14 @@ Circle.prototype = {
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     this.check(circles, futureLocX, futureLocY);
-    if (futureLocX <= 0 || futureLocX >= this.width - 50 ||
+    if (futureLocX <= 0 || futureLocX >= this.width - this.radius - 3 ||
       futureLocY <= 0 || futureLocY >= this.height) {
       if (futureLocX <= 0 && flagX === 0) {
         console.log(flagX);
-        this.locX = this.width - 53;
+        this.locX = this.width - this.radius - 3;
         flagX++;
       }
-      if (futureLocX >= this.width - 50 && flagX === 0) {
+      if (futureLocX >= this.width - this.radius - 3 && flagX === 0) {
         console.log(flagX);
         this.locX = 0;
         flagX++;
