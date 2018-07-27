@@ -269,37 +269,23 @@ Circle.prototype = {
   },
   go: function (distance, circles) {
     const radian = this.direction * Math.PI / 180;
-    let flagX = 0;
-    let flagY = 0;
     let distanceX = distance * Math.cos(radian);
     let distanceY = distance * Math.sin(radian);
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
     this.check(circles, futureLocX, futureLocY);
-    if (futureLocX <= - this.radius || futureLocX >= this.width - this.radius - 3 ||
-      futureLocY <= - this.radius || futureLocY >= this.height + this.radius) {
-      if (futureLocX <= - this.radius && flagX === 0) {
-        this.locX = this.width - this.radius - 3;
-        flagX++;
+    if (this.flag === 0) {
+      this.direction = this.normalizeDirection(direction);
+      this.locX += distanceX;
+      this.locY += distanceY;
+      this.locX %= (this.width - this.radius);
+      this.locY %= (this.height - this.height);
+      if (this.loX < 0) {
+        this.locX = this.width + this.locX
       }
-      if (futureLocX >= this.width - this.radius - 3 && flagX === 0) {
-        this.locX = - this.radius;
-        flagX++;
-      }
-      if (futureLocY <= - this.radius && flagY === 0) {
-        this.locY = this.height + this.radius;
-        flagY++;
-      }
-      if (futureLocY >= this.height + this.radius && flagY === 0) {
-        this.locY = - this.radius;
-        flagY++;
-      }
-    } else {
-      if (this.flag === 0) {
-        this.direction = this.normalizeDirection(direction);
-        this.locX += distanceX;
-        this.locY += distanceY;
+      if (this.loY < 0) {
+        this.locY = this.height + this.locY
       }
     }
     this.flag = 0;
