@@ -339,7 +339,7 @@ Circle.prototype = {
     if (this.effectFlag !== 0) {
       context.fillStyle = 'white';
       context.font = "bold 18px Arial";
-      context.fillText("いてっ！", this.locX, this.locY);
+      context.fillText("いてっ！", this.locX + this.radius, this.locY + this.radius);
     }
     this.effectFlag = 0;
   }
