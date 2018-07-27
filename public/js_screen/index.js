@@ -272,7 +272,18 @@ Circle.prototype = {
     this.check(circles, futureLocX, futureLocY);
     if (futureLocX - this.radius <= 0 || futureLocX + this.radius >= this.width - 3 ||
       futureLocY - this.radius <= 0 || futureLocY + this.radius >= this.height - 3) {
-      this.hitCommand = this.hitEvent();
+      if (futureLocX - this.radius <= 0) {
+        this.locX = this.width - this.radius - 1;
+      }
+      if (futureLocX + this.radius >= this.width - 3) {
+        this.locX = this.radius + 1;
+      }
+      if (futureLocY - this.radius <= 0) {
+        this.locY = this.height - this.radius - 1;
+      }
+      if (futureLocY + this.radius >= this.height - 3) {
+        this.locY = this.radius + 1
+      }
     } else {
       if (this.flag === 0) {
         this.direction = this.normalizeDirection(direction);
