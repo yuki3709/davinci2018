@@ -3,6 +3,7 @@ Field = function (e) {
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
+  setInterval(() => this.fillWhite(this.context), 10);
   setInterval(() => this.run(), 33);
   setInterval(() => this.getColor(this.context), 1000);
 };
@@ -185,7 +186,7 @@ Field.prototype = {
   },
   fillWhite: function (context) {
     context.fillStyle = "white";
-    context.fillRect(this.size.width - 50, 0, this.size.width, this.canvas.height);
+    context.fillRect(this.size.width - 50, 0, 50, this.canvas.height);
   }
 };
 const Circle = function (data, field, n) {
@@ -281,7 +282,7 @@ Circle.prototype = {
       futureLocY <= 0 || futureLocY >= this.height) {
       if (futureLocX <= 0 && flagX === 0) {
         console.log(flagX);
-        this.locX = this.width - 50;
+        this.locX = this.width - 53;
         flagX++;
       }
       if (futureLocX >= this.width - 50 && flagX === 0) {
