@@ -280,7 +280,7 @@ Circle.prototype = {
       this.locX += distanceX;
       this.locY += distanceY;
       this.locX %= (this.width - this.radius);
-      this.locY %= (this.height - this.height);
+      this.locY %= (this.height - this.radius);
       if (this.loX < 0) {
         this.locX = this.width + this.locX
       }
