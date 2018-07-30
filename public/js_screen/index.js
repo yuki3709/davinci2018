@@ -345,6 +345,8 @@ window.onload = function () {
   console.log(index);
   let canvas = document.getElementById('game');
   const field = new Field(canvas);
+  const id = decodeURIComponent(location.search.match(/id=(.*?)(&|$)/)[1]);
+  console.log(id);
   socket.on('receiveMessage', function (d) {
     field.circles.push(new Circle(d, field, n));
     n++;
