@@ -165,15 +165,15 @@ Field.prototype = {
     context.fillText("ッ　　　少", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 3 / 5);
     context.fillText("ト　　　し", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 4 / 5);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 105, this.size.height / 100, red * this.canvas.width * 0.3 / 100, this.size.height / 6);
+    context.fillRect(this.size.width + 105, this.size.height / 100, red * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 105, this.size.height / 5, fuchsia * this.canvas.width * 0.3 / 100, this.size.height / 6);
+    context.fillRect(this.size.width + 105, this.size.height / 5, fuchsia * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 105, this.size.height / 2.5, lime * this.canvas.width * 0.3 / 100, this.size.height / 6);
+    context.fillRect(this.size.width + 105, this.size.height / 2.5, lime * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 105, this.size.height / 1.7, aqua * this.canvas.width * 0.3 / 100, this.size.height / 6);
+    context.fillRect(this.size.width + 105, this.size.height / 1.7, aqua * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "black";
-    context.fillRect(this.size.width + 105, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.3 / 100, this.size.height / 6);
+    context.fillRect(this.size.width + 105, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.2 / 100, this.size.height / 6);
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
