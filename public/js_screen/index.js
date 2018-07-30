@@ -100,6 +100,7 @@ Field.prototype = {
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
     this.circles.forEach(circle => circle.effect(this.context));
+    this.fillWhite(this.context);
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
@@ -155,24 +156,24 @@ Field.prototype = {
     context.fillRect(this.size.width, 0, this.canvas.width - this.size.width, this.size.height);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
-    context.fillText(red, this.size.width + 5, this.size.height / 100 + 75);
-    context.fillText(fuchsia, this.size.width + 5, this.size.height / 5 + 75);
-    context.fillText(lime, this.size.width + 5, this.size.height / 2.5 + 75);
-    context.fillText(aqua, this.size.width + 5, this.size.height / 1.7 + 75);
-    context.fillText("リ　　　あ", this.size.width + 55, this.size.height / 1.27 + 150 * 1 / 4);
-    context.fillText("セ　　　と", this.size.width + 55, this.size.height / 1.27 + 150 * 2 / 4);
-    context.fillText("ッ　　　少", this.size.width + 55, this.size.height / 1.27 + 150 * 3 / 4);
-    context.fillText("ト　　　し", this.size.width + 55, this.size.height / 1.27 + 150 * 4 / 4);
+    context.fillText(red, this.size.width + 60, this.size.height / 100 + this.size.height / 12);
+    context.fillText(fuchsia, this.size.width + 60, this.size.height / 5 + this.size.height / 12);
+    context.fillText(lime, this.size.width + 60, this.size.height / 2.5 + this.size.height / 12);
+    context.fillText(aqua, this.size.width + 60, this.size.height / 1.7 + this.size.height / 12);
+    context.fillText("リ　　　あ", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 1 / 5);
+    context.fillText("セ　　　と", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 2 / 5);
+    context.fillText("ッ　　　少", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 3 / 5);
+    context.fillText("ト　　　し", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 4 / 5);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 50, this.size.height / 100, red * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 105, this.size.height / 100, red * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 50, this.size.height / 5, fuchsia * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 105, this.size.height / 5, fuchsia * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 50, this.size.height / 2.5, lime * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 105, this.size.height / 2.5, lime * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 50, this.size.height / 1.7, aqua * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 105, this.size.height / 1.7, aqua * this.canvas.width * 0.2 / 100, this.size.height / 6);
     context.fillStyle = "black";
-    context.fillRect(this.size.width + 50, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.3 / 100, 150);
+    context.fillRect(this.size.width + 105, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.2 / 100, this.size.height / 6);
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
@@ -181,6 +182,10 @@ Field.prototype = {
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
+  },
+  fillWhite: function (context) {
+    context.fillStyle = "white";
+    context.fillRect(this.size.width, 0, 55, this.canvas.height);
   }
 };
 const Circle = function (data, field, n) {
@@ -269,15 +274,26 @@ Circle.prototype = {
     let futureLocX = this.locX + distanceX;
     let futureLocY = this.locY + distanceY;
     let direction = this.direction;
+    futureLocX %= this.width;
+    futureLocY %= this.height;
+    if (futureLocX < 0) {
+      futureLocX = this.width + futureLocX;
+    }
+    if (futureLocY < 0) {
+      futureLocY = this.height + futureLocY;
+    }
     this.check(circles, futureLocX, futureLocY);
-    if (futureLocX - this.radius <= 0 || futureLocX + this.radius >= this.width - 3 ||
-      futureLocY - this.radius <= 0 || futureLocY + this.radius >= this.height - 3) {
-      this.hitCommand = this.hitEvent();
-    } else {
-      if (this.flag === 0) {
-        this.direction = this.normalizeDirection(direction);
-        this.locX += distanceX;
-        this.locY += distanceY;
+    if (this.flag === 0) {
+      this.direction = this.normalizeDirection(direction);
+      this.locX += distanceX;
+      this.locY += distanceY;
+      this.locX %= this.width;
+      this.locY %= this.height;
+      if (this.locX < 0) {
+        this.locX = this.width + this.locX;
+      }
+      if (this.locY < 0) {
+        this.locY = this.height + this.locY;
       }
     }
     this.flag = 0;
@@ -317,7 +333,7 @@ Circle.prototype = {
     if (this.effectFlag !== 0) {
       context.fillStyle = 'white';
       context.font = "bold 18px Arial";
-      context.fillText("いてっ！", this.locX, this.locY);
+      context.fillText("いてっ！", this.locX + this.radius, this.locY + this.radius);
     }
     this.effectFlag = 0;
   }
