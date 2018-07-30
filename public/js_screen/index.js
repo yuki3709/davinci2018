@@ -352,7 +352,7 @@ window.onload = function () {
   };
   if (idMatches) {
     const id = decodeURIComponent(idMatches[1]);
-    socket.on('demo' + id, receive);
+    socket.on('receive' + id, receive);
   } else {
     socket.on('receiveMessage', receive);
   }
