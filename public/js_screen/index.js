@@ -160,10 +160,10 @@ Field.prototype = {
     context.fillText(fuchsia, this.size.width + 60, this.size.height / 5 + this.size.height / 12);
     context.fillText(lime, this.size.width + 60, this.size.height / 2.5 + this.size.height / 12);
     context.fillText(aqua, this.size.width + 60, this.size.height / 1.7 + this.size.height / 12);
-    context.fillText("リ　　　あ", this.size.width + 110, this.size.height / 1.27 + 150 * 1 / 4);
-    context.fillText("セ　　　と", this.size.width + 110, this.size.height / 1.27 + 150 * 2 / 4);
-    context.fillText("ッ　　　少", this.size.width + 110, this.size.height / 1.27 + 150 * 3 / 4);
-    context.fillText("ト　　　し", this.size.width + 110, this.size.height / 1.27 + 150 * 4 / 4);
+    context.fillText("リ　　　あ", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 1 / 5);
+    context.fillText("セ　　　と", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 2 / 5);
+    context.fillText("ッ　　　少", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 3 / 5);
+    context.fillText("ト　　　し", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 4 / 5);
     context.fillStyle = "red";
     context.fillRect(this.size.width + 105, this.size.height / 100, red * this.canvas.width * 0.3 / 100, this.size.height / 6);
     context.fillStyle = "fuchsia";
