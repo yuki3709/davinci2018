@@ -1,14 +1,19 @@
-Field = function (e, d) {
+Field = function (e, c, d) {
   this.canvas = e;
+  this.canvas2 = c;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
+  this.context2 = this.canvas2.getContext('2d');
+  this.context2.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  if (!d) setInterval(() => this.getColor(this.context), 1000);
+  if (!d) setInterval(() => this.getColor(this.context, this.context2), 1000);
 };
 Field.prototype = {
   canvas: null,
+  canvas2: null,
   context: null,
+  context2: null,
   size: {
     width: 0,
     height: 0
@@ -40,9 +45,9 @@ Field.prototype = {
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
     this.circles.forEach(circle => circle.effect(this.context));
-    this.fillWhite(this.context);
+    // this.fillWhite(this.context);
   },
-  getColor: function (context) {
+  getColor: function (context, context2) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
     const colors = [];
     for (let y = 0; y < this.size.height; y = y + 5) {
@@ -67,7 +72,7 @@ Field.prototype = {
       aqua: aqua,
       black: black
     };
-    this.displayRank(context, team);
+    this.displayRank(context2, team);
   },
   displayRank: function (context, team) {
     const score = {
@@ -302,8 +307,9 @@ window.onload = function () {
   let index = url.replace(/screen/g, "");
   console.log(index);
   let canvas = document.getElementById('game');
+  let canvas2 = document.getElementById('chart');
   const idMatches = location.search.match(/id=(.*?)(&|$)/);
-  const field = new Field(canvas, idMatches);
+  const field = new Field(canvas, canvas2, idMatches);
   const receive = d => field.addCircle(new Circle(d, field));
   if (idMatches) {
     const id = decodeURIComponent(idMatches[1]);
