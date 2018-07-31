@@ -65,7 +65,7 @@ Field.prototype = {
     const fuchsia = colors.filter(createFilter(255, 0, 255)).length;
     const lime = colors.filter(createFilter(0, 255, 0)).length;
     const aqua = colors.filter(createFilter(0, 255, 255)).length;
-    const black = colors.length - red - fuchsia - lime - aqua;
+    const black = colors.filter(createFilter(0, 0, 0)).length;
     const team = {
       red: red,
       fuchsia: fuchsia,
