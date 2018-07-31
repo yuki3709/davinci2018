@@ -112,15 +112,15 @@ Field.prototype = {
     context.fillText("ッ　　　少", 110, height / 1.27 + height / 6 * 3 / 5);
     context.fillText("ト　　　し", 110, height / 1.27 + height / 6 * 4 / 5);
     context.fillStyle = "red";
-    context.fillRect(105, height / 100, red * width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 100, red * width * 0.7 / 100, height / 6);
     context.fillStyle = "fuchsia";
-    context.fillRect(105, height / 5, fuchsia * width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 5, fuchsia * width * 0.7 / 100, height / 6);
     context.fillStyle = "lime";
-    context.fillRect(105, height / 2.5, lime * width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 2.5, lime * width * 0.7 / 100, height / 6);
     context.fillStyle = "aqua";
-    context.fillRect(105, height / 1.7, aqua * width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 1.7, aqua * width * 0.7 / 100, height / 6);
     context.fillStyle = "black";
-    context.fillRect(105, height / 1.27, (black - 20) * width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 1.27, (black - 20) * width * 0.7 / 100, height / 6);
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
