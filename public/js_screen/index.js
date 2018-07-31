@@ -179,33 +179,41 @@ Circle.prototype = {
     }
   },
   draw: function (context) {
-    context.beginPath();
-    context.lineWidth = 2;
-    context.strokeStyle = 'white';
-    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
-    context.stroke();
-    context.lineWidth = 1;
-    context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
-    context.fill();
-    let textLocX = this.locX - this.radius * 3 / 5 * Math.cos(this.direction * Math.PI / 180);
-    let textLocY = this.locY - this.radius * 3 / 5 * Math.sin(this.direction * Math.PI / 180);
-    context.fillStyle = 'black';
-    context.font = "bold 16px Arial";
-    context.fillText(this.id, textLocX - 12 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
-    context.fillStyle = 'white';
-    context.fillText(this.id, textLocX - 13 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 8 + this.radius * Math.sin(this.direction * Math.PI / 180));
+    for (ix = -1; ix < 2; ix++) {
+      for (iy = -1; iy < 2; iy++) {
+        context.beginPath();
+        context.lineWidth = 2;
+        context.strokeStyle = 'white';
+        context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
+        context.stroke();
+        context.lineWidth = 1;
+        context.fillStyle = this.color;
+        context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
+        context.fill();
+        let textLocX = this.locX + ix * this.width - this.radius * 3 / 5 * Math.cos(this.direction * Math.PI / 180);
+        let textLocY = this.locY + iy * this.height - this.radius * 3 / 5 * Math.sin(this.direction * Math.PI / 180);
+        context.fillStyle = 'black';
+        context.font = "bold 16px Arial";
+        context.fillText(this.id, textLocX - 12 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
+        context.fillStyle = 'white';
+        context.fillText(this.id, textLocX - 13 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 8 + this.radius * Math.sin(this.direction * Math.PI / 180));
+      }
+    }
   },
   shadeDraw: function (context) {
-    context.beginPath();
-    context.lineWidth = 3;
-    context.strokeStyle = this.color;
-    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
-    context.stroke();
-    context.lineWidth = 1;
-    context.fillStyle = this.color;
-    context.arc(this.locX, this.locY, this.radius, 0, Math.PI * 2.0, true);
-    context.fill();
+    for (ix = -1; ix < 2; ix++) {
+      for (iy = -1; iy < 2; iy++) {
+        context.beginPath();
+        context.lineWidth = 3;
+        context.strokeStyle = this.color;
+        context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
+        context.stroke();
+        context.lineWidth = 1;
+        context.fillStyle = this.color;
+        context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
+        context.fill();
+      }
+    }
   },
   roll: function (direction) {
     this.direction = this.normalizeDirection(direction + this.direction);
@@ -232,10 +240,10 @@ Circle.prototype = {
       this.locY += distanceY;
       this.locX %= this.width;
       this.locY %= this.height;
-      if (this.locX < 0) {
+      if (this.locX < -this.radius) {
         this.locX = this.width + this.locX;
       }
-      if (this.locY < 0) {
+      if (this.locY < -this.radius) {
         this.locY = this.height + this.locY;
       }
     }
@@ -260,23 +268,31 @@ Circle.prototype = {
     }
   },
   check: function (circles, futureLocX, futureLocY) {
-    for (i = 0; i < circles.length; i++) {
-      if (circles[i] !== this) {
-        if ((circles[i].radius + this.radius) ** 2
-          >= (circles[i].locX - futureLocX) ** 2
-          + (circles[i].locY - futureLocY) ** 2) {
-          this.hitCommand = this.hitEvent();
-          this.flag++;
-          this.effectFlag++;
+    for (ix = -1; ix < 2; ix++) {
+      for (iy = -1; iy < 2; iy++) {
+        for (i = 0; i < circles.length; i++) {
+          if (circles[i] !== this) {
+            if ((circles[i].radius + this.radius) ** 2
+              >= (circles[i].locX + ix * this.width - futureLocX + ix * this.width) ** 2
+              + (circles[i].locY + iy * this.height - futureLocY + iy * this.height) ** 2) {
+              this.hitCommand = this.hitEvent();
+              this.flag++;
+              this.effectFlag++;
+            }
+          }
         }
       }
     }
   },
   effect: function (context) {
-    if (this.effectFlag !== 0) {
-      context.fillStyle = 'white';
-      context.font = "bold 18px Arial";
-      context.fillText("いてっ！", this.locX + this.radius, this.locY + this.radius);
+    for (ix = -1; ix < 2; ix++) {
+      for (iy = -1; iy < 2; iy++) {
+        if (this.effectFlag !== 0) {
+          context.fillStyle = 'white';
+          context.font = "bold 18px Arial";
+          context.fillText("いてっ！", this.locX + ix * this.width + this.radius, this.locY + iy * this.height + this.radius);
+        }
+      }
     }
     this.effectFlag = 0;
   }
