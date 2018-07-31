@@ -345,10 +345,17 @@ window.onload = function () {
   console.log(index);
   let canvas = document.getElementById('game');
   const field = new Field(canvas);
-  socket.on('receiveMessage', function (d) {
+  const idMatches = location.search.match(/id=(.*?)(&|$)/);
+  const receive = d => {
     field.circles.push(new Circle(d, field, n));
     n++;
-  });
+  };
+  if (idMatches) {
+    const id = decodeURIComponent(idMatches[1]);
+    socket.on('receive' + id, receive);
+  } else {
+    socket.on('receiveMessage', receive);
+  }
   let outputArea = document.getElementById('output-area');
   field.resize(outputArea);
   field.context.fillStyle = "white";
