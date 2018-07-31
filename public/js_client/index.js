@@ -18,7 +18,7 @@ function getButton(discriminate) {
         case -90:
           return "左を向く (左へ90°回転)";
         case -135:
-          return "大きく左を向く (左へ135°回転)"
+          return "大きく左を向く (左へ135°回転)";
         case 15:
           return "少し右を向く (右へ15°回転)";
         case 90:
