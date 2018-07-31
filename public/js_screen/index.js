@@ -36,9 +36,10 @@ Field.prototype = {
     this.circles.forEach(circle => circle.discriminateCommand(this.circles));
   },
   resize: function (parent) {
-    this.canvas.width = parent.clientWidth;
-    this.size.width = Math.floor(this.canvas.width * 0.7);
-    this.size.height = this.canvas.height = parent.clientHeight;
+    this.canvas.width = Math.floor(parent.clientWidth * 0.7);
+    this.canvas2.width = Math.floor(parent.clientWidth * 0.3);
+    this.size.width = this.canvas.width;
+    this.size.height = this.canvas.height = this.canvas2.height = parent.clientHeight;
   },
   run: function () {
     this.circles.forEach(circle => circle.shadeDraw(this.context));
@@ -72,9 +73,9 @@ Field.prototype = {
       aqua: aqua,
       black: black
     };
-    this.displayRank(context2, team);
+    this.displayRank(context, context2, team);
   },
-  displayRank: function (context, team) {
+  displayRank: function (context, context2, team) {
     const score = {
       red: 0,
       fuchsia: 0,
@@ -90,40 +91,41 @@ Field.prototype = {
     score.aqua = Math.ceil(aqua / sumScore * 100);
     let total = score.red + score.fuchsia + score.lime + score.aqua;
     score.black = 100 - total;
-    this.drawChart(context, score);
+    this.drawChart(context2, score);
     this.resetScreen(context, score.black);
   },
   drawChart: function (context, score) {
     const { red, fuchsia, lime, aqua, black } = score;
-    const { width, height } = this.size;
+    const width = this.canvas2.width;
+    const height = this.size.height;
     context.beginPath();
     context.fillStyle = "white";
-    context.fillRect(width, 0, this.canvas.width - width, height);
+    context.fillRect(0, 0, this.canvas2.width, height);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
-    context.fillText(red, width + 60, height / 100 + height / 12);
-    context.fillText(fuchsia, width + 60, height / 5 + height / 12);
-    context.fillText(lime, width + 60, height / 2.5 + height / 12);
-    context.fillText(aqua, width + 60, height / 1.7 + height / 12);
-    context.fillText("リ　　　あ", width + 110, height / 1.27 + height / 6 * 1 / 5);
-    context.fillText("セ　　　と", width + 110, height / 1.27 + height / 6 * 2 / 5);
-    context.fillText("ッ　　　少", width + 110, height / 1.27 + height / 6 * 3 / 5);
-    context.fillText("ト　　　し", width + 110, height / 1.27 + height / 6 * 4 / 5);
+    context.fillText(red, 60, height / 100 + height / 12);
+    context.fillText(fuchsia, 60, height / 5 + height / 12);
+    context.fillText(lime, 60, height / 2.5 + height / 12);
+    context.fillText(aqua, 60, height / 1.7 + height / 12);
+    context.fillText("リ　　　あ", 110, height / 1.27 + height / 6 * 1 / 5);
+    context.fillText("セ　　　と", 110, height / 1.27 + height / 6 * 2 / 5);
+    context.fillText("ッ　　　少", 110, height / 1.27 + height / 6 * 3 / 5);
+    context.fillText("ト　　　し", 110, height / 1.27 + height / 6 * 4 / 5);
     context.fillStyle = "red";
-    context.fillRect(width + 105, height / 100, red * this.canvas.width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 100, red * width * 0.2 / 100, height / 6);
     context.fillStyle = "fuchsia";
-    context.fillRect(width + 105, height / 5, fuchsia * this.canvas.width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 5, fuchsia * width * 0.2 / 100, height / 6);
     context.fillStyle = "lime";
-    context.fillRect(width + 105, height / 2.5, lime * this.canvas.width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 2.5, lime * width * 0.2 / 100, height / 6);
     context.fillStyle = "aqua";
-    context.fillRect(width + 105, height / 1.7, aqua * this.canvas.width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 1.7, aqua * width * 0.2 / 100, height / 6);
     context.fillStyle = "black";
-    context.fillRect(width + 105, height / 1.27, (black - 20) * this.canvas.width * 0.2 / 100, height / 6);
+    context.fillRect(105, height / 1.27, (black - 20) * width * 0.2 / 100, height / 6);
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
-      context.fillStyle = "white";
-      context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      // context.fillStyle = "white";
+      // context.fillRect(0, 0, this.canvas.width, this.canvas.height);
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
