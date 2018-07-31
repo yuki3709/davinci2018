@@ -1,10 +1,10 @@
-Field = function (e) {
+Field = function (e, d) {
   this.canvas = e;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
   this.context = this.canvas.getContext('2d');
   this.context.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
-  setInterval(() => this.getColor(this.context), 1000);
+  if (!d) setInterval(() => this.getColor(this.context), 1000);
 };
 Field.prototype = {
   canvas: null,
@@ -342,10 +342,9 @@ window.onload = function () {
   let index = url.replace(/screen/g, "");
   console.log(index);
   let canvas = document.getElementById('game');
-  const field = new Field(canvas);
   const idMatches = location.search.match(/id=(.*?)(&|$)/);
+  const field = new Field(canvas, idMatches);
   const receive = d => field.circles.push(new Circle(d, field));
-
   if (idMatches) {
     const id = decodeURIComponent(idMatches[1]);
     socket.on('receive' + id, receive);
