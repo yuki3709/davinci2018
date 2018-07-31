@@ -188,7 +188,7 @@ Field.prototype = {
     context.fillRect(this.size.width, 0, 55, this.canvas.height);
   }
 };
-const Circle = function (data, field, n) {
+const Circle = function (data, field) {
   const props = JSON.parse(data);
   this.color = props.color;
   this.command = (function* () {
@@ -218,7 +218,6 @@ const Circle = function (data, field, n) {
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
   this.speed = 300 / this.radius;
   this.direction = Math.floor(Math.random() * 360);
-  this.num = n;
   this.flag = 0;
   this.effectFlag = 0;
   this.checkCircle(field.circles);
@@ -228,7 +227,7 @@ Circle.prototype = {
   checkCircle: function (circles) {
     let out = true;
     while (out) {
-      out = circles.some(circle => (circle.num !== this.num) && ((circle.radius + this.radius) ** 2 > (circle.locX - this.locX) ** 2 + (circle.locY - this.locY) ** 2));
+      out = circles.some(circle => (circle !== this) && ((circle.radius + this.radius) ** 2 > (circle.locX - this.locX) ** 2 + (circle.locY - this.locY) ** 2));
       if (out) {
         this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
         this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
@@ -318,7 +317,7 @@ Circle.prototype = {
   },
   check: function (circles, futureLocX, futureLocY) {
     for (i = 0; i < circles.length; i++) {
-      if (circles[i].num !== this.num) {
+      if (circles[i] !== this) {
         if ((circles[i].radius + this.radius) ** 2
           >= (circles[i].locX - futureLocX) ** 2
           + (circles[i].locY - futureLocY) ** 2) {
@@ -339,17 +338,14 @@ Circle.prototype = {
   }
 };
 window.onload = function () {
-  let n = 0;
   let url = location.href;
   let index = url.replace(/screen/g, "");
   console.log(index);
   let canvas = document.getElementById('game');
   const field = new Field(canvas);
   const idMatches = location.search.match(/id=(.*?)(&|$)/);
-  const receive = d => {
-    field.circles.push(new Circle(d, field, n));
-    n++;
-  };
+  const receive = d => field.circles.push(new Circle(d, field));
+
   if (idMatches) {
     const id = decodeURIComponent(idMatches[1]);
     socket.on('receive' + id, receive);
