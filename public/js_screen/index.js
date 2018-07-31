@@ -13,76 +13,17 @@ Field.prototype = {
     width: 0,
     height: 0
   },
-  team: {
-    red: 0,
-    fuchsia: 0,
-    lime: 0,
-    aqua: 0,
-    black: 0
-  },
-  score: {
-    red: 0,
-    fuchsia: 0,
-    lime: 0,
-    aqua: 0,
-    black: 0
-  },
-  num: {
-    red: 0,
-    fuchsia: 0,
-    lime: 0,
-    aqua: 0
-  },
   imageData: [],
   circles: [],
   constructor: Field,
-  checkNumber: function (circle) {
-    this.num.red = 0;
-    this.num.fuchsia = 0;
-    this.num.lime = 0;
-    this.num.aqua = 0;
+  checkNumber: function (color) {
+    const count = this.circles.filter(circle => circle.color === color).length;
+    if (count <= 4) return;
     for (i = 0; i < this.circles.length; i++) {
-      if (this.circles[i].color === "red") {
-        this.num.red++;
-      }
-      else if (this.circles[i].color === "fuchsia") {
-        this.num.fuchsia++;
-      }
-      else if (this.circles[i].color === "lime") {
-        this.num.lime++;
-      }
-      else if (this.circles[i].color === "aqua") {
-        this.num.aqua++;
-      }
-    }
-    for (i = 0; i < this.circles.length; i++) {
-      if (this.num.red > 4) {
-        if (this.circles[i].color === "red") {
-          this.circles[i].shadeDraw(this.context);
-          this.circles.splice(i, 1);
-          break;
-        }
-      }
-      if (this.num.fuchsia > 4) {
-        if (this.circles[i].color === "fuchsia") {
-          this.circles[i].shadeDraw(this.context);
-          this.circles.splice(i, 1);
-          break;
-        }
-      }
-      if (this.num.lime > 4) {
-        if (this.circles[i].color === "lime") {
-          this.circles[i].shadeDraw(this.context);
-          this.circles.splice(i, 1);
-          break;
-        }
-      }
-      if (this.num.aqua > 4) {
-        if (this.circles[i].color === "aqua") {
-          this.circles[i].shadeDraw(this.context);
-          this.circles.splice(i, 1);
-          break;
-        }
+      if (this.circles[i].color === color) {
+        this.circles[i].shadeDraw(this.context);
+        this.circles.splice(i, 1);
+        break;
       }
     }
   },
@@ -95,7 +36,6 @@ Field.prototype = {
     this.size.height = this.canvas.height = parent.clientHeight;
   },
   run: function () {
-    this.checkNumber();
     this.circles.forEach(circle => circle.shadeDraw(this.context));
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
@@ -104,76 +44,76 @@ Field.prototype = {
   },
   getColor: function (context) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
-    for (y = 0; y < this.size.height; y = y + 5) {
-      for (x = 0; x < this.size.width; x = x + 5) {
-        let index = (y * this.size.width + x) * 4;
-        let red = this.imageData.data[index]; // R
-        let green = this.imageData.data[index + 1]; // G
-        let blue = this.imageData.data[index + 2]; // B
-        if (red === 255 && green === 0 && blue === 0) {
-          this.team.red++;
-        }
-        else if (red === 255 && green === 0 && blue === 255) {
-          this.team.fuchsia++;
-        }
-        else if (red === 0 && green === 255 && blue === 0) {
-          this.team.lime++;
-        }
-        else if (red === 0 && green === 255 && blue === 255) {
-          this.team.aqua++;
-        }
-        else if (red === 0 && green === 0 && blue === 0) {
-          this.team.black++;
-        }
+    const colors = [];
+    for (let y = 0; y < this.size.height; y = y + 5) {
+      for (let x = 0; x < this.size.width; x = x + 5) {
+        const index = (y * this.size.width + x) * 4;
+        const r = this.imageData.data[index]; // R
+        const g = this.imageData.data[index + 1]; // G
+        const b = this.imageData.data[index + 2]; // B
+        colors.push({ r: r, g: g, b: b });
       }
     }
-    this.displayRank(context)
+    const createFilter = (r, g, b) => c => c.r === r && c.g === g && c.b === b;
+    const red = colors.filter(createFilter(255, 0, 0)).length;
+    const fuchsia = colors.filter(createFilter(255, 0, 255)).length;
+    const lime = colors.filter(createFilter(0, 255, 0)).length;
+    const aqua = colors.filter(createFilter(0, 255, 255)).length;
+    const black = colors.length - red - fuchsia - lime - aqua;
+    const team = {
+      red: red,
+      fuchsia: fuchsia,
+      lime: lime,
+      aqua: aqua,
+      black: black
+    };
+    this.displayRank(context, team);
   },
-  displayRank: function (context) {
-    let sumScore = this.team.red + this.team.fuchsia + this.team.lime + this.team.aqua + this.team.black;
-    this.score.red = Math.ceil(this.team.red / sumScore * 100);
-    this.score.fuchsia = Math.ceil(this.team.fuchsia / sumScore * 100);
-    this.score.lime = Math.ceil(this.team.lime / sumScore * 100);
-    this.score.aqua = Math.ceil(this.team.aqua / sumScore * 100);
-    let total = this.score.red + this.score.fuchsia + this.score.lime + this.score.aqua;
-    this.score.black = 100 - total;
-    this.drawChart(context, this.score.red, this.score.fuchsia, this.score.lime, this.score.aqua, this.score.black);
-    this.resetScreen(context, this.score.black);
-    this.team.red = 0;
-    this.team.fuchsia = 0;
-    this.team.lime = 0;
-    this.team.aqua = 0;
-    this.team.black = 0;
-    this.score.red = 0;
-    this.score.fuchsia = 0;
-    this.score.lime = 0;
-    this.score.aqua = 0;
-    this.score.black = 0;
+  displayRank: function (context, team) {
+    const score = {
+      red: 0,
+      fuchsia: 0,
+      lime: 0,
+      aqua: 0,
+      black: 0
+    };
+    const { red, fuchsia, lime, aqua, black } = team;
+    let sumScore = red + fuchsia + lime + aqua + black;
+    score.red = Math.ceil(red / sumScore * 100);
+    score.fuchsia = Math.ceil(fuchsia / sumScore * 100);
+    score.lime = Math.ceil(lime / sumScore * 100);
+    score.aqua = Math.ceil(aqua / sumScore * 100);
+    let total = score.red + score.fuchsia + score.lime + score.aqua;
+    score.black = 100 - total;
+    this.drawChart(context, score);
+    this.resetScreen(context, score.black);
   },
-  drawChart: function (context, red, fuchsia, lime, aqua, black) {
+  drawChart: function (context, score) {
+    const { red, fuchsia, lime, aqua, black } = score;
+    const { width, height } = this.size;
     context.beginPath();
     context.fillStyle = "white";
-    context.fillRect(this.size.width, 0, this.canvas.width - this.size.width, this.size.height);
+    context.fillRect(width, 0, this.canvas.width - width, height);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
-    context.fillText(red, this.size.width + 60, this.size.height / 100 + this.size.height / 12);
-    context.fillText(fuchsia, this.size.width + 60, this.size.height / 5 + this.size.height / 12);
-    context.fillText(lime, this.size.width + 60, this.size.height / 2.5 + this.size.height / 12);
-    context.fillText(aqua, this.size.width + 60, this.size.height / 1.7 + this.size.height / 12);
-    context.fillText("リ　　　あ", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 1 / 5);
-    context.fillText("セ　　　と", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 2 / 5);
-    context.fillText("ッ　　　少", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 3 / 5);
-    context.fillText("ト　　　し", this.size.width + 110, this.size.height / 1.27 + this.size.height / 6 * 4 / 5);
+    context.fillText(red, width + 60, height / 100 + height / 12);
+    context.fillText(fuchsia, width + 60, height / 5 + height / 12);
+    context.fillText(lime, width + 60, height / 2.5 + height / 12);
+    context.fillText(aqua, width + 60, height / 1.7 + height / 12);
+    context.fillText("リ　　　あ", width + 110, height / 1.27 + height / 6 * 1 / 5);
+    context.fillText("セ　　　と", width + 110, height / 1.27 + height / 6 * 2 / 5);
+    context.fillText("ッ　　　少", width + 110, height / 1.27 + height / 6 * 3 / 5);
+    context.fillText("ト　　　し", width + 110, height / 1.27 + height / 6 * 4 / 5);
     context.fillStyle = "red";
-    context.fillRect(this.size.width + 105, this.size.height / 100, red * this.canvas.width * 0.2 / 100, this.size.height / 6);
+    context.fillRect(width + 105, height / 100, red * this.canvas.width * 0.2 / 100, height / 6);
     context.fillStyle = "fuchsia";
-    context.fillRect(this.size.width + 105, this.size.height / 5, fuchsia * this.canvas.width * 0.2 / 100, this.size.height / 6);
+    context.fillRect(width + 105, height / 5, fuchsia * this.canvas.width * 0.2 / 100, height / 6);
     context.fillStyle = "lime";
-    context.fillRect(this.size.width + 105, this.size.height / 2.5, lime * this.canvas.width * 0.2 / 100, this.size.height / 6);
+    context.fillRect(width + 105, height / 2.5, lime * this.canvas.width * 0.2 / 100, height / 6);
     context.fillStyle = "aqua";
-    context.fillRect(this.size.width + 105, this.size.height / 1.7, aqua * this.canvas.width * 0.2 / 100, this.size.height / 6);
+    context.fillRect(width + 105, height / 1.7, aqua * this.canvas.width * 0.2 / 100, height / 6);
     context.fillStyle = "black";
-    context.fillRect(this.size.width + 105, this.size.height / 1.27, (black - 20) * this.canvas.width * 0.2 / 100, this.size.height / 6);
+    context.fillRect(width + 105, height / 1.27, (black - 20) * this.canvas.width * 0.2 / 100, height / 6);
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
@@ -186,6 +126,10 @@ Field.prototype = {
   fillWhite: function (context) {
     context.fillStyle = "white";
     context.fillRect(this.size.width, 0, 55, this.canvas.height);
+  },
+  addCircle: function (circle) {
+    this.circles.push(circle);
+    this.checkNumber(circle.color);
   }
 };
 const Circle = function (data, field) {
@@ -344,7 +288,7 @@ window.onload = function () {
   let canvas = document.getElementById('game');
   const idMatches = location.search.match(/id=(.*?)(&|$)/);
   const field = new Field(canvas, idMatches);
-  const receive = d => field.circles.push(new Circle(d, field));
+  const receive = d => field.addCircle(new Circle(d, field));
   if (idMatches) {
     const id = decodeURIComponent(idMatches[1]);
     socket.on('receive' + id, receive);
