@@ -89,7 +89,7 @@ window.onload = () => {
   const generateEventCallback = hitEvent => () => {
     prop.hitEvent.push(hitEvent);
     addEvent();
-  };
+  }
   const generateEventRollCallback = deg => generateEventCallback({roll: deg});
   setEvent('goEvent', generateEventCallback({go: 15}));
   setEvent('left15Event', generateEventRollCallback(-15));
