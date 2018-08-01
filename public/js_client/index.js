@@ -1,7 +1,7 @@
 let prop = {
   id: "",
   command: [],
-  hitEvent: [{roll: 90}],
+  hitEvent: [],
   color: ""
 };
 let tmpCommand = prop.command;
@@ -71,6 +71,7 @@ window.onload = () => {
   console.log(url + '?color=aqua');
   console.log(url + '?color=fuchsia');
   console.log(url + '?color=lime');
+  document.onclick = () => {if(!url.match("color"))alert("色を指定してください");}
   let name = document.getElementById('userID');
   prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
   const setEvent = (id, callback) => document.getElementById(id).addEventListener('click', callback);
@@ -94,7 +95,7 @@ window.onload = () => {
   const generateEventCallback = hitEvent => () => {
     prop.hitEvent.push(hitEvent);
     addEvent();
-  }
+  };
   const generateEventRollCallback = deg => generateEventCallback({roll: deg});
   setEvent('goEvent', generateEventCallback({go: 15}));
   setEvent('left15Event', generateEventRollCallback(-15));
@@ -112,7 +113,7 @@ window.onload = () => {
     name.value = '';
     prop.id = "";
     prop.command.length = 0;
-    prop.hitEvent = [{roll: 90}];
+    prop.hitEvent = [];
     addCommand();
     addEvent();
   });
