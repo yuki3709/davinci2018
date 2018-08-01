@@ -151,23 +151,23 @@ const Circle = function (data, field) {
   this.command.go = 10;
   this.id = props.id;
   let radius = 10;
+  this.width = field.size.width;
+  this.height = field.size.height;
   this.radius = (radius => {
     switch (this.id) {
       case "・ω・":
-        return 50;
+        return this.width / 25;
       case "˘ω˘":
-        return 30;
+        return this.width / 50;
       case "><":
-        return 20;
+        return this.width / 80;
       default:
         return radius;
     }
   })(this.radius);
-  this.width = field.size.width;
-  this.height = field.size.height;
   this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
-  this.speed = 300 / this.radius;
+  this.speed = 60 / this.radius;
   this.direction = Math.floor(Math.random() * 360);
   this.flag = 0;
   this.effectFlag = 0;
@@ -280,8 +280,8 @@ Circle.prototype = {
         for (i = 0; i < circles.length; i++) {
           if (circles[i] !== this) {
             if ((circles[i].radius + this.radius) ** 2
-              >= (circles[i].locX + ix * this.width - futureLocX + ix * this.width) ** 2
-              + (circles[i].locY + iy * this.height - futureLocY + iy * this.height) ** 2) {
+              >= (circles[i].locX + ix * this.width - futureLocX) ** 2
+              + (circles[i].locY + iy * this.height - futureLocY) ** 2) {
               this.hitCommand = this.hitEvent();
               this.flag++;
               this.effectFlag++;
