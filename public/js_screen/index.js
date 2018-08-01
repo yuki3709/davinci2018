@@ -22,17 +22,16 @@ Field.prototype = {
   imageData: [],
   circles: [],
   constructor: Field,
-
   checkNumber: function (color) {
     const count = this.circles.filter(circle => circle.color === color).length;
     if (count <= 4) return;
-    for (i = 0; i < this.circles.length; i++) {
-      if (this.circles[i].color === color) {
-        this.circles[i].shadeDraw(this.context);
+    this.circles.some((circle, i) => {
+      if (circle.color === color) {
+        circle.shadeDraw(this.context);
         this.circles.splice(i, 1);
-        break;
+        return true;
       }
-    }
+    });
   },
   discriminateCommand: function () {
     this.circles.forEach(circle => circle.discriminateCommand(this.circles));
@@ -159,24 +158,24 @@ const Circle = function (data, field) {
   };
   this.command.go = 10;
   this.id = props.id;
-  let radius = 10;
+  let speed = 1;
   this.width = field.size.width;
   this.height = field.size.height;
-  this.radius = (radius => {
+  this.speed = (speed => {
     switch (this.id) {
       case "・ω・":
-        return this.width / 25;
+        return 1;
       case "˘ω˘":
-        return this.width / 50;
+        return 3;
       case "><":
-        return this.width / 80;
+        return 5;
       default:
-        return radius;
+        return speed;
     }
-  })(this.radius);
+  })(this.speed);
   this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
-  this.speed = 60 / this.radius;
+  this.radius = this.width / this.speed / 20;
   this.direction = Math.floor(Math.random() * 360);
   this.flag = 0;
   this.effectFlag = 0;
