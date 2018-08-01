@@ -1,7 +1,7 @@
 let prop = {
   id: "",
   command: [],
-  hitEvent: [{roll: 90}],
+  hitEvent: [],
   color: ""
 };
 let tmpCommand = prop.command;
@@ -113,7 +113,7 @@ window.onload = () => {
     name.value = '';
     prop.id = "";
     prop.command.length = 0;
-    prop.hitEvent = [{roll: 90}];
+    prop.hitEvent = [];
     addCommand();
     addEvent();
   });
