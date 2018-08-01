@@ -8,6 +8,7 @@ Field = function (e, c, d) {
   this.context2.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
   if (!d) setInterval(() => this.getColor(this.context, this.context2), 1000);
+  if (!!d) setInterval(() => this.resetScreen(this.context, this.context2), 1000);
 };
 Field.prototype = {
   canvas: null,
@@ -21,6 +22,7 @@ Field.prototype = {
   imageData: [],
   circles: [],
   constructor: Field,
+
   checkNumber: function (color) {
     const count = this.circles.filter(circle => circle.color === color).length;
     if (count <= 4) return;
@@ -35,9 +37,10 @@ Field.prototype = {
   discriminateCommand: function () {
     this.circles.forEach(circle => circle.discriminateCommand(this.circles));
   },
-  resize: function (parent) {
+  resize: function (parent, d) {
     this.canvas.width = Math.floor(parent.clientWidth * 0.7);
     this.canvas2.width = Math.floor(parent.clientWidth * 0.3);
+    if (!!d) this.canvas.width = parent.clientWidth;
     this.size.width = this.canvas.width;
     this.size.height = this.canvas.height = this.canvas2.height = parent.clientHeight;
   },
@@ -129,6 +132,12 @@ Field.prototype = {
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
+    document.onkeydown = (e) => {
+      if (e.key === "r") {
+        context.fillStyle = "black";
+        context.fillRect(0, 0, this.size.width, this.canvas.height);
+      }
+    };
   },
   fillWhite: function (context) {
     context.fillStyle = "white";
@@ -320,7 +329,7 @@ window.onload = function () {
     socket.on('receiveMessage', receive);
   }
   let outputArea = document.getElementById('output-area');
-  field.resize(outputArea);
+  field.resize(outputArea, idMatches);
   field.context.fillStyle = "white";
   field.context.fillRect(field.size.width, 0, field.canvas.width * 0.3, field.size.height);
 };
