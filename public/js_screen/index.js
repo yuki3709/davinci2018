@@ -208,10 +208,10 @@ Circle.prototype = {
         let textLocX = this.locX + ix * this.width - this.radius * 3 / 5 * Math.cos(this.direction * Math.PI / 180);
         let textLocY = this.locY + iy * this.height - this.radius * 3 / 5 * Math.sin(this.direction * Math.PI / 180);
         context.fillStyle = 'black';
-        context.font = "bold 16px Arial";
-        context.fillText(this.id, textLocX - 12 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
+        context.font = "bold 10px Arial";
+        context.fillText(this.id, textLocX - 6 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
         context.fillStyle = 'white';
-        context.fillText(this.id, textLocX - 13 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 8 + this.radius * Math.sin(this.direction * Math.PI / 180));
+        context.fillText(this.id, textLocX - 7 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 7 + this.radius * Math.sin(this.direction * Math.PI / 180));
       }
     }
   },
