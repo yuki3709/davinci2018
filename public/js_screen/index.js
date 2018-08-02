@@ -206,13 +206,13 @@ Circle.prototype = {
         context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
         context.fill();
         let direction = this.direction * Math.PI / 180;
-        let textLocX = this.locX + ix * this.width - this.radius * 3 / 5 * Math.cos(direction);
-        let textLocY = this.locY + iy * this.height - this.radius * 3 / 5 * Math.sin(direction);
+        let textLocX = this.locX + ix * this.width - this.radius * 1 / 10;
+        let textLocY = this.locY + iy * this.height - this.radius * 1 / 10;
         context.fillStyle = 'black';
         context.font = "bold 10px Arial";
-        context.fillText(this.id, textLocX - 6 + this.radius * Math.cos(direction), textLocY + 6 + this.radius * Math.sin(direction));
+        context.fillText(this.id, textLocX + this.radius / 2 * (Math.cos(direction) - 1 / 2), textLocY + this.radius / 2 * (Math.sin(direction) + 1 / 2));
         context.fillStyle = 'white';
-        context.fillText(this.id, textLocX - 7 + this.radius * Math.cos(direction), textLocY + 7 + this.radius * Math.sin(direction));
+        context.fillText(this.id, textLocX + 1 + this.radius / 2 * (Math.cos(direction) - 1 / 2), textLocY + 1 + this.radius / 2 * (Math.sin(direction) + 1 / 2));
       }
     }
   },
