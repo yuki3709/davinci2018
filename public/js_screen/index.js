@@ -8,6 +8,7 @@ Field = function (e, c, d) {
   this.context2.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
   if (!d) setInterval(() => this.getColor(this.context, this.context2), 1000);
+  if (!!d) setInterval(() => this.resetScreen(this.context, this.context2), 1000);
 };
 Field.prototype = {
   canvas: null,
@@ -24,20 +25,21 @@ Field.prototype = {
   checkNumber: function (color) {
     const count = this.circles.filter(circle => circle.color === color).length;
     if (count <= 4) return;
-    for (i = 0; i < this.circles.length; i++) {
-      if (this.circles[i].color === color) {
-        this.circles[i].shadeDraw(this.context);
+    this.circles.some((circle, i) => {
+      if (circle.color === color) {
+        circle.shadeDraw(this.context);
         this.circles.splice(i, 1);
-        break;
+        return true;
       }
-    }
+    });
   },
   discriminateCommand: function () {
     this.circles.forEach(circle => circle.discriminateCommand(this.circles));
   },
-  resize: function (parent) {
+  resize: function (parent, d) {
     this.canvas.width = Math.floor(parent.clientWidth * 0.7);
     this.canvas2.width = Math.floor(parent.clientWidth * 0.3);
+    if (!!d) this.canvas.width = parent.clientWidth;
     this.size.width = this.canvas.width;
     this.size.height = this.canvas.height = this.canvas2.height = parent.clientHeight;
   },
@@ -129,6 +131,12 @@ Field.prototype = {
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
+    document.onkeydown = (e) => {
+      if (e.key === "r") {
+        context.fillStyle = "black";
+        context.fillRect(0, 0, this.size.width, this.canvas.height);
+      }
+    };
   },
   fillWhite: function (context) {
     context.fillStyle = "white";
@@ -150,24 +158,24 @@ const Circle = function (data, field) {
   };
   this.command.go = 10;
   this.id = props.id;
-  let radius = 10;
-  this.radius = (radius => {
-    switch (this.id) {
-      case "・ω・":
-        return 50;
-      case "˘ω˘":
-        return 30;
-      case "><":
-        return 20;
-      default:
-        return radius;
-    }
-  })(this.radius);
+  let speed = 1;
   this.width = field.size.width;
   this.height = field.size.height;
+  this.speed = (speed => {
+    switch (this.id) {
+      case "・ω・":
+        return 1;
+      case "˘ω˘":
+        return 3;
+      case "><":
+        return 4;
+      default:
+        return speed;
+    }
+  })(this.speed);
   this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
-  this.speed = 300 / this.radius;
+  this.radius = this.width / this.speed / 20;
   this.direction = Math.floor(Math.random() * 360);
   this.flag = 0;
   this.effectFlag = 0;
@@ -197,13 +205,14 @@ Circle.prototype = {
         context.fillStyle = this.color;
         context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
         context.fill();
-        let textLocX = this.locX + ix * this.width - this.radius * 3 / 5 * Math.cos(this.direction * Math.PI / 180);
-        let textLocY = this.locY + iy * this.height - this.radius * 3 / 5 * Math.sin(this.direction * Math.PI / 180);
+        let direction = this.direction * Math.PI / 180;
+        let textLocX = this.locX + ix * this.width - this.radius * 1 / 5 - 20 / this.radius;
+        let textLocY = this.locY + iy * this.height - this.radius * 1 / 10;
         context.fillStyle = 'black';
-        context.font = "bold 16px Arial";
-        context.fillText(this.id, textLocX - 12 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 6 + this.radius * Math.sin(this.direction * Math.PI / 180));
+        context.font = "bold 10px Arial";
+        context.fillText(this.id, textLocX + this.radius / 4 * (Math.cos(direction) - 1 / 2), textLocY + this.radius / 2 * (Math.sin(direction) + 1 / 2));
         context.fillStyle = 'white';
-        context.fillText(this.id, textLocX - 13 + this.radius * Math.cos(this.direction * Math.PI / 180), textLocY + 8 + this.radius * Math.sin(this.direction * Math.PI / 180));
+        context.fillText(this.id, textLocX + 1 + this.radius / 4 * (Math.cos(direction) - 1 / 2), textLocY + 1 + this.radius / 2 * (Math.sin(direction) + 1 / 2));
       }
     }
   },
@@ -280,8 +289,8 @@ Circle.prototype = {
         for (i = 0; i < circles.length; i++) {
           if (circles[i] !== this) {
             if ((circles[i].radius + this.radius) ** 2
-              >= (circles[i].locX + ix * this.width - futureLocX + ix * this.width) ** 2
-              + (circles[i].locY + iy * this.height - futureLocY + iy * this.height) ** 2) {
+              >= (circles[i].locX + ix * this.width - futureLocX) ** 2
+              + (circles[i].locY + iy * this.height - futureLocY) ** 2) {
               this.hitCommand = this.hitEvent();
               this.flag++;
               this.effectFlag++;
@@ -320,7 +329,7 @@ window.onload = function () {
     socket.on('receiveMessage', receive);
   }
   let outputArea = document.getElementById('output-area');
-  field.resize(outputArea);
+  field.resize(outputArea, idMatches);
   field.context.fillStyle = "white";
   field.context.fillRect(field.size.width, 0, field.canvas.width * 0.3, field.size.height);
 };
