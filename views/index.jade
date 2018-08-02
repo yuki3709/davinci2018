@@ -9,6 +9,7 @@ html
         script.
           var socket = io.connect();
     body
+      .Putin
         form(class="cp_ipselect cp_sl01")
           select(id="userID")
             option(value="" hidden) せんたくしてください
@@ -48,4 +49,5 @@ html
             button(class="subsend" type="button" id="subsend") おためし
             button(class="send" type="button" id="send")  アップロード
             button(class="reset" type="button" id="reset") リセット
-        script(type='text/javascript' src='/js_client/index.js')
+      iframe(class="iframe" id="iframe")
+      script(type='text/javascript' src='/js_client/index.js')

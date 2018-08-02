@@ -67,11 +67,13 @@ function addEvent() {
 window.onload = () => {
   let url = location.href;
   console.log(url + 'screen');
-  console.log(url + '?color=red');
-  console.log(url + '?color=aqua');
-  console.log(url + '?color=fuchsia');
-  console.log(url + '?color=lime');
+  console.log(url + '?color=red&?id=1');
+  console.log(url + '?color=aqua&?id=2');
+  console.log(url + '?color=fuchsia&?id=3');
+  console.log(url + '?color=lime&?id=4');
   document.onclick = () => {if(!url.match("color"))alert("色を指定してください");}
+  let canvas = document.getElementById('iframe');
+  canvas.src = url.replace(/\?color=(.+)\&/g, "screen/")
   let name = document.getElementById('userID');
   prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
   const setEvent = (id, callback) => document.getElementById(id).addEventListener('click', callback);
@@ -118,7 +120,7 @@ window.onload = () => {
     addEvent();
   });
   const id = (() => {
-    const idMatches = location.search.match(/id=(.*?)(&|$)/);
+    const idMatches = location.search.match(/id=(.+)(&|$)/);
     if (idMatches) {
       return decodeURIComponent(idMatches[1]);
     }
