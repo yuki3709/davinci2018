@@ -39,7 +39,10 @@ Field.prototype = {
   resize: function (parent, d) {
     this.canvas.width = Math.floor(parent.clientWidth * 0.7);
     this.canvas2.width = Math.floor(parent.clientWidth * 0.3);
-    if (!!d) this.canvas.width = parent.clientWidth;
+    if (!!d) {
+      this.canvas.width = parent.clientWidth;
+      this.canvas2.width = 0;
+    }
     this.size.width = this.canvas.width;
     this.size.height = this.canvas.height = this.canvas2.height = parent.clientHeight;
   },
@@ -48,7 +51,6 @@ Field.prototype = {
     this.discriminateCommand();
     this.circles.forEach(circle => circle.draw(this.context));
     this.circles.forEach(circle => circle.effect(this.context));
-    // this.fillWhite(this.context);
   },
   getColor: function (context, context2) {
     this.imageData = context.getImageData(0, 0, this.size.width, this.size.height);
@@ -126,8 +128,6 @@ Field.prototype = {
   },
   resetScreen: function (context, black) {
     if (black <= 20) {
-      // context.fillStyle = "white";
-      // context.fillRect(0, 0, this.canvas.width, this.canvas.height);
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
@@ -166,7 +166,7 @@ const Circle = function (data, field) {
       case "・ω・":
         return 1;
       case "˘ω˘":
-        return 3;
+        return 2;
       case "><":
         return 4;
       default:
@@ -175,7 +175,7 @@ const Circle = function (data, field) {
   })(this.speed);
   this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
-  this.radius = this.width / this.speed / 20;
+  this.radius = this.width / this.speed / 15;
   this.direction = Math.floor(Math.random() * 360);
   this.flag = 0;
   this.effectFlag = 0;
