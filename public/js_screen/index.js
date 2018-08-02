@@ -175,7 +175,7 @@ const Circle = function (data, field) {
   })(this.speed);
   this.locX = Math.floor(Math.random() * (this.width - 100) + 50);
   this.locY = Math.floor(Math.random() * (this.height - 100) + 50);
-  this.radius = this.width / this.speed / 15;
+  this.radius = this.width / (this.speed + 1) / 15;
   this.direction = Math.floor(Math.random() * 360);
   this.flag = 0;
   this.effectFlag = 0;
@@ -206,13 +206,13 @@ Circle.prototype = {
         context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
         context.fill();
         let direction = this.direction * Math.PI / 180;
-        let textLocX = this.locX + ix * this.width - this.radius * 1 / 5 - 20 / this.radius;
-        let textLocY = this.locY + iy * this.height - this.radius * 1 / 10;
+        let textLocX = this.locX + ix * this.width - this.radius * 1 / 2 - 20 / this.radius;
+        let textLocY = this.locY + iy * this.height - this.radius * 1 / 50 + 20 / this.radius;
         context.fillStyle = 'black';
-        context.font = "bold 10px Arial";
-        context.fillText(this.id, textLocX + this.radius / 4 * (Math.cos(direction) - 1 / 2), textLocY + this.radius / 2 * (Math.sin(direction) + 1 / 2));
+        context.font = "bold 8px Arial";
+        context.fillText(this.id, textLocX + this.radius / 6 * (Math.cos(direction) - 1 / 3), textLocY + this.radius / 6 * (Math.sin(direction) + 1 / 3));
         context.fillStyle = 'white';
-        context.fillText(this.id, textLocX + 1 + this.radius / 4 * (Math.cos(direction) - 1 / 2), textLocY + 1 + this.radius / 2 * (Math.sin(direction) + 1 / 2));
+        context.fillText(this.id, textLocX + 1 + this.radius / 6 * (Math.cos(direction) - 1 / 3), textLocY + 1 + this.radius / 6 * (Math.sin(direction) + 1 / 3));
       }
     }
   },
