@@ -1,4 +1,5 @@
 body {
+  display: flex;
   padding: 30px;
 }
 .cp_ipselect {
@@ -30,6 +31,9 @@ body {
 .cp_ipselect.cp_sl01 select {
   padding: 8px 38px 8px 8px;
   color: #666666;
+}
+.Putin{
+  flex: column;
 }
 .Field{
   display: flex;
@@ -173,5 +177,10 @@ button.reset:hover {
 }
 .scroll{
   width: 290px;
+  height: 300px;
   overflow-y: scroll;
+}
+iframe.iframe{
+  height: 500px;
+  width: 500px;
 }
