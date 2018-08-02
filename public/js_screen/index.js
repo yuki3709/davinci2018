@@ -206,7 +206,7 @@ Circle.prototype = {
         context.arc(this.locX + ix * this.width, this.locY + iy * this.height, this.radius, 0, Math.PI * 2.0, true);
         context.fill();
         let direction = this.direction * Math.PI / 180;
-        let textLocX = this.locX + ix * this.width - this.radius * 1 / 4;
+        let textLocX = this.locX + ix * this.width - this.radius * 1 / 5 - 20 / this.radius;
         let textLocY = this.locY + iy * this.height - this.radius * 1 / 10;
         context.fillStyle = 'black';
         context.font = "bold 10px Arial";
