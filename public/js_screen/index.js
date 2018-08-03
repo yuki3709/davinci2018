@@ -126,6 +126,8 @@ Field.prototype = {
     context.fillRect(105, height / 1.7, aqua * width * 0.7 / 100, height / 6);
     context.fillStyle = "black";
     context.fillRect(105, height / 1.27, (black - 20) * width * 0.7 / 100, height / 6);
+    context.fillStyle = "white";
+    context.fillRect(105, height / 1.27, (- 20) * width * 0.7 / 100, height / 6);
   },
   resetScreen: function (context, black, d) {
     if (black <= 20) {
