@@ -144,6 +144,8 @@ Field.prototype = {
       if (e.key === "r") {
         context.fillStyle = "red";
         context.fillRect(0, 0, this.size.width, this.canvas.height);
+        context.fillStyle = "fuchsia";
+        context.fillRect(0, 0, this.size.width / 2, this.canvas.height);
       }
     };
   },
@@ -182,7 +184,7 @@ Field.prototype = {
     if (black < 20) {
       let div = document.getElementById("winner");
       div.style.padding = "30px";
-      div.textContent = "勝利！！ " + this.winner(score);
+      div.textContent = "勝利!! " + this.winner(score);
     } else {
       let div = document.getElementById("winner");
       div.style.padding = "0px";
