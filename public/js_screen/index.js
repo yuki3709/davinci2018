@@ -106,16 +106,6 @@ Field.prototype = {
     context.beginPath();
     context.fillStyle = "white";
     context.fillRect(0, 0, this.canvas2.width, height);
-    context.fillStyle = "black";
-    context.font = "italic bold 20px sans-serif";
-    context.fillText(red, 60, height / 100 + height / 12);
-    context.fillText(fuchsia, 60, height / 5 + height / 12);
-    context.fillText(lime, 60, height / 2.5 + height / 12);
-    context.fillText(aqua, 60, height / 1.7 + height / 12);
-    context.fillText("リ　　　あ", 110, height / 1.27 + height / 6 * 1 / 5);
-    context.fillText("セ　　　と", 110, height / 1.27 + height / 6 * 2 / 5);
-    context.fillText("ッ　　　少", 110, height / 1.27 + height / 6 * 3 / 5);
-    context.fillText("ト　　　し", 110, height / 1.27 + height / 6 * 4 / 5);
     context.fillStyle = "red";
     context.fillRect(105, height / 100, red * width * 0.7 / 100, height / 6);
     context.fillStyle = "fuchsia";
@@ -127,7 +117,17 @@ Field.prototype = {
     context.fillStyle = "black";
     context.fillRect(105, height / 1.27, (black - 20) * width * 0.7 / 100, height / 6);
     context.fillStyle = "white";
-    context.fillRect(105, height / 1.27, (- 20) * width * 0.7 / 100, height / 6);
+    context.fillRect(105, height / 1.27 - 1, (- 22) * width * 0.7 / 100, height / 6 + 2);
+    context.fillStyle = "black";
+    context.font = "italic bold 20px sans-serif";
+    context.fillText(red, 60, height / 100 + height / 12);
+    context.fillText(fuchsia, 60, height / 5 + height / 12);
+    context.fillText(lime, 60, height / 2.5 + height / 12);
+    context.fillText(aqua, 60, height / 1.7 + height / 12);
+    context.fillText("リ　　　あ", 110, height / 1.27 + height / 6 * 1 / 5);
+    context.fillText("セ　　　と", 110, height / 1.27 + height / 6 * 2 / 5);
+    context.fillText("ッ　　　少", 110, height / 1.27 + height / 6 * 3 / 5);
+    context.fillText("ト　　　し", 110, height / 1.27 + height / 6 * 4 / 5);
   },
   resetScreen: function (context, black, d) {
     if (black <= 20) {
@@ -156,6 +156,16 @@ Field.prototype = {
     this.checkNumber(circle.color);
   },
   winner: function (score) {
+    const names = {
+      red: "赤",
+      fuchsia: "ピンク"
+    }
+    const rank = Object.keys(score).sort((a, b) => score[a] - score[b]);
+    if (score[rank[0]] === score[rank[1]]) {
+      return names[score[rank[0]]] + " " + names[score[rank[1]]];
+    }
+    return names[score[rank[0]]];
+
     const { red, fuchsia, lime, aqua, black } = score;
     if (red > fuchsia && red > lime && red > aqua) return "赤";
     if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
