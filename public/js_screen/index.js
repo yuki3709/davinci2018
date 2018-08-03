@@ -183,7 +183,7 @@ Field.prototype = {
     const { red, fuchsia, lime, aqua, black } = score;
     if (black < 20) {
       let div = document.getElementById("winner");
-      div.style.padding = "30px";
+      div.style.padding = "35px";
       div.textContent = "勝利!! " + this.winner(score);
     } else {
       let div = document.getElementById("winner");
