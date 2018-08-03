@@ -16,10 +16,16 @@ body{
     position: absolute; 
         left: 20%; 
         top: 40%;
-    color: khaki;
-    background: black;
-    background-size: 50% 20%;
+    color: white;
+    background: aquamarine;
+    background-size: auto;
+    font-family: "HGS明朝E";
+    font-style: oblique;
     font-size: 10em;
+    text-shadow: 2px 2px lightseagreen,
+             -2px 2px 0 lightseagreen,
+             2px -2px 0 lightseagreen,
+             -2px -2px 0 lightseagreen;
 }
 #input-area{
     flex: 1 1 30%;

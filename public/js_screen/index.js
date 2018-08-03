@@ -156,16 +156,15 @@ Field.prototype = {
     this.checkNumber(circle.color);
   },
   winner: function (score) {
-    const names = {
-      red: "赤",
-      fuchsia: "ピンク"
-    }
-    const rank = Object.keys(score).sort((a, b) => score[a] - score[b]);
-    if (score[rank[0]] === score[rank[1]]) {
-      return names[score[rank[0]]] + " " + names[score[rank[1]]];
-    }
-    return names[score[rank[0]]];
-
+    // const names = {
+    //   red: "赤",
+    //   fuchsia: "ピンク"
+    // }
+    // const rank = Object.keys(score).sort((a, b) => score[b] - score[a]);
+    // if (score[rank[0]] === score[rank[1]]) {
+    //   return names[rank[0]] + " " + names[rank[1]];
+    // }
+    // return names[rank[0]];
     const { red, fuchsia, lime, aqua, black } = score;
     if (red > fuchsia && red > lime && red > aqua) return "赤";
     if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
@@ -182,9 +181,11 @@ Field.prototype = {
     const { red, fuchsia, lime, aqua, black } = score;
     if (black < 20) {
       let div = document.getElementById("winner");
+      div.style.padding = "10px";
       div.textContent = "勝利 " + this.winner(score);
     } else {
       let div = document.getElementById("winner");
+      div.style.padding = "0px";
       div.textContent = "";
     }
   }
