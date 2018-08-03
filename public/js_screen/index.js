@@ -97,6 +97,7 @@ Field.prototype = {
     score.black = 100 - total;
     this.drawChart(context2, score);
     this.resetScreen(context, score.black);
+    this.winnerTeam(score);
   },
   drawChart: function (context, score) {
     const { red, fuchsia, lime, aqua, black } = score;
@@ -145,6 +146,19 @@ Field.prototype = {
   addCircle: function (circle) {
     this.circles.push(circle);
     this.checkNumber(circle.color);
+  },
+  winner: function (score) {
+    const { red, fuchsia, lime, aqua, black } = score;
+    if (black < 60) {
+      if (red > fuchsia && red > lime && red > aqua) return "赤";
+      if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
+      if (lime > red && lime > fuchsia && lime > aqua) return "緑";
+      if (aqua > red && aqua > fuchsia && aqua > lime) return "青";
+    }
+  },
+  winnerTeam: function (score) {
+    let div = document.getElementById("win");
+    div.textContent = "勝利" + this.winner(score);
   }
 };
 const Circle = function (data, field) {

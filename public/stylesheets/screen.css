@@ -12,7 +12,14 @@ body{
 
 #output-area{
     flex: 1 1 70%; }
-    
+.winner{
+    position: absolute; 
+        left: 40%; 
+        top: 40%;
+    color: khaki;
+    background: springgreen;
+    background-size: 100px 100px;
+}
 #input-area{
     flex: 1 1 30%;
     padding: 1rem;
