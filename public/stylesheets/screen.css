@@ -18,7 +18,7 @@ body{
         top: 40%;
     color: khaki;
     background: springgreen;
-    background-size: 100px 100px;
+    background-size: 50% 20%;
 }
 #input-area{
     flex: 1 1 30%;

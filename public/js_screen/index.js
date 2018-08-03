@@ -8,7 +8,7 @@ Field = function (e, c, d) {
   this.context2.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
   if (!d) setInterval(() => this.getColor(this.context, this.context2), 1000);
-  if (!!d) setInterval(() => this.resetScreen(this.context, this.context2), 1000);
+  if (!!d) setInterval(() => this.resetScreen(this.context, this.context2, d), 1000);
 };
 Field.prototype = {
   canvas: null,
@@ -127,14 +127,20 @@ Field.prototype = {
     context.fillStyle = "black";
     context.fillRect(105, height / 1.27, (black - 20) * width * 0.7 / 100, height / 6);
   },
-  resetScreen: function (context, black) {
+  resetScreen: function (context, black, d) {
     if (black <= 20) {
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
     document.onkeydown = (e) => {
-      if (e.key === "r") {
+      if (e.key === "r" && !!d) {
         context.fillStyle = "black";
+        context.fillRect(0, 0, this.size.width, this.canvas.height);
+      }
+    };
+    document.onkeydown = (e) => {
+      if (e.key === "r") {
+        context.fillStyle = "red";
         context.fillRect(0, 0, this.size.width, this.canvas.height);
       }
     };
@@ -149,7 +155,7 @@ Field.prototype = {
   },
   winner: function (score) {
     const { red, fuchsia, lime, aqua, black } = score;
-    if (black < 60) {
+    if (black < 20) {
       if (red > fuchsia && red > lime && red > aqua) return "赤";
       if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
       if (lime > red && lime > fuchsia && lime > aqua) return "緑";
