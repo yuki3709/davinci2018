@@ -159,12 +159,21 @@ Field.prototype = {
     if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
     if (lime > red && lime > fuchsia && lime > aqua) return "緑";
     if (aqua > red && aqua > fuchsia && aqua > lime) return "青";
+    if (red === fuchsia && red > lime && red > aqua) return "赤 ピンク";
+    if (red > fuchsia && red === lime && red > aqua) return "赤 緑";
+    if (red > fuchsia && red > lime && red === aqua) return "赤 青";
+    if (fuchsia > red && fuchsia === lime && fuchsia > aqua) return "ピンク 緑";
+    if (fuchsia > red && fuchsia > lime && fuchsia === aqua) return "ピンク 青";
+    if (lime > red && lime > fuchsia && lime === aqua) return "緑 青";
   },
   winnerTeam: function (score) {
     const { red, fuchsia, lime, aqua, black } = score;
     if (black < 20) {
       let div = document.getElementById("winner");
       div.textContent = "勝利 " + this.winner(score);
+    } else {
+      let div = document.getElementById("winner");
+      div.textContent = "";
     }
   }
 };
