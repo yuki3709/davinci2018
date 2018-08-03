@@ -8,7 +8,7 @@ Field = function (e, c, d) {
   this.context2.globalCompositeOperation = "source-over";
   setInterval(() => this.run(), 33);
   if (!d) setInterval(() => this.getColor(this.context, this.context2), 1000);
-  if (!!d) setInterval(() => this.resetScreen(this.context, this.context2), 1000);
+  if (!!d) setInterval(() => this.resetScreen(this.context, this.context2, d), 1000);
 };
 Field.prototype = {
   canvas: null,
@@ -97,6 +97,7 @@ Field.prototype = {
     score.black = 100 - total;
     this.drawChart(context2, score);
     this.resetScreen(context, score.black);
+    this.winnerTeam(score);
   },
   drawChart: function (context, score) {
     const { red, fuchsia, lime, aqua, black } = score;
@@ -105,16 +106,6 @@ Field.prototype = {
     context.beginPath();
     context.fillStyle = "white";
     context.fillRect(0, 0, this.canvas2.width, height);
-    context.fillStyle = "black";
-    context.font = "italic bold 20px sans-serif";
-    context.fillText(red, 60, height / 100 + height / 12);
-    context.fillText(fuchsia, 60, height / 5 + height / 12);
-    context.fillText(lime, 60, height / 2.5 + height / 12);
-    context.fillText(aqua, 60, height / 1.7 + height / 12);
-    context.fillText("リ　　　あ", 110, height / 1.27 + height / 6 * 1 / 5);
-    context.fillText("セ　　　と", 110, height / 1.27 + height / 6 * 2 / 5);
-    context.fillText("ッ　　　少", 110, height / 1.27 + height / 6 * 3 / 5);
-    context.fillText("ト　　　し", 110, height / 1.27 + height / 6 * 4 / 5);
     context.fillStyle = "red";
     context.fillRect(105, height / 100, red * width * 0.7 / 100, height / 6);
     context.fillStyle = "fuchsia";
@@ -125,16 +116,36 @@ Field.prototype = {
     context.fillRect(105, height / 1.7, aqua * width * 0.7 / 100, height / 6);
     context.fillStyle = "black";
     context.fillRect(105, height / 1.27, (black - 20) * width * 0.7 / 100, height / 6);
+    context.fillStyle = "white";
+    context.fillRect(105, height / 1.27 - 1, (- 22) * width * 0.7 / 100, height / 6 + 2);
+    context.fillStyle = "black";
+    context.font = "italic bold 20px sans-serif";
+    context.fillText(red, 60, height / 100 + height / 12);
+    context.fillText(fuchsia, 60, height / 5 + height / 12);
+    context.fillText(lime, 60, height / 2.5 + height / 12);
+    context.fillText(aqua, 60, height / 1.7 + height / 12);
+    context.fillText("リ　　　あ", 110, height / 1.27 + height / 6 * 1 / 5);
+    context.fillText("セ　　　と", 110, height / 1.27 + height / 6 * 2 / 5);
+    context.fillText("ッ　　　少", 110, height / 1.27 + height / 6 * 3 / 5);
+    context.fillText("ト　　　し", 110, height / 1.27 + height / 6 * 4 / 5);
   },
-  resetScreen: function (context, black) {
+  resetScreen: function (context, black, d) {
     if (black <= 20) {
       context.fillStyle = "black";
       context.fillRect(0, 0, this.size.width, this.canvas.height);
     }
     document.onkeydown = (e) => {
-      if (e.key === "r") {
+      if (e.key === "r" && !!d) {
         context.fillStyle = "black";
         context.fillRect(0, 0, this.size.width, this.canvas.height);
+      }
+    };
+    document.onkeydown = (e) => {
+      if (e.key === "r") {
+        context.fillStyle = "red";
+        context.fillRect(0, 0, this.size.width, this.canvas.height);
+        context.fillStyle = "fuchsia";
+        context.fillRect(0, 0, this.size.width / 2, this.canvas.height);
       }
     };
   },
@@ -145,6 +156,40 @@ Field.prototype = {
   addCircle: function (circle) {
     this.circles.push(circle);
     this.checkNumber(circle.color);
+  },
+  winner: function (score) {
+    // const names = {
+    //   red: "赤",
+    //   fuchsia: "ピンク"
+    // }
+    // const rank = Object.keys(score).sort((a, b) => score[b] - score[a]);
+    // if (score[rank[0]] === score[rank[1]]) {
+    //   return names[rank[0]] + " " + names[rank[1]];
+    // }
+    // return names[rank[0]];
+    const { red, fuchsia, lime, aqua, black } = score;
+    if (red > fuchsia && red > lime && red > aqua) return "赤";
+    if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
+    if (lime > red && lime > fuchsia && lime > aqua) return "緑";
+    if (aqua > red && aqua > fuchsia && aqua > lime) return "青";
+    if (red === fuchsia && red > lime && red > aqua) return "赤 ピンク";
+    if (red > fuchsia && red === lime && red > aqua) return "赤 緑";
+    if (red > fuchsia && red > lime && red === aqua) return "赤 青";
+    if (fuchsia > red && fuchsia === lime && fuchsia > aqua) return "ピンク 緑";
+    if (fuchsia > red && fuchsia > lime && fuchsia === aqua) return "ピンク 青";
+    if (lime > red && lime > fuchsia && lime === aqua) return "緑 青";
+  },
+  winnerTeam: function (score) {
+    const { red, fuchsia, lime, aqua, black } = score;
+    if (black < 20) {
+      let div = document.getElementById("winner");
+      div.style.padding = "35px";
+      div.textContent = "勝利!! " + this.winner(score);
+    } else {
+      let div = document.getElementById("winner");
+      div.style.padding = "0px";
+      div.textContent = "";
+    }
   }
 };
 const Circle = function (data, field) {
