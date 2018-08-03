@@ -127,7 +127,7 @@ window.onload = () => {
   })();
   const send = id => () => {
     prop.id = name.value;
-    if (prop.command.length === 0 || prop.id === "" || prop.hitEvent.length === 0) {
+    if (prop.command.length === 0 || prop.id === "") {
       alert('入力されていない部分があります');
       return false;
     }
