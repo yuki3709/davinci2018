@@ -75,7 +75,13 @@ window.onload = () => {
   let canvas = document.getElementById('iframe');
   canvas.src = url.replace(/\?color=(.+)\&/g, "screen/")
   let name = document.getElementById('userID');
-  prop.color = decodeURIComponent(location.search.match(/color=(.*?)(&|$)/)[1]);
+  let PlayerColor = location.search.match(/color=(.*?)(&|$)/);
+  if(PlayerColor){
+    prop.color = decodeURIComponent(PlayerColor[1]);
+    teamcolor = document.getElementById("teamcolor");
+    teamcolor.style.background = prop.color;
+  }
+
   const setEvent = (id, callback) => document.getElementById(id).addEventListener('click', callback);
   const generateCallback = command => () => {
     tmpCommand.push(command);

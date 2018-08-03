@@ -30,7 +30,7 @@ html
               button(class="button1" type="button" id="right135") ↘
             .under
               button(class="reset" type="button" id="onereturn") ひとつけす
-              div(class="scroll" id="messageList" style="position: relative; bottom;") めいれい
+              div(class="scroll" id="messageList") めいれい
           .Area
             .buttonArea
               button(class="button1" type="button" id="left15Event" ) ↖
@@ -44,10 +44,12 @@ html
               button(class="button1" type="button" id="right135Event" ) ↘
             .under
               button(class="reset" type="button" id="onereturnEvent") ひとつけす
-              div(class="scroll" id="hitEventList" style="position: relative; bottom;") ぶつかったとき
+              div(class="scroll" id="hitEventList") ぶつかったとき
           .order
             button(class="subsend" type="button" id="subsend") おためし
             button(class="send" type="button" id="send")  アップロード
             button(class="reset" type="button" id="reset") リセット
+            div(id="teamcolor" class="teamcolor")
+              div(class="textcolor") キミの色
       iframe(class="iframe" id="iframe")
       script(type='text/javascript' src='/js_client/index.js')
