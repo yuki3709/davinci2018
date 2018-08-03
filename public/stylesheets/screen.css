@@ -14,11 +14,12 @@ body{
     flex: 1 1 70%; }
 .winner{
     position: absolute; 
-        left: 40%; 
+        left: 20%; 
         top: 40%;
     color: khaki;
-    background: springgreen;
+    background: black;
     background-size: 50% 20%;
+    font-size: 10em;
 }
 #input-area{
     flex: 1 1 30%;

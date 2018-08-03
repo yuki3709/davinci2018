@@ -155,16 +155,17 @@ Field.prototype = {
   },
   winner: function (score) {
     const { red, fuchsia, lime, aqua, black } = score;
-    if (black < 20) {
-      if (red > fuchsia && red > lime && red > aqua) return "赤";
-      if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
-      if (lime > red && lime > fuchsia && lime > aqua) return "緑";
-      if (aqua > red && aqua > fuchsia && aqua > lime) return "青";
-    }
+    if (red > fuchsia && red > lime && red > aqua) return "赤";
+    if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
+    if (lime > red && lime > fuchsia && lime > aqua) return "緑";
+    if (aqua > red && aqua > fuchsia && aqua > lime) return "青";
   },
   winnerTeam: function (score) {
-    let div = document.getElementById("winner");
-    div.textContent = "勝利" + this.winner(score);
+    const { red, fuchsia, lime, aqua, black } = score;
+    if (black < 20) {
+      let div = document.getElementById("winner");
+      div.textContent = "勝利 " + this.winner(score);
+    }
   }
 };
 const Circle = function (data, field) {
