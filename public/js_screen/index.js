@@ -163,7 +163,7 @@ Field.prototype = {
     }
   },
   winnerTeam: function (score) {
-    let div = document.getElementById("win");
+    let div = document.getElementById("winner");
     div.textContent = "勝利" + this.winner(score);
   }
 };
