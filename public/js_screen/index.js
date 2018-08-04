@@ -140,14 +140,6 @@ Field.prototype = {
         context.fillRect(0, 0, this.size.width, this.canvas.height);
       }
     };
-    document.onkeydown = (e) => {
-      if (e.key === "r") {
-        context.fillStyle = "red";
-        context.fillRect(0, 0, this.size.width, this.canvas.height);
-        context.fillStyle = "fuchsia";
-        context.fillRect(0, 0, this.size.width / 2, this.canvas.height);
-      }
-    };
   },
   fillWhite: function (context) {
     context.fillStyle = "white";
