@@ -74,8 +74,6 @@ window.onload = () => {
   document.onclick = () => {
     if (!url.match("color")) alert("色を指定してください");
   }
-  let canvas = document.getElementById('iframe');
-  canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
 
   let name = document.getElementById('userID');
   let PlayerColor = location.search.match(/color=(.*?)(&|$)/);
@@ -137,6 +135,8 @@ window.onload = () => {
     console.log(prop);
     socket.emit(id, JSON.stringify(prop));
   };
+  let canvas = document.getElementById('iframe');
+  canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
   let canAdd = true;
   setEvent('send', ()=>{
     if (!canAdd) return;
