@@ -71,12 +71,14 @@ window.onload = () => {
   console.log(url + '?color=aqua&?id=2');
   console.log(url + '?color=fuchsia&?id=3');
   console.log(url + '?color=lime&?id=4');
-  document.onclick = () => {if(!url.match("color"))alert("色を指定してください");}
+  document.onclick = () => {
+    if (!url.match("color")) alert("色を指定してください");
+  }
   let canvas = document.getElementById('iframe');
   canvas.src = url.replace(/\?color=(.+)\&/g, "screen/")
   let name = document.getElementById('userID');
   let PlayerColor = location.search.match(/color=(.*?)(&|$)/);
-  if(PlayerColor){
+  if (PlayerColor) {
     prop.color = decodeURIComponent(PlayerColor[1]);
     teamcolor = document.getElementById("teamcolor");
     teamcolor.style.background = prop.color;
@@ -140,6 +142,12 @@ window.onload = () => {
     console.log(prop);
     socket.emit(id, JSON.stringify(prop));
   };
-  setEvent('send', send('message'));
+  let canAdd = true;
+  setEvent('send', ()=>{
+    if (!canAdd) return;
+    canAdd = false;
+    setTimeout(() => canAdd = true, 5000);
+    send('message')();
+  });
   setEvent('subsend', send('demo' + id));
 };
