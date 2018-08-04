@@ -135,7 +135,8 @@ window.onload = () => {
     console.log(prop);
     socket.emit(id, JSON.stringify(prop));
   };
-  let canvas = document.getElementById('iframe');
+  const canvas = document.getElementById('iframe');
+  console.log(socket);
   canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
   let canAdd = true;
   setEvent('send', ()=>{
