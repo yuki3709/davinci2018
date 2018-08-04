@@ -67,9 +67,10 @@ function addEvent() {
 window.onload = () => {
   let url = location.href;
   console.log(url + 'screen');
-  ["red", "aqua", "fuchsia", "lime"].forEach((color, i) => {
-    console.log(url + `?color=${color}&id=${i + 1}`);
-  });
+  console.log(url + '?color=red&?id=1');
+  console.log(url + '?color=aqua&?id=2');
+  console.log(url + '?color=fuchsia&?id=3');
+  console.log(url + '?color=lime&?id=4');
   document.onclick = () => {
     if (!url.match("color")) alert("色を指定してください");
   }
@@ -142,9 +143,9 @@ window.onload = () => {
     setTimeout(() => canAdd = true, 5000);
     send('message');
   });
-  socket.on('connected', ()=>{
+  setTimeout(() => {
     canvas = document.getElementById('iframe');
     canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
-  });
+  }, 1000);
   setEvent('subsend', () => send('demo' + socket.id));
 };
