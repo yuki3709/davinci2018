@@ -67,16 +67,19 @@ function addEvent() {
 window.onload = () => {
   let url = location.href;
   console.log(url + 'screen');
-  console.log(url + '?color=red&?id=1');
-  console.log(url + '?color=aqua&?id=2');
-  console.log(url + '?color=fuchsia&?id=3');
-  console.log(url + '?color=lime&?id=4');
-  document.onclick = () => {if(!url.match("color"))alert("色を指定してください");}
+  console.log(url + '?color=red');
+  console.log(url + '?color=aqua');
+  console.log(url + '?color=fuchsia');
+  console.log(url + '?color=lime&');
+  document.onclick = () => {
+    if (!url.match("color")) alert("色を指定してください");
+  };
   let canvas = document.getElementById('iframe');
-  canvas.src = url.replace(/\?color=(.+)\&/g, "screen/")
+  canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
+
   let name = document.getElementById('userID');
   let PlayerColor = location.search.match(/color=(.*?)(&|$)/);
-  if(PlayerColor){
+  if (PlayerColor) {
     prop.color = decodeURIComponent(PlayerColor[1]);
     teamcolor = document.getElementById("teamcolor");
     teamcolor.style.background = prop.color;
@@ -125,12 +128,6 @@ window.onload = () => {
     addCommand();
     addEvent();
   });
-  const id = (() => {
-    const idMatches = location.search.match(/id=(.+)(&|$)/);
-    if (idMatches) {
-      return decodeURIComponent(idMatches[1]);
-    }
-  })();
   const send = id => () => {
     prop.id = name.value;
     if (prop.command.length === 0 || prop.id === "") {
@@ -141,5 +138,5 @@ window.onload = () => {
     socket.emit(id, JSON.stringify(prop));
   };
   setEvent('send', send('message'));
-  setEvent('subsend', send('demo' + id));
+  setEvent('subsend', send('demo' + socket.id));
 };
