@@ -143,11 +143,9 @@ window.onload = () => {
     setTimeout(() => canAdd = true, 5000);
     send('message');
   });
-  setEvent('subsend', () => {
-    if (!canvas) {
-      canvas = document.getElementById('iframe');
-      canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
-    }
-    send('demo' + socket.id)
-  });
+  setTimeout(() => {
+    canvas = document.getElementById('iframe');
+    canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
+  }, 1000);
+  setEvent('subsend', () => send('demo' + socket.id));
 };
