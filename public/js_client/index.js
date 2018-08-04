@@ -126,7 +126,7 @@ window.onload = () => {
     addCommand();
     addEvent();
   });
-  const send = id => () => {
+  const send = id => {
     prop.id = name.value;
     if (prop.command.length === 0 || prop.id === "") {
       alert('入力されていない部分があります');
@@ -135,15 +135,19 @@ window.onload = () => {
     console.log(prop);
     socket.emit(id, JSON.stringify(prop));
   };
-  const canvas = document.getElementById('iframe');
-  console.log(socket);
-  canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
+  let canvas;
   let canAdd = true;
-  setEvent('send', ()=>{
+  setEvent('send', () => {
     if (!canAdd) return;
     canAdd = false;
     setTimeout(() => canAdd = true, 5000);
-    send('message')();
+    send('message');
   });
-  setEvent('subsend', send('demo' + socket.id));
+  setEvent('subsend', () => {
+    if (!canvas) {
+      canvas = document.getElementById('iframe');
+      canvas.src = url.replace(/\?.+/g, "screen/?id=" + socket.id);
+    }
+    send('demo' + socket.id)
+  });
 };
