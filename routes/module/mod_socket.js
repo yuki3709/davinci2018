@@ -5,9 +5,8 @@ function socket(srv) {
   io.sockets.on('connection', function (socket) {
     console.log('connected');
     socket.on('message', d => io.emit('receiveMessage', d));
-    for (let i = 0; i < 16; i++) {
-      socket.on('demo' + i, d => io.emit('receive' + i, d))
-    }
+    const id = socket.id;
+    socket.on('demo' + id, d => io.emit('receive' + id, d))
   });
 }
 
