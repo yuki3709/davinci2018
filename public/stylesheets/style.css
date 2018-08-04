@@ -175,9 +175,23 @@ button.reset:hover {
 .block2:hover{
   background-size: 13px 10px;
 }
+.teamcolor{
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+}
+.textcolor{
+  color: white;
+  text-align: center;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  font-weight: bold;
+  font-size: 24pt;
+  padding: 80px 80px;
+}
 .scroll{
   width: 290px;
-  height: 300px;
+  height: 400px;
   overflow-y: scroll;
 }
 iframe.iframe{
