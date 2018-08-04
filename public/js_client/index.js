@@ -144,5 +144,5 @@ window.onload = () => {
     setTimeout(() => canAdd = true, 5000);
     send('message')();
   });
-  setEvent('subsend', send('demo' + id));
+  setEvent('subsend', send('demo' + socket.id));
 };
