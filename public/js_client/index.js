@@ -32,48 +32,39 @@ function getButton(discriminate) {
   }
 }
 
-function addElement() {
+
+const createBlock = className => command => {
+  const el = document.createElement("div");
+  el.className = className;
+  el.style.marginBottom = "20px";
+  el.innerHTML = getButton(command);
+};
+
+function addElement(id, commands, className) {
   console.log(prop);
+  const list = document.getElementById(id);
+  list.innerHTML = "";
+  commands.map(createBlock(className)).forEach(el => list.appendChild(el));
+  list.scrollTop = list.scrollHeight;
 }
 
 function addCommand() {
-  addElement();
-  let commandList = document.getElementById('messageList');
-  commandList.innerHTML = "";
-  for (let i = 0; i < prop.command.length; i++) {
-    let command = document.createElement("div");
-    command.className = "block1";
-    command.style.marginBottom = "20px";
-    command.innerHTML = getButton(prop.command[i]);
-    commandList.appendChild(command);
-    commandList.scrollTop = commandList.scrollHeight;
-  }
+  addElement('messageList', prop.command, "block1");
 }
 
 function addEvent() {
-  addElement();
-  let hitEventList = document.getElementById('hitEventList');
-  hitEventList.innerHTML = "";
-  for (let i = 0; i < prop.hitEvent.length; i++) {
-    let hitEvent = document.createElement("div");
-    hitEvent.className = "block2";
-    hitEvent.style.marginBottom = "20px";
-    hitEvent.innerHTML = getButton(prop.hitEvent[i]);
-    hitEventList.appendChild(hitEvent);
-    hitEventList.scrollTop = hitEventList.scrollHeight;
-  }
+  addElement('hitEventList', prop.hitEvent, "block2");
 }
 
 window.onload = () => {
   let url = location.href;
   console.log(url + 'screen');
-  console.log(url + '?color=red&?id=1');
-  console.log(url + '?color=aqua&?id=2');
-  console.log(url + '?color=fuchsia&?id=3');
-  console.log(url + '?color=lime&?id=4');
+  ["red", "aqua", "fuchsia", "lime"].forEach((color, i) => {
+    console.log(url + `?color=${color}&?id=${i + 1}`);
+  });
   document.onclick = () => {
     if (!url.match("color")) alert("色を指定してください");
-  }
+  };
 
   let name = document.getElementById('userID');
   let PlayerColor = location.search.match(/color=(.*?)(&|$)/);
