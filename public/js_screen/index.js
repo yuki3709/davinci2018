@@ -1,4 +1,4 @@
-Field = function (e, c, d) {
+const Field = function (e, c, d) {
   this.canvas = e;
   this.canvas2 = c;
   if (!this.canvas.getContext) throw new Error("contextが見つかりません");
@@ -61,7 +61,7 @@ Field.prototype = {
         const r = this.imageData.data[index]; // R
         const g = this.imageData.data[index + 1]; // G
         const b = this.imageData.data[index + 2]; // B
-        colors.push({ r: r, g: g, b: b });
+        colors.push({r: r, g: g, b: b});
       }
     }
     const createFilter = (r, g, b) => c => c.r === r && c.g === g && c.b === b;
@@ -87,7 +87,7 @@ Field.prototype = {
       aqua: 0,
       black: 0
     };
-    const { red, fuchsia, lime, aqua, black } = team;
+    const {red, fuchsia, lime, aqua, black} = team;
     let sumScore = red + fuchsia + lime + aqua + black;
     score.red = Math.ceil(red / sumScore * 100);
     score.fuchsia = Math.ceil(fuchsia / sumScore * 100);
@@ -100,7 +100,7 @@ Field.prototype = {
     this.winnerTeam(score);
   },
   drawChart: function (context, score) {
-    const { red, fuchsia, lime, aqua, black } = score;
+    const {red, fuchsia, lime, aqua, black} = score;
     const width = this.canvas2.width;
     const height = this.size.height;
     context.beginPath();
@@ -117,7 +117,7 @@ Field.prototype = {
     context.fillStyle = "black";
     context.fillRect(105, height / 1.27, (black - 20) * width * 0.7 / 100, height / 6);
     context.fillStyle = "white";
-    context.fillRect(105, height / 1.27 - 1, (- 22) * width * 0.7 / 100, height / 6 + 2);
+    context.fillRect(105, height / 1.27 - 1, (-22) * width * 0.7 / 100, height / 6 + 2);
     context.fillStyle = "black";
     context.font = "italic bold 20px sans-serif";
     context.fillText(red, 60, height / 100 + height / 12);
@@ -159,7 +159,7 @@ Field.prototype = {
     //   return names[rank[0]] + " " + names[rank[1]];
     // }
     // return names[rank[0]];
-    const { red, fuchsia, lime, aqua, black } = score;
+    const {red, fuchsia, lime, aqua, black} = score;
     if (red > fuchsia && red > lime && red > aqua) return "赤";
     if (fuchsia > red && fuchsia > lime && fuchsia > aqua) return "ピンク";
     if (lime > red && lime > fuchsia && lime > aqua) return "緑";
@@ -172,13 +172,12 @@ Field.prototype = {
     if (lime > red && lime > fuchsia && lime === aqua) return "緑 青";
   },
   winnerTeam: function (score) {
-    const { red, fuchsia, lime, aqua, black } = score;
+    const {red, fuchsia, lime, aqua, black} = score;
+    const div = document.getElementById("winner");
     if (black < 20) {
-      let div = document.getElementById("winner");
       div.style.padding = "35px";
       div.textContent = "勝利!! " + this.winner(score);
     } else {
-      let div = document.getElementById("winner");
       div.style.padding = "0px";
       div.textContent = "";
     }
@@ -254,8 +253,8 @@ Circle.prototype = {
     }
   },
   shadeDraw: function (context) {
-    for (ix = -1; ix < 2; ix++) {
-      for (iy = -1; iy < 2; iy++) {
+    for (let ix = -1; ix < 2; ix++) {
+      for (let iy = -1; iy < 2; iy++) {
         context.beginPath();
         context.lineWidth = 3;
         context.strokeStyle = this.color;
@@ -294,10 +293,10 @@ Circle.prototype = {
       this.locX %= this.width;
       this.locY %= this.height;
       if (this.locX < -this.radius) {
-        this.locX = this.width + this.locX;
+        this.locX += this.width;
       }
       if (this.locY < -this.radius) {
-        this.locY = this.height + this.locY;
+        this.locY += this.height;
       }
     }
     this.flag = 0;
@@ -321,25 +320,26 @@ Circle.prototype = {
     }
   },
   check: function (circles, futureLocX, futureLocY) {
-    for (ix = -1; ix < 2; ix++) {
-      for (iy = -1; iy < 2; iy++) {
-        for (i = 0; i < circles.length; i++) {
-          if (circles[i] !== this) {
-            if ((circles[i].radius + this.radius) ** 2
-              >= (circles[i].locX + ix * this.width - futureLocX) ** 2
-              + (circles[i].locY + iy * this.height - futureLocY) ** 2) {
+    const self = this;
+    for (let ix = -1; ix < 2; ix++) {
+      for (let iy = -1; iy < 2; iy++) {
+        circles.forEach(circle => {
+          if (circle !== self) {
+            if ((circle.radius + this.radius) ** 2
+              >= (circle.locX + ix * this.width - futureLocX) ** 2
+              + (circle.locY + iy * this.height - futureLocY) ** 2) {
               this.hitCommand = this.hitEvent();
               this.flag++;
               this.effectFlag++;
             }
           }
-        }
+        });
       }
     }
   },
   effect: function (context) {
-    for (ix = -1; ix < 2; ix++) {
-      for (iy = -1; iy < 2; iy++) {
+    for (let ix = -1; ix < 2; ix++) {
+      for (let iy = -1; iy < 2; iy++) {
         if (this.effectFlag !== 0) {
           context.fillStyle = 'white';
           context.font = "bold 18px Arial";
